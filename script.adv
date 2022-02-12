@@ -792,65 +792,55 @@ on_tick {
          : print "Stay out here too much longer and you will freeze to death. WALK NORTH already" ;
       }
       : if (linger() == 8) {
-      : print "You are lost outside. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
-      : press_any_key ;
-      : print "If you found this first puzzle too hard...I hate to break it to you, but this is only the tutorial" ;
-      : gosub "end_game";
-      : failure ;
-      
+         : print "You are lost outside. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
+         : press_any_key ;
+         : print "If you found this first puzzle too hard...I hate to break it to you, but this is only the tutorial" ;
+         : gosub "end_game";
+         : failure ;
       }
    }
 
 //if too long outside_tavern
    : if (is_at "outside_tavern") {
       : if (linger() == 6) {
-      : print "It's too dark to do anything else out here...maybe you should go inside" ;
+         : print "It's too dark to do anything else out here...maybe you should go inside" ;
       }
       : if (linger() == 8) {
-      : print "Maybe you should do something to that DOOR you see before you..." ;
+         : print "Maybe you should do something to that DOOR you see before you..." ;
       }
       : if (linger() == 9) {
-      : print "Stay out here too much longer and you will freeze to death. OPEN the DOOR already" ;
+         : print "Stay out here too much longer and you will freeze to death. OPEN the DOOR already" ;
       }
       : if (linger() == 10) {
-      : print "You linger outside the building. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
-      : press_any_key ;
-      : print "Perhaps this is for the best. Afterall, a templar who lacks the knowledge to operate a simple door is not worthy of the rewards within" ;
-      : gosub "end_game" ;
-      : failure ;
+         : print "You linger outside the building. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
+         : press_any_key ;
+         : print "Perhaps this is for the best. Afterall, a templar who lacks the knowledge to operate a simple door is not worthy of the rewards within" ;
+         : gosub "end_game" ;
+         : failure ;
       }
    }
 
-//quests completed
-: if (quest_counter == 3 && is_heard_something == false) {
-   : play_music sound="ambient_gong";
-   : print "you hear something..." ;
-   : pause "5000" ;
-   : pause "5000" ;
-   : pause "5000" ;
-   : pause "2000" ;
-   : print "three gongs..." ;
-   : play_music sound="ambient_chant";
-   : press_any_key ;
-   : print "and..chanting? Sounds like it's coming from near the painting" ;
-   : set_boolean var = "is_heard_something"  value = "true" ;
-   
+   //quests completed
+   : if (quest_counter == 3 && is_heard_something == false) {
+      : play_music sound="ambient_gong";
+      : print "you hear something..." ;
+      : pause "5000" ;
+      : pause "5000" ;
+      : pause "5000" ;
+      : pause "2000" ;
+      : print "three gongs..." ;
+      : play_music sound="ambient_chant";
+      : press_any_key ;
+      : print "and..chanting? Sounds like it's coming from near the painting" ;
+      : set_boolean var = "is_heard_something"  value = "true" ;
+   }
+      
+   //impostor fail
+   : if (impostor_try == 0) {
+      : print "<'I am sorry<5>> {name} <. We have drawn too much suspicion to ourselves. The impostor would have their guard up by now. But thank you for trying anyway <5>>." ;
+      : gosub "end_game2" ;
+   }
 }
-   
-//impostor fail
-
-: if (impostor_try == 0) {
-   : print "<'I am sorry<5>> {name} <. We have drawn too much suspicion to ourselves. The impostor would have their guard up by now. But thank you for trying anyway <5>>." ;
-   : gosub "end_game2" ;
-   
-}
-
-
-}
-
-
-
-
 
 ######################################
 #  On Command                        #
@@ -858,829 +848,831 @@ on_tick {
 
 on_command {
 
-//walk any other direction
-: match " s _;e _;w _; go back"  {
+   //walk any other direction
+   : match " s _;e _;w _; go back"  {
       : if (is_at "far_1_tavern" || is_at "far_2_tavern") {
       : print "It's too dark to go that way" ;
       }
-}
+   }
 
 
-//walk forward once
-: match "walk forward; go forward; n _; walk north"  {
+   //walk forward once
+   : match "walk forward; go forward; n _; walk north"  {
       : if (is_at "far_1_tavern") {
-      : print "You make haste towards the light..." ;
-      : goto "far_2_tavern" ;
-      : press_any_key ;
-      : redescribe;
+         : print "You make haste towards the light..." ;
+         : goto "far_2_tavern" ;
+         : press_any_key ;
+         : redescribe;
       }
-}
+   }
 
-//walk forward twice
-: match "walk forward; go forward; keep walking; n _; walk north"  {
+   //walk forward twice
+   : match "walk forward; go forward; keep walking; n _; walk north"  {
       : if (is_at "far_2_tavern") {
-      : print "You make haste towards the light..." ;
-      : goto "outside_tavern" ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-
-//enter tavern
-: match "open door; enter _ "  {
-      : if (is_at "outside_tavern") {
-      : print "Nothing else to do but go inside..." ;
-      : press_any_key ;
-      : goto "inside_tavern" ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-
-//outside tavern - misc
-: match "examine tavern; examine apothecary; examine apothecarium"  {
-      : if (is_at "outside_tavern") {
-      : print "The building looks old, but sturdy. It has a logo of the sun above the door" ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-
-//inside tavern - misc
-: match "examine vial; examine tincture; examine bottle; examine artifact; examine scrolls; examine books"  {
-      : if (is_at "inside_tavern") {
-      : print "You strain your eyes but can't make out anything useful there" ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-: match "examine bar"  {
-      : if (is_at "inside_tavern") {
-      : print "a worn out bar" ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-//: match "examine stool"  {
-//    : if (is_at "inside_tavern") {
-//   : print "look's comfortable enough..." ;
-//      : press_any_key ;
-//      : redescribe;
-//      }
-//}
-: match "examine bathroom; examine toilet"  {
-      : if (is_at "inside_tavern") {
-      : print "look's like a regular bathroom from here...smells like one too." ;
-      : press_any_key ;
-      : redescribe;
-      }
-}
-
-//inside tavern - painting
-: match "examine painting "  {
-   : if (is_at "inside_tavern") {
-      : if (is_carried "ancient_key" && quest_counter != 3) {
-      : print_graphic "painting1_empty" ;
-      : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding burning incense." ;
-      : press_any_key ;
-      : redescribe;
-      }
-      : if (quest_counter == 3) {
-      : print "It sounds like the chanting is coming from...behind the painting." ;
-      : create "keyhole_1" ;
-      : print_graphic "painting_keyhole" ;
-      : print "And what's this? The place where the key was supposed to be has now turned into a keyhole!" ;
-      : press_any_key ;
-      : redescribe;
-      }
-      : if (!is_carried "ancient_key" && drunkeness == 0) {
-      : set_boolean var = "is_key_exists"  value = "true" ;
-      : print_graphic "painting" ;
-      : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. The key almost looks real..." ;   
-      : press_any_key ;
-      : redescribe;
-      }
-      : if (!is_carried "ancient_key" && drunkeness > 0) {
-      : set_boolean var = "is_key_exists"  value = "true" ;
-         : if (drunkeness == 1) {
-           : print_graphic "painting_red" ;  
-         }
-         : if (drunkeness == 2) {
-           : print_graphic "painting_blue" ;  
-         }
-         : if (drunkeness == 3) {
-           : print_graphic "painting_yellow" ;  
-         }
-         : if (drunkeness == 4) {
-           : print_graphic "painting_green" ;  
-         }
-         : if (drunkeness == 5) {
-           : print_graphic "painting_purple" ;  
-         }
-      : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. {drunkeness} of the 5 emblems of the key is glowing!" ;   
-      : press_any_key ;
-      : redescribe;
+         : print "You make haste towards the light..." ;
+         : goto "outside_tavern" ;
+         : press_any_key ;
+         : redescribe;
       }
    }
-}
 
-: match "change pic"  {
- : if (is_at "inside_tavern") {
- : print "excalibur!" ;
-   : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true";
+   //enter tavern
+   : match "open door; enter _ "  {
+      : if (is_at "outside_tavern") {
+         : print "Nothing else to do but go inside..." ;
+         : press_any_key ;
+         : goto "inside_tavern" ;
+         : press_any_key ;
+         : redescribe;
+      }
    }
-}
 
+   //outside tavern - misc
+   : match "examine tavern; examine apothecary; examine apothecarium"  {
+      : if (is_at "outside_tavern") {
+         : print "The building looks old, but sturdy. It has a logo of the sun above the door" ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
 
-//inside tavern - sit down (optional)
-: match "sit _; take seat; use stool"  {
-       : if (is_at "inside_tavern") {
-       : print "You take a seat at the bar" ;
-//       : set_boolean var = "is_sitting"  value = "true" ;
-       : press_any_key ;
-       : redescribe;
-       }
-}
+   //inside tavern - misc
+   : match "examine vial; examine tincture; examine bottle; examine artifact; examine scrolls; examine books"  {
+      : if (is_at "inside_tavern") {
+         : print "You strain your eyes but can't make out anything useful there" ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
+   : match "examine bar"  {
+      : if (is_at "inside_tavern") {
+         : print "a worn out bar" ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
 
-//inside tavern - stand up (optional)
-//: match "stand _"  {
-//       : if (is_at "inside_tavern" && is_sitting == true ) {
-//      : print "You stand up" ;
-//       : set_boolean var = "is_sitting"  value = "false" ;
-//       : press_any_key ;
-//       : redescribe;
-//       }
-//}
+   //: match "examine stool"  {
+   //    : if (is_at "inside_tavern") {
+   //   : print "look's comfortable enough..." ;
+   //      : press_any_key ;
+   //      : redescribe;
+   //      }
+   //}
 
+   : match "examine bathroom; examine toilet"  {
+      : if (is_at "inside_tavern") {
+         : print "look's like a regular bathroom from here...smells like one too." ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
 
-//inside tavern - woman
-: match "examine woman "  {
+   //inside tavern - painting
+   : match "examine painting "  {
+      : if (is_at "inside_tavern") {
+         : if (is_carried "ancient_key" && quest_counter != 3) {
+            : print_graphic "painting1_empty" ;
+            : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding burning incense." ;
+            : press_any_key ;
+            : redescribe;
+         }
+         : if (quest_counter == 3) {
+            : print "It sounds like the chanting is coming from...behind the painting." ;
+            : create "keyhole_1" ;
+            : print_graphic "painting_keyhole" ;
+            : print "And what's this? The place where the key was supposed to be has now turned into a keyhole!" ;
+            : press_any_key ;
+            : redescribe;
+         }
+         : if (!is_carried "ancient_key" && drunkeness == 0) {
+            : set_boolean var = "is_key_exists"  value = "true" ;
+            : print_graphic "painting" ;
+            : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. The key almost looks real..." ;   
+            : press_any_key ;
+            : redescribe;
+         }
+         : if (!is_carried "ancient_key" && drunkeness > 0) {
+            : set_boolean var = "is_key_exists"  value = "true" ;
+               : if (drunkeness == 1) {
+                  : print_graphic "painting_red" ;  
+               }
+               : if (drunkeness == 2) {
+                  : print_graphic "painting_blue" ;  
+               }
+               : if (drunkeness == 3) {
+                  : print_graphic "painting_yellow" ;  
+               }
+               : if (drunkeness == 4) {
+                  : print_graphic "painting_green" ;  
+               }
+               : if (drunkeness == 5) {
+                  : print_graphic "painting_purple" ;  
+               }
+            : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. {drunkeness} of the 5 emblems of the key is glowing!" ;   
+            : press_any_key ;
+            : redescribe;
+         }
+      }
+   }
+
+   : match "change pic"  {
+      : if (is_at "inside_tavern") {
+         : print "excalibur!" ;
+         : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true";
+      }
+   }
+
+   //inside tavern - sit down (optional)
+   : match "sit _; take seat; use stool"  {
+      : if (is_at "inside_tavern") {
+         : print "You take a seat at the bar" ;
+         // : set_boolean var = "is_sitting"  value = "true" ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
+
+   //inside tavern - stand up (optional)
+   //: match "stand _"  {
+   //       : if (is_at "inside_tavern" && is_sitting == true ) {
+   //      : print "You stand up" ;
+   //       : set_boolean var = "is_sitting"  value = "false" ;
+   //       : press_any_key ;
+   //       : redescribe;
+   //       }
+   //}
+
+   //inside tavern - woman
+   : match "examine woman "  {
       : if (is_at "inside_tavern" && is_present "cloak_woman") {
-      : print "The woman dons a tattered cloak. They look somewhat familiar. She is drinking a shimmery beverage" ;
-      : press_any_key ;
-      : redescribe;
+         : print "The woman dons a tattered cloak. They look somewhat familiar. She is drinking a shimmery beverage" ;
+         : press_any_key ;
+         : redescribe;
       }
-}
-: match "kiss woman "  {
+   }
+   : match "kiss woman "  {
       : if (is_at "inside_tavern") {
-      : print "Don't be innapropriate." ;
-      : press_any_key ;
-      : redescribe;
+         : print "Don't be innapropriate." ;
+         : press_any_key ;
+         : redescribe;
       }
-}   
-: match "talk woman; speak woman "  {
+   }   
+   : match "talk woman; speak woman "  {
       : if (is_at "inside_tavern" && is_woman_ready == false && is_present "cloak_woman") {
-      : print "You try to introduce yourself, but she is oblivious to you.";
-      : print "She mutters under her breath and all you could make out was <verify or...NGMI. Sacrifice to stake and chill...How...verify? Am I NGMI?...verify…. verify….<6>>";
-      : press_any_key ;
-      : redescribe;
-      : done;
+         : print "You try to introduce yourself, but she is oblivious to you.";
+         : print "She mutters under her breath and all you could make out was <verify or...NGMI. Sacrifice to stake and chill...How...verify? Am I NGMI?...verify…. verify….<6>>";
+         : press_any_key ;
+         : redescribe;
+         : done;
       }
       : if (is_at "inside_tavern" && is_woman_ready == true && is_woman_intro_done == false && is_present "cloak_woman") {
-      : print "You say to her 'You know, I too knew someone who didn't make it through the Opening Ceremony...'";
-      : press_any_key ;
-      : print "She finally turns to you";
-      : press_any_key ;
-      : set_boolean var = "is_woman_intro_done"  value = "true" ;
-      : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
-      : press_any_key ;
-      : gosub "woman_questions" ;
-      : redescribe;
-      : done;
+         : print "You say to her 'You know, I too knew someone who didn't make it through the Opening Ceremony...'";
+         : press_any_key ;
+         : print "She finally turns to you";
+         : press_any_key ;
+         : set_boolean var = "is_woman_intro_done"  value = "true" ;
+         : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
+         : press_any_key ;
+         : gosub "woman_questions" ;
+         : redescribe;
+         : done;
       }
       : if (is_at "inside_tavern" && is_woman_ready == true && is_woman_intro_done == true && is_present "cloak_woman") {
-      : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
-      : press_any_key ;
-      : gosub "woman_questions" ;
-      : redescribe;
-      : done;
+         : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
+         : press_any_key ;
+         : gosub "woman_questions" ;
+         : redescribe;
+         : done;
       }
-//      : if (is_at "inside_tavern" && is_sitting == false) {
-//      : print "You should probably sit down first";
-//      : press_any_key ;
-//      : redescribe;
-//      : done ;
-//      }
-}   
+ 
+   //      : if (is_at "inside_tavern" && is_sitting == false) {
+   //      : print "You should probably sit down first";
+   //      : press_any_key ;
+   //      : redescribe;
+   //      : done ;
+   //      }
+   }   
 
-//inside tavern - man
-: match "examine man; examine bartender "  {
+   //inside tavern - man
+   : match "examine man; examine bartender "  {
       : if (is_at "inside_tavern" ) {
-      : print "The burly man wears a dark robe emblazoned with a sun emblem. It is not the usual attire of a bartender..." ;
-      : press_any_key ;
-      : redescribe;
+         : print "The burly man wears a dark robe emblazoned with a sun emblem. It is not the usual attire of a bartender..." ;
+         : press_any_key ;
+         : redescribe;
       }
-      }
-: match "kiss man "  {
+   }
+ 
+   : match "kiss man "  {
       : if (is_at "inside_tavern") {
-      : print "Don't be innapropriate." ;
-      : press_any_key ;
-      : redescribe;
+         : print "Don't be innapropriate." ;
+         : press_any_key ;
+         : redescribe;
       }
-      }   
-: match "talk man; speak man; talk bartender; speak bartender "  {
-//      : if (is_at "inside_tavern") {
-//            : print "You should probably sit down first";
-//            : press_any_key ;
-//            : redescribe;
-//            : done ;
-//         }  
+   }   
+ 
+   : match "talk man; speak man; talk bartender; speak bartender "  {
+   //      : if (is_at "inside_tavern") {
+   //            : print "You should probably sit down first";
+   //            : press_any_key ;
+   //            : redescribe;
+   //            : done ;
+   //         }  
       : if (is_at "inside_tavern") {
          : if (is_intro_done == false) {
             : print "You introduce yourself. \n \"Hello, my name is {name}.\" ";
             : press_any_key ;
             : print "<'Howdy friend. Haven't see you round these parts before. Take your time, make yourself at home. I'll be here to answer your questions if you need me.\"<4>>" ;
-            : set_boolean var = "is_intro_done"  value = "true" ;
-            
+            : set_boolean var = "is_intro_done"  value = "true" ;         
          }
-          
-         
-      //man questions question
+
+         //man questions question
          : if (is_intro_done == true) {
-           : while (is_intro_done == true) {
+            : while (is_intro_done == true) {
                : if (question_1==0) {
-               : gosub "man_question1" ;
+                  : gosub "man_question1" ;
                }
                : if (question_1==1) {
-               : gosub "man_question2" ;
+                  : gosub "man_question2" ;
                }
                : if (question_1==2) {
-               : gosub "man_red_drink" ;
+                  : gosub "man_red_drink" ;
                }
                : if (question_1==3) {
-               : gosub "man_blue_drink" ;
+                  : gosub "man_blue_drink" ;
                }
                : if (question_1==4) {
-               : gosub "man_green_drink" ;
+                  : gosub "man_green_drink" ;
                }
                : if (question_1==5) {
-               : gosub "man_yellow_drink" ;
+                  : gosub "man_yellow_drink" ;
                }
                : if (question_1==6) {
-               : gosub "man_purple_drink" ;
+                  : gosub "man_purple_drink" ;
                }
                : if (question_1==7) {
-               : gosub "man_nomore_drink" ;
+                  : gosub "man_nomore_drink" ;
                }
             }
          }
       }
-}
+   }
 
-//examine drink
-: match "examine drink"  {
-   : print "Drinks here don't look like anything you've seen before..." ;
-}
+   //examine drink
+   : match "examine drink"  {
+      : print "Drinks here don't look like anything you've seen before..." ;
+   }
 
 
-//inside tavern - drink red drink
-: match "drink drink; down drink; gulp drink; take drink; drink red"  {
-   : if (is_exists "red_drink") {
-      : print "You down the red drink in one go" ;
-      : press_any_key ;
-      : print "The taste was all over the place. Sweet, bitter, floral, earthy and a bit like cardboard. It can only be described as...chaotic" ;
-      : increment "drunkeness" ;
-      : destroy "red_drink" ;
-   }
-}
-//inside tavern - drink blue drink
-: match "drink drink; down drink; gulp drink; take drink; drink blue"  {
-   : if (is_exists "blue_drink") {
-      : print "You down the blue drink in one go" ;
-      : press_any_key ;
-      : print "It tastes like Blue Curacao. Well, it did look like Blue Curacao, so it's no surprise it tastes like it. That is only logical." ;
-      : increment "drunkeness" ;
-      : destroy "blue_drink" ;
-   }
-}
-//inside tavern - drink green drink
-: match "drink drink; down drink; gulp drink; take drink; drink green"  {
-   : if (is_exists "green_drink") {
-      : print "You down the green drink in one go" ;
-      : press_any_key ;
-      : print "You marvel at the diversity of its taste. It was as if it was structured layer by layer to form the perfect drink." ;
-      : increment "drunkeness" ;
-      : destroy "green_drink" ;
-   }
-}
-//inside tavern - drink yellow drink
-: match "drink drink; down drink; gulp drink; take drink; drink yellow"  {
-   : if (is_exists "yellow_drink") {
-      : print "You down the yellow drink in one go" ;
-      : press_any_key ;
-      : print "This was one of the most well ordered drink you've seen. 5 mini cubes of ice, beneath 5 slices of fruit, each symmetrically cut and placed on the rim, precisely spaced out." ;
-      : increment "drunkeness" ;
-      : destroy "yellow_drink" ;
-   }
-}
-//inside tavern - drink purple drink
-: match "drink drink; down drink; gulp drink; take drink; drink purple"  {
-   : if (is_exists "purple_drink") {
-      : print "You down the purple drink in one go" ;
-      : press_any_key ;
-      : print "You are unable to pinpoint what it tastes like...It is a complete mystery to you." ;
-      : increment "drunkeness" ;
-      : destroy "purple_drink" ;
-   }
-}
-
-//inside tavern - ancient key
-: match "examine key "  {
-      : if (is_at "inside_tavern") {
-         : if (is_key_exists == true && drunkeness == 0 ) {
-          : print_graphic "painting" ;  
-          : print "Looks like an ancient key with 5 coloured emblems on it" ;
-          : press_any_key ;
-          : redescribe;
-          
-         }
-         : if (is_key_exists == true && drunkeness >0 ) {
-           : if (drunkeness == 1) {
-           : print_graphic "painting_red" ;  
-            }
-            : if (drunkeness == 2) {
-           : print_graphic "painting_blue" ;  
-            }
-            : if (drunkeness == 3) {
-           : print_graphic "painting_yellow" ;  
-            }
-            : if (drunkeness == 4) {
-           : print_graphic "painting_green" ;  
-            }
-            : if (drunkeness == 5) {
-           : print_graphic "painting_purple" ;  
-            }
-         }
-         : print "Looks like an ancient key with 5 coloured emblems on it. Is {drunkeness} of the emblems glowing? Geez maybe I need another drink..." ;
+   //inside tavern - drink red drink
+   : match "drink drink; down drink; gulp drink; take drink; drink red"  {
+      : if (is_exists "red_drink") {
+         : print "You down the red drink in one go" ;
          : press_any_key ;
-          : redescribe;
-      }
-}
- : match "examine key "  {
-      : if (is_at "inside_tavern") {
-      : if (is_carried "ancient_key" ) {
-      : print "Looks like an ancient key" ;
-      }
-      }
-      }     
-: match "take key; pick key; touch key; touch painting"  {
-      : if (is_at "inside_tavern") {
-      : if (is_key_exists == true && drunkeness == 5) {
-      : print "You reach out to touch the key and...you manage to grab the key. You are a little shocked. This should be impossible! Was it the drinks? No one else seemed to notice, so you quickly pocket the key" ;
-      : success ;
-      : set_boolean var = "is_key_exists"  value = "false" ;
-      : pocket "ancient_key" ;
-      : increment "quest_counter" ;
-      : press_any_key ;
-      }
-      : if (is_key_exists == true && drunkeness != 5) {
-      : print "You reach out to touch the key and...nothing happens. You are not sure why you did that..maybe you need a drink..." ;
-      }
-      }
-      }
-
-//enter bathroom
-: match "enter bathroom; enter toilet; go bathroom; go toilet"  {
-      : if (is_at "inside_tavern") {
-      : print "The front of the door says 'memes room'. You assume it was a typo and meant to say 'men's room'. you proceed to enter" ;
-      : goto "toilet" ;
-      : increment "entered_toilet" ;
-      : press_any_key ;
-      : redescribe;
+         : print "The taste was all over the place. Sweet, bitter, floral, earthy and a bit like cardboard. It can only be described as...chaotic" ;
+         : increment "drunkeness" ;
+         : destroy "red_drink" ;
       }
    }
-//exit bathroom
-: match "exit bathroom; exit _;go outside; enter tavern; enter apothecarium; enter apothecary; open door"  {
-      : if (is_at "toilet") {
-      : print "you exit the bathroom with haste, escaping the stench" ;
-      : goto "inside_tavern" ;
-      : press_any_key ;
-      : play_music sound="ambient_apothecarium";
-      : redescribe;
-      }
-   } 
-   
-   
-//read writings in toilet
-: match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
-      : if (is_at "toilet") {
-         : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
-            : print "You look at the scribbles and see that one of the scribbles say" ;
-            : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
-            : print "Further down someone else wrote\n <What's a flush?<2>>" ;
-            : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
-            : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
-            : print "On yet another section of wall it says \n <You can touch...<2>> " ;
-            : print "Further below it says \n <You can play...<2>> " ;
-            : print "Further yet it says \n <If you say...<2>> " ;
-            on_exhausted {
-               : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
-               : play_music sound="ambient_barbie";
-               : pause "5000" ;
-               : print "you probably shouldn't take anything on this wall seriously..." ;
-               : press_any_key ;
-               : play_music sound="ambient_apothecarium";
-               : redescribe;
-            }      
-         }
-      }
-}
-
-//use sink
-: match "use sink; use tap; turn tap; examine tap; examine sink; wash hands; wash face; wash self; check sink"  {
-   : if (is_at "toilet") {
-      :if (is_incense_there == false) {
-         : print "what's that on the sink? Is that a stick of incense?" ;
-         : create "incense" ;
-         : set_boolean var = "is_incense_there"  value = "true" ;
+   //inside tavern - drink blue drink
+   : match "drink drink; down drink; gulp drink; take drink; drink blue"  {
+      : if (is_exists "blue_drink") {
+         : print "You down the blue drink in one go" ;
          : press_any_key ;
-         : redescribe;
-         : done ;
+         : print "It tastes like Blue Curacao. Well, it did look like Blue Curacao, so it's no surprise it tastes like it. That is only logical." ;
+         : increment "drunkeness" ;
+         : destroy "blue_drink" ;
       }
-      : if (is_incense_there == true && is_quest_started == false) {
-         : print "You turn the taps on" ;
-         : pause "1000" ;
-         : print "...and you turn them off again.";
-         : pause "1000" ;
-         : print "That was quite unremarkble" ;
+   }
+   //inside tavern - drink green drink
+   : match "drink drink; down drink; gulp drink; take drink; drink green"  {
+      : if (is_exists "green_drink") {
+         : print "You down the green drink in one go" ;
          : press_any_key ;
-         : redescribe; 
+         : print "You marvel at the diversity of its taste. It was as if it was structured layer by layer to form the perfect drink." ;
+         : increment "drunkeness" ;
+         : destroy "green_drink" ;
       }
-       : if (is_incense_there == true && is_quest_started == true && is_clean == false) {
-         : print "Cleanse thy skin..." ;
-         : print "You use the sink to wash your hands and face" ;
-         : increment "quest_counter" ;
-         : set_boolean var = "is_clean"  value = "true" ;
+   }
+   //inside tavern - drink yellow drink
+   : match "drink drink; down drink; gulp drink; take drink; drink yellow"  {
+      : if (is_exists "yellow_drink") {
+         : print "You down the yellow drink in one go" ;
          : press_any_key ;
-         : success ;
-         : redescribe; 
-      }
-       : if (is_incense_there == true && is_quest_started == true && is_clean == true) {
-         : print "You are already clean";
-         : press_any_key;
-         : redescribe; 
+         : print "This was one of the most well ordered drink you've seen. 5 mini cubes of ice, beneath 5 slices of fruit, each symmetrically cut and placed on the rim, precisely spaced out." ;
+         : increment "drunkeness" ;
+         : destroy "yellow_drink" ;
       }
    }
-}
-
-
-//examine incense
-: match "examine incense"  {
-   : if (is_present "incense") {
-   : print "a stick of incense" ;
-   : press_any_key ;
-   : redescribe;   
-   }
-}
-
-
-//use toilet bowl
-: match "use toilet; examine toilet"  {
-   : if (is_at "toilet") {
-   : print "You don't really feel like going right now..." ;
-   : press_any_key ;
-   : redescribe;
-   }
-}
-
-//examine table
-: match "examine table; check table; look table; examine candle; check candle"  {
-   : if (is_at "inside_tavern") {
-      : if (entered_toilet > 0) {
-      : print "upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
-      : create "candle" ;
-      : press_any_key ;
-      : redescribe;
+   //inside tavern - drink purple drink
+   : match "drink drink; down drink; gulp drink; take drink; drink purple"  {
+      : if (is_exists "purple_drink") {
+         : print "You down the purple drink in one go" ;
+         : press_any_key ;
+         : print "You are unable to pinpoint what it tastes like...It is a complete mystery to you." ;
+         : increment "drunkeness" ;
+         : destroy "purple_drink" ;
       }
    }
-}
 
-//examine candle
-: match "examine candle; check candle; look candle"  {
-   : if (is_at "inside_tavern") {
-      : if (is_present "candle") {
-      : print "a newly lighted candle burns brightly." ;
-      : press_any_key ;
-      : redescribe;
-      }
-   }
-}
-
-//burn incense
-: match "burn incense; incense candle; light incense; candle incense"  {
-   : if (is_at "inside_tavern") {
-      : if (is_carried "incense") {
-      : print "You burn the incense. It effuses a sweet smelling aroma" ;
-      : press_any_key ;
-      : print "The stick burns quicker than you expected...The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
-      : press_any_key ;
-      : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
-      : press_any_key ;
-      : create "table_words" ;
-      : destroy "incense" ;
-      : redescribe;
-      }
-   }
-}
-
-//read table words
-: match "read words; read message; examine words; examine message; read writing; examine writing"  {
-   : if (is_at "inside_tavern" && is_exists "table_words") {
-      : print "the message reads: \n <Abandon thine inhibitions and collect the key<1>> \n <Give thine aid to a lost devotee<1>> \n <Then cleanse thy skin of all impurity<1>> \n <Only then<1>> {name} <, will thy prove thyself worthy<1>>   " ;
-      : print "And right at the bottom it says 'Tasks Completed = {quest_counter}'" ;
-      : set_boolean var = "is_quest_started"  value = "true" ;
-   }
-}
-
-
-//examine keyhole
-: match "examine keyhole; check keyhole; look keyhole"  {
-   : if (is_at "inside_tavern" && is_present "keyhole_1") {
-   : print "This wasn't here before. But this is a real keyhole alright. " ;
-   }
-}
-
-//use ancient key on keyhole
-: match "use key; unlock keyhole; unlock painting; key keyhole"  {
-   : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
-   : print "You cautiously put the ancient key into the keyhole" ;
-   : press_any_key ;
-   : print "it fits";
-   : press_any_key ;
-   : print "you turn the key, and the entire section of the wall slowly swings open! \n you glance behind you, the bartender doesn't even bat an eyelid. " ;
-   : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
-   : press_any_key ;
-   : success ;
-   : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
-   : set_boolean var = "is_chamber_open"  value = "true" ;
-   : destroy "ancient_key" ;
-   : press_any_key ;
-   : redescribe;
-
-   }
-}
-
-//examine chamber
-: match "examine chamber"  {
-   : if (is_at "inside_tavern" && is_chamber_open == true) {
-      : print "You can't make out what is inside from here. " ;
-   }
-}
-
-
-
-//examine tables
-: match "examine table; check table; look table"  {
-   : if (is_at "chamber") {
-      : add_choice "Table of Chaos Red"  {
-         : gosub "chaos_s" ;
-      }
-      : add_choice "Table of Logic Blue"  {
-         : gosub "logic_s" ;
-      }
-      : add_choice "Table of Order Yellow"  {
-        : gosub "order_s" ;
-      }
-      : add_choice "Table of Structure Green"  {
-        : gosub "structure_s" ;
-      }
-      : add_choice "Table of Mystery Purple"  {
-        : gosub "mystery_s" ;
-      }
-      : choose "Which table?" ;
-      
-      : press_any_key ;
-      : done ;
-      
-   }
-}
-
-//examine chaos table directly
-: if_examine "chaos"  {
-   : gosub "chaos_s" ;
-}
-: if_examine "logic"  {
-   : gosub "logic_s" ;
-}
-: if_examine "order"  {
-   : gosub "order_s" ;
-}
-: if_examine "structure"  {
-   : gosub "structure_s" ;
-}
-: if_examine "mystery"  {
-   : gosub "mystery_s" ;
-}
-
-
-//examine guardian
-: if_examine "guardian"  {
-   : print "The guardian beckons to you. Does he want to talk to you?" ;
-}
-
-//talk guardian
-: match "talk guardian; speak guardian"  {
-   : if (is_at "chamber") {
-      : if (is_chamber_quest == false) {
-          : print "<'Welcome<5>> {name} <. You have made it to the inner chamber. The Temple labours are performed here. Ordinarily there are more templars in here, but today we are spread thin. Many are called away to fight in the FUD wars, others to defend the AMM and more still sent to call upon our allies the Great House of FRAX to aid us.'<5>>" ;
-          : press_any_key ;
-          : print "<'Alas, that has left the chambers vulnerable to malicious actors. In fact, I know that one such impostor has made their way into our midst. It is one of these templars here. As the guardian of the chamber I am unable to abandon my post. Can you help me find the impostor? Maybe you can gather some clues by examining each table… Good luck<5>> {name} <'<5>>" ;
-          : set_boolean var = "is_chamber_quest"  value = "true" ;
-          : press_any_key ;
-          : redescribe;
-      }
-      : if (is_chamber_quest == true) {
-      : add_choice "Yes"  {
-         : add_choice "Chaos Templar 1"  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+   //inside tavern - ancient key
+   : match "examine key "  {
+         : if (is_at "inside_tavern") {
+            : if (is_key_exists == true && drunkeness == 0 ) {
+            : print_graphic "painting" ;  
+            : print "Looks like an ancient key with 5 coloured emblems on it" ;
             : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. I have verified that he works with the codex team.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : add_choice "Chaos Templar 2"  {
-            : clear_screen;
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "But the templar suspect calls you back" ;
-            : press_any_key ;
-            : print "<'Ok you got me...But before you banish me I have one thing to say to you...'<2>>";
-            : press_any_key ;
-            : print "<'You...'<2>>";
-            : press_any_key ;
-            : print "<'Got...'<2>>";
-            : press_any_key ;
-            : play_music sound="ambient_rickroll";
-            : print "<\"Trolled!\"<2>>";
-            : set_graphic graphic = "rick_astley"  target = "chamber" immediate = "true";
-            : press_any_key ;
-            : print "<'Hahaha! Sorry couldn't help myself! But really though, I'm not the impostor. Good luck finding em!'<2>>";
-            : press_any_key ;
-            : print "The Guardian groans as the templar walks back to his table" ;
-            : decrement "impostor_try" ;
-            : print "<'I will give you<5>> {impostor_try} <more try(s)'<5>>'" ;
-            : press_any_key ;
-            : play_music sound="ambient_chant";
-            : set_graphic graphic = "chamber"  target = "chamber";
+            : redescribe;
             
          }
-         : add_choice "Logic Templar 1 "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+
+         : if (is_key_exists == true && drunkeness >0 ) {
+            : if (drunkeness == 1) {
+               : print_graphic "painting_red" ;  
+            }
+            : if (drunkeness == 2) {
+               : print_graphic "painting_blue" ;  
+            }
+            : if (drunkeness == 3) {
+               : print_graphic "painting_yellow" ;  
+            }
+            : if (drunkeness == 4) {
+               : print_graphic "painting_green" ;  
+            }
+            : if (drunkeness == 5) {
+               : print_graphic "painting_purple" ;  
+            }
          }
-         : add_choice "Logic Templar 2 "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : add_choice "Order Templar"  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : add_choice "Structure Templar "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. The entire dAPP and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : add_choice "Mystery Templar 1 "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. I've personally seen some of this guy's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : add_choice "Mystery Templar 2 "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'You've got him! Once I cornered him he confessed to having infiltrated our ranks. How did you know?'<5>>" ;
-            : press_any_key ;
-            : success ;
-            : print "'Lucky Guess...'" ;
-            : press_any_key ;
-               : if (is_asked_work ==true) {
-               : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
-               : press_any_key ;
-               }
-               : if (is_asked_future ==true) {
-               : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
-               : press_any_key ;
-               }
-            : print "<'You've done well. And I see your knowledge of all things Temple is returning.'<5>>" ;
-            : press_any_key ;
-            : print "'Yes...it is...all coming back to me now. I was a templar myself...a devoted one. I did everything required of me...'" ;
-            : press_any_key ;
-            : print "But I..." ;
-            : press_any_key ;
-            : print "'...lost faith in the protocol. The market turned. I lost a lot of money...I remember I was one of the loudest fudders in the building.\n I was stripped of my roles, my memories...'" ;
-            : press_any_key ;
-            : print "<'Yes...there were many others like you. Some never came back. But it is a choice we are all free to make. You however, chose to come back for some reason. Whatever that reason may be, welcome back<5>> {name} <. And this time, we all hope you stay.'<5>>" ;
-            : gosub "win_game" ;
-         }
-         : add_choice "Mystery Templar 3 "  {
-            : print "The guardian motions for the suspect while you move away to give them some privacy." ;
-            : press_any_key ;
-            : print "After a long conversation the guardian calls you back and says..." ;
-            : press_any_key ;
-            : decrement "impostor_try" ;
-            : print "<'No... that is not the impostor. His work can be heard everywhere.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
-         }
-         : choose "<So who is it?<5>>" ;
+
+         : print "Looks like an ancient key with 5 coloured emblems on it. Is {drunkeness} of the emblems glowing? Geez maybe I need another drink..." ;
+         : press_any_key ;
          : redescribe;
       }
-      : add_choice "No"  {
-         : print "<ok well, you let me know as soon as you do<5>>" ;
+   }
+
+   : match "examine key "  {
+      : if (is_at "inside_tavern") {
+         : if (is_carried "ancient_key" ) {
+            : print "Looks like an ancient key" ;
+         }
       }
-      : choose "<So, you figured out who the impostor is yet?<5>>" ;
+   }     
+   : match "take key; pick key; touch key; touch painting"  {
+      : if (is_at "inside_tavern") {
+         : if (is_key_exists == true && drunkeness == 5) {
+            : print "You reach out to touch the key and...you manage to grab the key. You are a little shocked. This should be impossible! Was it the drinks? No one else seemed to notice, so you quickly pocket the key" ;
+            : success ;
+            : set_boolean var = "is_key_exists"  value = "false" ;
+            : pocket "ancient_key" ;
+            : increment "quest_counter" ;
+            : press_any_key ;
+         }
+         : if (is_key_exists == true && drunkeness != 5) {
+            : print "You reach out to touch the key and...nothing happens. You are not sure why you did that..maybe you need a drink..." ;
+         }
+      }
+   }
+
+   //enter bathroom
+   : match "enter bathroom; enter toilet; go bathroom; go toilet"  {
+      : if (is_at "inside_tavern") {
+         : print "The front of the door says 'memes room'. You assume it was a typo and meant to say 'men's room'. you proceed to enter" ;
+         : goto "toilet" ;
+         : increment "entered_toilet" ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
+   
+   //exit bathroom
+   : match "exit bathroom; exit _;go outside; enter tavern; enter apothecarium; enter apothecary; open door"  {
+      : if (is_at "toilet") {
+         : print "you exit the bathroom with haste, escaping the stench" ;
+         : goto "inside_tavern" ;
+         : press_any_key ;
+         : play_music sound="ambient_apothecarium";
+         : redescribe;
+      }
+   } 
+         
+   //read writings in toilet
+   : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
+         : if (is_at "toilet") {
+            : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
+               : print "You look at the scribbles and see that one of the scribbles say" ;
+               : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
+               : print "Further down someone else wrote\n <What's a flush?<2>>" ;
+               : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
+               : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
+               : print "On yet another section of wall it says \n <You can touch...<2>> " ;
+               : print "Further below it says \n <You can play...<2>> " ;
+               : print "Further yet it says \n <If you say...<2>> " ;
+               on_exhausted {
+                  : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
+                  : play_music sound="ambient_barbie";
+                  : pause "5000" ;
+                  : print "you probably shouldn't take anything on this wall seriously..." ;
+                  : press_any_key ;
+                  : play_music sound="ambient_apothecarium";
+                  : redescribe;
+               }      
+            }
+         }
+   }
+
+   //use sink
+   : match "use sink; use tap; turn tap; examine tap; examine sink; wash hands; wash face; wash self; check sink"  {
+      : if (is_at "toilet") {
+         :if (is_incense_there == false) {
+            : print "what's that on the sink? Is that a stick of incense?" ;
+            : create "incense" ;
+            : set_boolean var = "is_incense_there"  value = "true" ;
+            : press_any_key ;
+            : redescribe;
+            : done ;
+         }
+         : if (is_incense_there == true && is_quest_started == false) {
+            : print "You turn the taps on" ;
+            : pause "1000" ;
+            : print "...and you turn them off again.";
+            : pause "1000" ;
+            : print "That was quite unremarkble" ;
+            : press_any_key ;
+            : redescribe; 
+         }
+         : if (is_incense_there == true && is_quest_started == true && is_clean == false) {
+            : print "Cleanse thy skin..." ;
+            : print "You use the sink to wash your hands and face" ;
+            : increment "quest_counter" ;
+            : set_boolean var = "is_clean"  value = "true" ;
+            : press_any_key ;
+            : success ;
+            : redescribe; 
+         }
+         : if (is_incense_there == true && is_quest_started == true && is_clean == true) {
+            : print "You are already clean";
+            : press_any_key;
+            : redescribe; 
+         }
+      }
+   }
+
+
+   //examine incense
+   : match "examine incense"  {
+      : if (is_present "incense") {
+      : print "a stick of incense" ;
+      : press_any_key ;
+      : redescribe;   
+      }
+   }
+
+
+   //use toilet bowl
+   : match "use toilet; examine toilet"  {
+      : if (is_at "toilet") {
+      : print "You don't really feel like going right now..." ;
       : press_any_key ;
       : redescribe;
-      
-      
-      
-      
       }
-      
+   }
+
+   //examine table
+   : match "examine table; check table; look table; examine candle; check candle"  {
+      : if (is_at "inside_tavern") {
+         : if (entered_toilet > 0) {
+         : print "upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
+         : create "candle" ;
+         : press_any_key ;
+         : redescribe;
+         }
+      }
+   }
+
+   //examine candle
+   : match "examine candle; check candle; look candle"  {
+      : if (is_at "inside_tavern") {
+         : if (is_present "candle") {
+         : print "a newly lighted candle burns brightly." ;
+         : press_any_key ;
+         : redescribe;
+         }
+      }
+   }
+
+   //burn incense
+   : match "burn incense; incense candle; light incense; candle incense"  {
+      : if (is_at "inside_tavern") {
+         : if (is_carried "incense") {
+         : print "You burn the incense. It effuses a sweet smelling aroma" ;
+         : press_any_key ;
+         : print "The stick burns quicker than you expected...The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
+         : press_any_key ;
+         : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
+         : press_any_key ;
+         : create "table_words" ;
+         : destroy "incense" ;
+         : redescribe;
+         }
+      }
+   }
+
+   //read table words
+   : match "read words; read message; examine words; examine message; read writing; examine writing"  {
+      : if (is_at "inside_tavern" && is_exists "table_words") {
+         : print "the message reads: \n <Abandon thine inhibitions and collect the key<1>> \n <Give thine aid to a lost devotee<1>> \n <Then cleanse thy skin of all impurity<1>> \n <Only then<1>> {name} <, will thy prove thyself worthy<1>>   " ;
+         : print "And right at the bottom it says 'Tasks Completed = {quest_counter}'" ;
+         : set_boolean var = "is_quest_started"  value = "true" ;
+      }
    }
 
 
-}
-
-//examine statues
-: match "examine statue; check statue; look statue; examine effigy; examine effigies; check effigy; check effigies"  {
-   : if (is_at "chamber") {
-   : print "intricately carved statues. They look like templars in deep prayer" ;
-      
-   }
-}
-
-
-
-
-
-      
-//troubeshoot
-: match "colour me"  {
-   : print "<'1'<1>>" ;
-   : print "<'2'<2>>" ; 
-   : print "<'3'<3>>" ;
-   : print "<'4'<4>>" ; 
-   : print "<'5'<5>>" ;
-   : print "<'6'<6>>" ; 
-   : print "<'7'<7>>" ;
-   : print "<'8'<8>>" ;
-   : print "<'9'<9>>" ;
-   : print "<'10'<10>>";
-   : print "<'11'<11>>";
-   : print "<'12'<12>>";
-   : print "<'13'<13>>";
-   : print "<'14'<14>>";
-   : print "<'15'<15>>";
+   //examine keyhole
+   : match "examine keyhole; check keyhole; look keyhole"  {
+      : if (is_at "inside_tavern" && is_present "keyhole_1") {
+      : print "This wasn't here before. But this is a real keyhole alright. " ;
+      }
    }
 
-: match "get apoth"  {
-     : play_music sound="ambient_apothecarium";
-}
-: match "get night"  {
-    : play_music sound="ambient_night";
-}
-: match "get chant"  {
-    : play_music sound="ambient_chant";
-}
- : match "get barbie"  {
-    : play_music sound="ambient_barbie";
-}  
- : match "get gong"  {
-    : play_music sound="ambient_gong";
-}  
- : match "get rick"  {
-    : play_music sound="ambient_rickroll";
-}
+   //use ancient key on keyhole
+   : match "use key; unlock keyhole; unlock painting; key keyhole"  {
+      : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
+      : print "You cautiously put the ancient key into the keyhole" ;
+      : press_any_key ;
+      : print "it fits";
+      : press_any_key ;
+      : print "you turn the key, and the entire section of the wall slowly swings open! \n you glance behind you, the bartender doesn't even bat an eyelid. " ;
+      : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
+      : press_any_key ;
+      : success ;
+      : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
+      : set_boolean var = "is_chamber_open"  value = "true" ;
+      : destroy "ancient_key" ;
+      : press_any_key ;
+      : redescribe;
 
-: match "get drunk"  {
-   : set_integer var = "drunkeness"  value = "5" ;
-   
-   
-}
+      }
+   }
+
+   //examine chamber
+   : match "examine chamber"  {
+      : if (is_at "inside_tavern" && is_chamber_open == true) {
+         : print "You can't make out what is inside from here. " ;
+      }
+   }
 
 
+
+   //examine tables
+   : match "examine table; check table; look table"  {
+      : if (is_at "chamber") {
+         : add_choice "Table of Chaos Red"  {
+            : gosub "chaos_s" ;
+         }
+         : add_choice "Table of Logic Blue"  {
+            : gosub "logic_s" ;
+         }
+         : add_choice "Table of Order Yellow"  {
+         : gosub "order_s" ;
+         }
+         : add_choice "Table of Structure Green"  {
+         : gosub "structure_s" ;
+         }
+         : add_choice "Table of Mystery Purple"  {
+         : gosub "mystery_s" ;
+         }
+         : choose "Which table?" ;
+         
+         : press_any_key ;
+         : done ;
+         
+      }
+   }
+
+   //examine chaos table directly
+   : if_examine "chaos"  {
+      : gosub "chaos_s" ;
+   }
+   : if_examine "logic"  {
+      : gosub "logic_s" ;
+   }
+   : if_examine "order"  {
+      : gosub "order_s" ;
+   }
+   : if_examine "structure"  {
+      : gosub "structure_s" ;
+   }
+   : if_examine "mystery"  {
+      : gosub "mystery_s" ;
+   }
+
+
+   //examine guardian
+   : if_examine "guardian"  {
+      : print "The guardian beckons to you. Does he want to talk to you?" ;
+   }
+
+   //talk guardian
+   : match "talk guardian; speak guardian"  {
+      : if (is_at "chamber") {
+         : if (is_chamber_quest == false) {
+            : print "<'Welcome<5>> {name} <. You have made it to the inner chamber. The Temple labours are performed here. Ordinarily there are more templars in here, but today we are spread thin. Many are called away to fight in the FUD wars, others to defend the AMM and more still sent to call upon our allies the Great House of FRAX to aid us.'<5>>" ;
+            : press_any_key ;
+            : print "<'Alas, that has left the chambers vulnerable to malicious actors. In fact, I know that one such impostor has made their way into our midst. It is one of these templars here. As the guardian of the chamber I am unable to abandon my post. Can you help me find the impostor? Maybe you can gather some clues by examining each table… Good luck<5>> {name} <'<5>>" ;
+            : set_boolean var = "is_chamber_quest"  value = "true" ;
+            : press_any_key ;
+            : redescribe;
+         }
+         : if (is_chamber_quest == true) {
+         : add_choice "Yes"  {
+            : add_choice "Chaos Templar 1"  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. I have verified that he works with the codex team.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Chaos Templar 2"  {
+               : clear_screen;
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "But the templar suspect calls you back" ;
+               : press_any_key ;
+               : print "<'Ok you got me...But before you banish me I have one thing to say to you...'<2>>";
+               : press_any_key ;
+               : print "<'You...'<2>>";
+               : press_any_key ;
+               : print "<'Got...'<2>>";
+               : press_any_key ;
+               : play_music sound="ambient_rickroll";
+               : print "<\"Trolled!\"<2>>";
+               : set_graphic graphic = "rick_astley"  target = "chamber" immediate = "true";
+               : press_any_key ;
+               : print "<'Hahaha! Sorry couldn't help myself! But really though, I'm not the impostor. Good luck finding em!'<2>>";
+               : press_any_key ;
+               : print "The Guardian groans as the templar walks back to his table" ;
+               : decrement "impostor_try" ;
+               : print "<'I will give you<5>> {impostor_try} <more try(s)'<5>>'" ;
+               : press_any_key ;
+               : play_music sound="ambient_chant";
+               : set_graphic graphic = "chamber"  target = "chamber";
+               
+            }
+            : add_choice "Logic Templar 1 "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Logic Templar 2 "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Order Templar"  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Structure Templar "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. The entire dAPP and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Mystery Templar 1 "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. I've personally seen some of this guy's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : add_choice "Mystery Templar 2 "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'You've got him! Once I cornered him he confessed to having infiltrated our ranks. How did you know?'<5>>" ;
+               : press_any_key ;
+               : success ;
+               : print "'Lucky Guess...'" ;
+               : press_any_key ;
+                  : if (is_asked_work ==true) {
+                  : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
+                  : press_any_key ;
+                  }
+                  : if (is_asked_future ==true) {
+                  : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
+                  : press_any_key ;
+                  }
+               : print "<'You've done well. And I see your knowledge of all things Temple is returning.'<5>>" ;
+               : press_any_key ;
+               : print "'Yes...it is...all coming back to me now. I was a templar myself...a devoted one. I did everything required of me...'" ;
+               : press_any_key ;
+               : print "But I..." ;
+               : press_any_key ;
+               : print "'...lost faith in the protocol. The market turned. I lost a lot of money...I remember I was one of the loudest fudders in the building.\n I was stripped of my roles, my memories...'" ;
+               : press_any_key ;
+               : print "<'Yes...there were many others like you. Some never came back. But it is a choice we are all free to make. You however, chose to come back for some reason. Whatever that reason may be, welcome back<5>> {name} <. And this time, we all hope you stay.'<5>>" ;
+               : gosub "win_game" ;
+            }
+            : add_choice "Mystery Templar 3 "  {
+               : print "The guardian motions for the suspect while you move away to give them some privacy." ;
+               : press_any_key ;
+               : print "After a long conversation the guardian calls you back and says..." ;
+               : press_any_key ;
+               : decrement "impostor_try" ;
+               : print "<'No... that is not the impostor. His work can be heard everywhere.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+            }
+            : choose "<So who is it?<5>>" ;
+            : redescribe;
+         }
+         : add_choice "No"  {
+            : print "<ok well, you let me know as soon as you do<5>>" ;
+         }
+         : choose "<So, you figured out who the impostor is yet?<5>>" ;
+         : press_any_key ;
+         : redescribe;
+         
+         
+         
+         
+         }
+         
+      }
+
+
+   }
+
+   //examine statues
+   : match "examine statue; check statue; look statue; examine effigy; examine effigies; check effigy; check effigies"  {
+      : if (is_at "chamber") {
+      : print "intricately carved statues. They look like templars in deep prayer" ;
+         
+      }
+   }
+
+
+
+
+
+         
+   //troubeshoot
+   : match "colour me"  {
+      : print "<'1'<1>>" ;
+      : print "<'2'<2>>" ; 
+      : print "<'3'<3>>" ;
+      : print "<'4'<4>>" ; 
+      : print "<'5'<5>>" ;
+      : print "<'6'<6>>" ; 
+      : print "<'7'<7>>" ;
+      : print "<'8'<8>>" ;
+      : print "<'9'<9>>" ;
+      : print "<'10'<10>>";
+      : print "<'11'<11>>";
+      : print "<'12'<12>>";
+      : print "<'13'<13>>";
+      : print "<'14'<14>>";
+      : print "<'15'<15>>";
+      }
+
+   : match "get apoth"  {
+      : play_music sound="ambient_apothecarium";
+   }
+   : match "get night"  {
+      : play_music sound="ambient_night";
+   }
+   : match "get chant"  {
+      : play_music sound="ambient_chant";
+   }
+   : match "get barbie"  {
+      : play_music sound="ambient_barbie";
+   }  
+   : match "get gong"  {
+      : play_music sound="ambient_gong";
+   }  
+   : match "get rick"  {
+      : play_music sound="ambient_rickroll";
+   }
+
+   : match "get drunk"  {
+      : set_integer var = "drunkeness"  value = "5" ;
+      
+      
+   }
 }
 
 ######################################
