@@ -637,7 +637,7 @@ subroutines {
 //red table
 chaos_s : subroutine {
      : print "You approach the red table. There are two templars sitting there, wearing robes with a 'Chaos' insignia." ;
-     : print "They are the loudest templars in the room, scheming loudly about 'trolling fudders', 'creating more memes' and... 'eating beans?'. These bros know how to party!";
+     : print "They are the loudest templars in the room, scheming loudly about 'trolling fudders', 'creating more memes' and... 'eating beans?'. These templars know how to party!";
      : if (is_chamber_quest == true) {
         : add_choice "What are you working on?"  {
            : print "<Chaos Templar 1: 'Just working on the next article for the Temple Codex/Newsletter'<2>>" ;
