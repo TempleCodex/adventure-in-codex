@@ -3,6 +3,12 @@
 ######################################
 
 start_at = far_1_tavern
+
+// debug code
+on_debug {
+   : goto "inside_tavern" ;
+}
+
 start_theme = my_theme
 themes {
    my_theme : theme {
@@ -22,7 +28,7 @@ on_startup {
    
    : print "This is a text based adventure game. Type in commands to perform actions, solve pussles and progress the story.\n TIPS \n -typing 'EXAMINE' followed by an object name usually provides more info on that object \n -typing 'INVENTORY' shows you a list of things you are currently carrying \n -typing 'SAVE' saves your game \n -typing 'LOAD' will load a saved game";
    : press_any_key ;
-   : ask_string question = "Before we begin...What is your name?"  var = "name" ;
+   : ask_string question = "Before we begin... What is your name?"  var = "name" ;
    
 }
 ######################################
@@ -105,25 +111,36 @@ on_describe {
   
 //describe far from tavern
       : if (is_at "far_1_tavern") {
-      : print "You open your eyes. The surrounding looks unfamiliar. It is nighttime." ;
+      : print "You open your eyes." ;
       : press_any_key ;
-      : print "The air is curiously still and fills your mouth with a stale taste.  It’s too quiet, and not a single creature of the night stirs. The only thing breaking the silence is the incessant ringing in your ears..." ;
+      : print "The surrounding looks unfamiliar." ;
       : press_any_key ;
-      : print "“What happened? Where is this place?" ;
+      : print "It's night time." ;
       : press_any_key ;
-      : print "Darkness seeps out of the night. You can see nothing except...a faint glow to the north \n Looks like you have no choice but to walk towards it" ;
+      : print "The air is curiously still and fills your mouth with a stale taste."; 
+      : press_any_key ;
+      : print "It’s too quiet, and not a single creature of the night stirs. The only thing breaking the silence is the incessant ringing in your ears..." ;
+      : press_any_key ;
+      : print "\"What happened? Where is this place?\"" ;
+      : press_any_key ;
+      : print "Darkness seeps out of the night." ;
+      : press_any_key ;
+      : print "You can see nothing... except a faint glow to the north." ;
+      : press_any_key ;
+      : print "Looks like you have no choice but to walk towards it." ;
+      : press_any_key ;
       }
       
 //describe far from tavern
       : if (is_at "far_2_tavern") {
       : print "You're getting closer to the glow. You can make out an outline of a building of some sort." ;
       : press_any_key ;
-      : print "You sigh with relief...at least there is civilisation here. Better keep walking" ;
+      : print "You sigh with relief... at least there is civilisation here. Better keep walking." ;
       }  
       
 //describe outside tavern
       : if (is_at "outside_tavern") {
-      : print "You seem to be standing in front of a door leading into what looks like an apothecarium..or is it a tavern? " ;
+      : print "You're standing in front of a door leading into what looks like an apothecarium... or is it a tavern?" ;
       }
    
 //describe inside tavern
@@ -192,13 +209,13 @@ booleans {
 
 integers {
    
-   question_1 : integer "0" ;
-   drinking : integer "0" ;
-   drunkeness : integer "0" ;
-   toilet_writing : integer "0" ;
-   entered_toilet : integer "0" ;
-   quest_counter : integer "0" ;
-   impostor_try : integer "3" ;
+   question_1 : integer "0";
+   drinking : integer "0";
+   drunkeness : integer "0";
+   toilet_writing : integer "0";
+   entered_toilet : integer "0";
+   quest_counter : integer "0";
+   impostor_try : integer "3";
    
 }
 
@@ -230,8 +247,9 @@ subroutines {
       : failure ;
       : lose_game;
          }
+
  //game over at impostor       
-end_game2 : subroutine {
+   end_game2 : subroutine {
       : press_any_key ;
       : clear_screen;
       : print "YOU FAILED" ;
@@ -242,51 +260,51 @@ end_game2 : subroutine {
 //woman questions
    woman_questions : subroutine {
       : add_choice "You need to post your feet pictures to the devs"  {
-      : print "<'I have *sniff*...and now...my feet is all over feetfinder.com! waaaaaaaa! <6>>" ;
+      : print "<\"I have *sniff*...and now...my feet is all over feetfinder.com! Waaaaaaaa!\" <6>>" ;
       }
       : add_choice "You need to verify yourself in voice chat"  {
       : print "<You kidding me? I was in there for ages. Then I got told dat is not da way to get verified!<6>>" ;
       }
       : add_choice "You just need to react with an emoji"  {
-      : print "<'What? First I've heard if this. React where?<6>>" ;
+      : print "<\"What? First I've heard if this. React where?\"<6>>" ;
             : add_choice "On the announcements channel"  {
             : print "<Liar. I've seen many reactions on that channel. None of them worked<6>>" ;
             }
             : add_choice "On one of the pinned messages in the verification channel"  {
-            : print "<Oh! I've not thought to check the pinned messages. Which emoji do I use?<6>>" ;
+            : print "<\"Oh! I didn't think to check the pinned messages. Which emoji do I use?\"<6>>" ;
                   : add_choice "The thumbs up emoji"  {
-                  : print "<You sure? Hmm, ok I will try that right away!<6>>" ;
+                  : print "<\"You sure? Hmm, ok I will try that right away!\"<6>>" ;
                   : print "She thanks you one last time and leaves. \n You secretly hope you told her the right thing..." ;
                   : success ;
                   : destroy "cloak_woman" ;
                   }
                   : add_choice "The sun emoji"  {
-                  : print "<You sure? Hmm, ok I will try that right away!<6>>" ;
+                  : print "<\"You sure? Hmm, ok I will try that right away!\"<6>>" ;
                   : print "She thanks you one last time and leaves. \n You secretly hope you told her the right thing..." ;
                   : success ;
                   : destroy "cloak_woman" ;
                   }
                    : add_choice "The fire emoji"  {
-                  : print "<You sure? Hmm, ok I will try that right away!<6>>" ;
+                  : print "<\"You sure? Hmm, ok I will try that right away!\"<6>>" ;
                   : print "She thanks you one last time and leaves. \n You secretly hope you told her the right thing..." ;  
                   : success ;
                   : destroy "cloak_woman" ;
                   }
-                  : choose "you ponder her words for a moment...and respond with" ;
+                  : choose "You ponder her words for a moment, and respond with..." ;
                   : create "empty_seat";
                   : increment "quest_counter" ;
                   
             }
             : add_choice "On the voice-verify channel"  {
-            : print "<I'm starting to wonder if you know what you are talking about. You can't use emojis in voice channels...<6>>" ;
+            : print "<\"I'm starting to wonder if you know what you are talking about. You can't use emojis in voice channels...\"<6>>" ;
             }
             
-            : choose "you ponder her words for a moment...and respond with" ;
+            : choose "You ponder her words for a moment, and respond with..." ;
             : press_any_key ;
             : redescribe;
             
       }
-      : choose "you ponder her words for a moment...and respond with" ; 
+      : choose "You ponder her words for a moment, and respond with..." ; 
       : press_any_key ;
       : redescribe;
       : done ;
@@ -296,23 +314,23 @@ end_game2 : subroutine {
 //first man question
    man_question1 : subroutine {
             : add_choice "Where am I?"  {
-            : print "<'Why this here is where all newcomers like yourself start off in. It's both a starting point and a halfway house if you will.<4>>" ;
+            : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
             : set_integer var = "question_1"  value = "1" ;
             }
             : add_choice "Why am I here?"  {
-            : print "<'That my friend is a question you will need to figure out yourself'<4>>" ;
+            : print "<\"That my friend is a question you will need to figure out yourself\"<4>>" ;
             }
             : add_choice "Who is that woman?"  {
-            : print "<'Ahh...don't mind her. She is still stuck on the Opening Ceremony. She never made it through, unlike most Templars.<4>>\n <I've told her the OC is over and all doors are open to her now, but I can't get through to her.<4>>\n <sigh...what can you do...'<4>>" ;
+            : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
             : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             : add_choice "I have no more questions for now"  {
-            : print "<'You take care then.<4>>" ;
+            : print "<\"You take care then.\"<4>>" ;
             : press_any_key ;
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ;
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;
             : press_any_key ;
             
             
@@ -320,23 +338,23 @@ end_game2 : subroutine {
 //second man question
    man_question2 : subroutine {
             : add_choice "Newcomers?"  {
-            : print "<'New people come in all the time, some to stake and chill, some to throw FUD, other's just to lurk around.<4>>\n<Can't quite tell which camp you fall into...I guess we'll see...<4>>" ;
+            : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
             : set_integer var = "question_1"  value = "2" ;
             }
             : add_choice "Why am I here?"  {
-            : print "<'That my friend is a question you will need to figure out yourself'<4>>" ;
+            : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
             }
             : add_choice "Who is that woman?"  {
-            : print "<'Ahh...don't mind her. She is still stuck on the Opening Ceremony. She never made it through, unlike more Templars.<4>>\n <I've told her the OC is over and all doors are open to her now, but I can't get through to her.<4>>\n <sigh...what can you do...'<4>>" ;
+            : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
             : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             : add_choice "I have no more questions for now"  {
-            : print "<'You take care then.<4>>" ;
+            : print "\"You take care then.\"<4>" ;
             : press_any_key ;
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ;  
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
             : press_any_key ;
             
    }
@@ -344,11 +362,11 @@ end_game2 : subroutine {
    man_red_drink : subroutine {
             : add_choice "I need a drink..."  {
             : print "<'I have just the thing for you...<4>>" ;
-            : press_any_key ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
             : pause "1000" ;
             : print "<Here you go champ<4>>" ;
@@ -369,7 +387,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ; 
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ; 
             : press_any_key ;
             
          }
@@ -378,11 +396,11 @@ end_game2 : subroutine {
     man_blue_drink : subroutine {     
             : add_choice "I need a drink..."  {
             : print "<'Oho another one already?<4>>" ;
-            : press_any_key ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
             : pause "1000" ;
             : print "<Here you go champ<4>>" ;
@@ -403,7 +421,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ; 
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ; 
             : press_any_key ;
             
          }
@@ -412,11 +430,11 @@ end_game2 : subroutine {
    man_green_drink : subroutine {  
             : add_choice "I need a drink..."  {
             : print "<'Coming right up...<4>>" ;
-            : press_any_key ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
             : pause "1000" ;
             : print "<Here you go champ<4>>" ;
@@ -437,7 +455,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ; 
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ; 
             : press_any_key ;
             
    }
@@ -446,11 +464,11 @@ end_game2 : subroutine {
    man_yellow_drink : subroutine {  
             : add_choice "I need a drink..."  {
             : print "<'Got a special one for you this time...<4>>" ;
-            : press_any_key ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
             : pause "1000" ;
             : print "<Here you go champ<4>>" ;
@@ -471,7 +489,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ; 
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ; 
             : press_any_key ;
             
          }
@@ -480,11 +498,11 @@ end_game2 : subroutine {
       man_purple_drink : subroutine {  
             : add_choice "I need a drink..."  {
             : print "<'This one here is my favourite...<4>>" ;
-            : press_any_key ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
-            : pause "700" ;
+            : pause "500" ;
             : print "<** Mix **<5>>" ;
             : pause "1000" ;
             : print "<Here you go champ<4>>" ;
@@ -505,7 +523,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ; 
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ; 
             : press_any_key ;
             
       }
@@ -528,7 +546,7 @@ end_game2 : subroutine {
             : redescribe;
             : done ;
             }
-            : choose "<'So, what will it be <4>>{name}<?<4>>'" ;  
+            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
             : press_any_key ;
       
          }
@@ -949,9 +967,9 @@ on_command {
 //         }  
       : if (is_at "inside_tavern") {
          : if (is_intro_done == false) {
-            : print "You introduce yourself \n 'Hello, my name is {name}' ";
+            : print "You introduce yourself. \n \"Hello, my name is {name}.\" ";
             : press_any_key ;
-            : print "<'Howdy friend. Haven't see you round these parts before. Take your time, make yourself at home. I'll be here to answer your questions if you need me'<4>>" ;
+            : print "<'Howdy friend. Haven't see you round these parts before. Take your time, make yourself at home. I'll be here to answer your questions if you need me.\"<4>>" ;
             : set_boolean var = "is_intro_done"  value = "true" ;
             
          }
@@ -1351,7 +1369,7 @@ on_command {
             : print "<'Got...'<2>>";
             : press_any_key ;
             : play_music sound="ambient_rickroll";
-            : print "<'Trolled!'<2>>";
+            : print "<\"Trolled!\"<2>>";
             : print_graphic "rickroll" ;
             : press_any_key ;
             : print "<'Hahaha! Sorry couldn't help myself! But really though, I'm not the impostor. Good luck finding em!'<2>>";
@@ -1414,11 +1432,11 @@ on_command {
             : print "Lucky Guess..." ;
             : press_any_key ;
                : if (is_asked_work ==true) {
-               : print "'I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially Eth investments which we don't actually have, I got a little suspicious." ;
+               : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
                : press_any_key ;
                }
                : if (is_asked_future ==true) {
-               : print "'He spoke of Lost Boy as a 'Mystery' leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!" ;
+               : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
                : press_any_key ;
                }
             : print "<'You've done well. And I see your knowledge of all things Temple is returning.'<5>>" ;
@@ -1538,7 +1556,7 @@ assets {
 game_information {
 
    game_name        = Temple Codex Chronicles
-   game_shortname   = Ex
+   game_shortname   = TCC
    written_by       = Gman
    year_of_original = 2022
    year_of_release  = 2022
