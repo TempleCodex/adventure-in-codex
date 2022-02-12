@@ -635,9 +635,9 @@ subroutines {
         }
          : add_choice "What's in the pipeline?"  {
            : print "<Chaos Templar 1: \"Educational materials for the protocol!\"<2>>" ;
-           : print "<Chaos Templar 2: \"umm... Poker night?\"<2>>" ;
+           : print "<Chaos Templar 2: \"Umm... Poker night?\"<2>>" ;
         }
-        : choose "You think for a moment, and decide to ask the table" ;
+        : choose "You think for a moment, and decide to ask the table:" ;
      }
      : press_any_key ;
      : redescribe;
@@ -647,7 +647,7 @@ subroutines {
    //blue table
    logic_s : subroutine {
      : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
-     : print "One of the templars is fidgeting with his hand, cracking knuckles... is he nervous or just deep in thought?";
+     : print "One of the templars is fidgeting with his hand, cracking knuckles... Is he nervous or just deep in thought?";
       : if (is_chamber_quest == true) {
          : add_choice "What are you working on?"  {
          : print "<Logic Templar 1: \"Shhhh! I almost cracked the code on sustainable yield...\"<9>>" ;
@@ -657,7 +657,7 @@ subroutines {
            : print "<Logic Templar 1: \"Quit disturbing me! I duno, there are a whole heap of analytics and calculators I need to create<9>>" ;
            : print "<Logic Templar 2: \"It's all about the treasury investment opportunities baby!\"<9>>" ;
         }
-        : choose "You think for a moment, and decide to ask the table" ;
+        : choose "You think for a moment, and decide to ask the table:" ;
      }
      : press_any_key ;
      : redescribe;
@@ -666,15 +666,16 @@ subroutines {
 
    //yellow table
    order_s : subroutine {
-    : print "As you approach the yellow table you see one Templar writing furiously. He dons a robe with a yellow 'Order' insignia displayed. There are post it notes and plans strewn across the table. You see the word 'Operations' repeated a lot in the documents . ";
+    : print "As you approach the yellow table you see one Templar writing furiously.";
+    : print "They don a robe with a yellow \"Order\" insignia displayed. There are post it notes and plans strewn across the table. You see the word \"Operations\" repeated a lot in the documents. ";
     : if (is_chamber_quest == true) {
        : add_choice "What are you working on?"  {
-          : print "<Order Templar : 'A better onboarding experience for newcomers is my focus'<6>>" ;
+          : print "<Order Templar : \"A better onboarding experience for newcomers is my focus\"<6>>" ;
         }
         : add_choice "What's in the pipeline?"  {
-           : print "<Order Templar : 'Working on reopening enclaves and allowing people to swtich between them really'<6>>";
+           : print "<Order Templar : \"I'm working on reopening enclaves. This will allow people to switch between them.\"<6>>";
         }
-        : choose "You think for a moment, and decide to ask the table" ;
+        : choose "You think for a moment, and decide to ask the table:" ;
      }
      : press_any_key ;
      : redescribe;
@@ -682,7 +683,9 @@ subroutines {
 
    //green table
    structure_s : subroutine {
-   : print "You approach the green table. One templar, muttering, shrouded in a robe. You can barely see his green 'structure' insignia.  There is a model of a temple on the table. Seems that the templars on this table have been building it piece by piece ";
+   : print "You approach the green table." ;
+   : print "You see only one templar, shrouded in a robe, muttering something to themselves. You can barely see their green \"Structure\" insignia." ; 
+   : print "There is a model of a temple on the table. It seems that the templars at this table have been building it piece by piece.";
    : if (is_chamber_quest == true) {
       : add_choice "What are you working on?"  {
          : print "<Structure Templar: 'How can you not know?? I created the whole website!'<12>>" ;
@@ -690,7 +693,7 @@ subroutines {
          : add_choice "What's in the pipeline?"  {
             : print "<Structure Templar: 'Well someone needs to keep making those smart contracts smarter you know'<12>>" ;
       }
-      : choose "You think for a moment, and decide to ask the table" ;
+      : choose "You think for a moment, and decide to ask the table:" ;
    }
    : press_any_key ;
    : redescribe;
@@ -712,7 +715,7 @@ subroutines {
            : print "<Mystery Templar 3: 'Music music music and more music'<3>>" ;
            : set_boolean var = "is_asked_future"  value = "true" ;
         }
-      : choose "You think for a moment, and decide to ask the table" ;
+      : choose "You think for a moment, and decide to ask the table:" ;
    }
 }
 
