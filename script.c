@@ -382,7 +382,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -419,7 +421,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -458,7 +462,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -497,7 +503,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -536,7 +544,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -575,7 +585,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
@@ -602,7 +614,9 @@ subroutines {
             }
             
             : add_choice "Who is that woman?"  {
-               : print "<\"Ahh...don't mind her. She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+               : print "<\"Ahh... Don't mind her.\"<4>>" ;
+               : pause "600";
+               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
                : set_boolean var = "is_woman_ready"  value = "true" ;
             }
             
