@@ -636,16 +636,16 @@ subroutines {
 
 //red table
 chaos_s : subroutine {
-     : print "You approach the red table. There are two templars sitting there, wearing robes with a 'Chaos' insignia." ;
-     : print "They are the loudest templars in the room, scheming loudly about 'trolling fudders', 'creating more memes' and... 'eating beans?'. These templars know how to party!";
+     : print "You approach the red table. There are two templars sitting there, wearing robes with a \"Chaos\" insignia." ;
+     : print "They are the loudest templars in the room, scheming loudly about \"trolling fudders\", \"creating more memes\" and... \"eating beans?\". These templars know how to party!";
      : if (is_chamber_quest == true) {
         : add_choice "What are you working on?"  {
-           : print "<Chaos Templar 1: 'Just working on the next article for the Temple Codex/Newsletter'<2>>" ;
-           : print "<Chaos Templar 2: 'Oh...err...just some marketing stuff...'<2>>" ;
+           : print "<Chaos Templar 1: \"Just working on the next article for the Temple Codex. You know, the community newsletter!\"<2>>" ;
+           : print "<Chaos Templar 2: \"Oh... Err... Just some marketing stuff...\"<2>>" ;
         }
          : add_choice "What's in the pipeline?"  {
-           : print "<Chaos Templar 1: 'Educational materials for the protocol!'<2>>" ;
-           : print "<Chaos Templar 2: 'umm...poker night?'<2>>" ;
+           : print "<Chaos Templar 1: \"Educational materials for the protocol!\"<2>>" ;
+           : print "<Chaos Templar 2: \"umm... Poker night?\"<2>>" ;
         }
         : choose "You think for a moment, and decide to ask the table" ;
      }
@@ -656,15 +656,16 @@ chaos_s : subroutine {
 
 //blue table
 logic_s : subroutine {
-     : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue 'Logic' insignia, though this is not the only thing that caught your eye… \n One of the templars is fidgeting with his hand, cracking knuckles… is he nervous or just deep in thought?";
+     : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
+     : print "One of the templars is fidgeting with his hand, cracking knuckles... is he nervous or just deep in thought?";
       : if (is_chamber_quest == true) {
         : add_choice "What are you working on?"  {
-           : print "<Logic Templar 1: 'Shhhh! I almost cracked the code on sustainable yield...'<9>>" ;
-           : print "<Logic Templar 2: 'Faith mechanics is my top priority'<9>>" ; 
+           : print "<Logic Templar 1: \"Shhhh! I almost cracked the code on sustainable yield...\"<9>>" ;
+           : print "<Logic Templar 2: \"Faith mechanics is my top priority\"<9>>" ; 
         }
          : add_choice "What's in the pipeline?"  {
-           : print "<Logic Templar 1: 'Quit disturbing me! I duno, there are a whole heap of analytics and calculators I need to create<9>>" ;
-           : print "<Logic Templar 2: 'It's all about the treasury investment opportunities baby!''<9>>" ;
+           : print "<Logic Templar 1: \"Quit disturbing me! I duno, there are a whole heap of analytics and calculators I need to create<9>>" ;
+           : print "<Logic Templar 2: \"It's all about the treasury investment opportunities baby!\"<9>>" ;
         }
         : choose "You think for a moment, and decide to ask the table" ;
      }
