@@ -279,9 +279,9 @@ subroutines {
 	//woman questions
    woman_questions : subroutine {
       : add_choice "You need to post your feet pictures to the devs."  {
-         : print "<\"I have... *sniff*" ;
+         : print "<\"I have... *sniff*\" <6>>" ;
          : pause "600" ;
-         : print "A-and... now... my feet are all over feetfinder.com! Waaaaaah!\" <6>>" ;
+         : print "<\"A-and... now... my feet are all over feetfinder.com! Waaaaaah!\" <6>>" ;
       }
       
       : add_choice "You need to verify yourself in voice chat."  {
@@ -293,9 +293,10 @@ subroutines {
          : print "The woman turns and looks at you." ;
          : print "<\"What? First I've heard if this. React where?\"<6>>" ;
          : add_choice "On the announcements channel."  {
-            : print "<Liar. I've seen many reactions on that channel. None of them worked<6>>" ;
+            : print "The woman shakes her head." ;
+            : print "<Liar. I've seen many reactions on that channel. I've even clicked on every reaction! None of them worked!<6>>" ;
          }
-            
+         
          : add_choice "On one of the pinned messages in the verification channel."  {
             : print "The woman raised her eyebrows in surprise." ;
             : print "<\"Oh! I didn't think to check the pinned messages. Which emoji do I use?\"<6>>" ;
@@ -400,10 +401,10 @@ subroutines {
    }
 //red drink
    man_red_drink : subroutine {
-            : add_choice "I need a drink..."  {
+            : add_choice "Give me a drink..."  {
                : print "<'I have just the thing for you...<4>>" ;
                : print "The burly bartender begins to mix your drink..." ;
-               : pause "100" ;
+               : pause "800" ;
                : print "<** Mix **<5>>" ;
                : pause "100" ;
                : print "<** Mix **<5>>" ;
@@ -441,7 +442,7 @@ subroutines {
      
 //blue drink
     man_blue_drink : subroutine {     
-            : add_choice "I need a drink..."  {
+            : add_choice "I need another drink."  {
                : print "<'Oho, another one already?<4>>" ;
                : print "The burly bartender begins to mix your drink..." ;
                : pause "700" ;
@@ -482,7 +483,7 @@ subroutines {
        
 //green drink
    man_green_drink : subroutine {  
-            : add_choice "I need a drink..."  {
+            : add_choice "Another drink, bartender."  {
                : print "<'Coming right up...<4>>" ;
                : print "The burly bartender begins to mix your drink..." ;
                : pause "500" ;
@@ -523,7 +524,7 @@ subroutines {
        
 //yellow drink
    man_yellow_drink : subroutine {  
-            : add_choice "I need a drink..."  {
+            : add_choice "Barkeep, a drink is needed."  {
                : print "<'Got a special one for you this time...<4>>" ;
                : print "The burly bartender begins to mix your drink..." ;
                : pause "600" ;
@@ -564,7 +565,7 @@ subroutines {
        
 //purple drink
       man_purple_drink : subroutine {  
-            : add_choice "I need a drink..."  {
+            : add_choice "I need one more drink..."  {
                : print "<'This one here is my favourite...<4>>" ;
                : print "The burly bartender begins to mix your drink..." ;
                : pause "1000" ;
@@ -605,7 +606,7 @@ subroutines {
        
       //no more drinks
          man_nomore_drink : subroutine { 
-            : add_choice "I need a drink..."  {
+            : add_choice "I need more drinks..."  {
                : print "<'I think that's about enough for you today...<4>>" ;
             }
             
@@ -635,7 +636,8 @@ subroutines {
 
 //red table
 chaos_s : subroutine {
-     : print "You approach the red table. There are two templars sitting there, wearing robes with a 'Chaos' insignia.\n They are the loudest templars in the room, scheming loudly about 'trolling fudders', 'creating more memes' and... 'eating beans?'. These bros know how to party!";
+     : print "You approach the red table. There are two templars sitting there, wearing robes with a 'Chaos' insignia." ;
+     : print "They are the loudest templars in the room, scheming loudly about 'trolling fudders', 'creating more memes' and... 'eating beans?'. These bros know how to party!";
      : if (is_chamber_quest == true) {
         : add_choice "What are you working on?"  {
            : print "<Chaos Templar 1: 'Just working on the next article for the Temple Codex/Newsletter'<2>>" ;
