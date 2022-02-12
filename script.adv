@@ -49,12 +49,12 @@ strings {
 
 locations {
 
-   far_1_tavern : location "" ;
-   far_2_tavern : location "" ;
+   far_1_tavern   : location "" ;
+   far_2_tavern   : location "" ;
    outside_tavern : location "" ;
-   inside_tavern : location "" ;
-   toilet : location "" ;
-   chamber : location "";
+   inside_tavern  : location "" ;
+   toilet         : location "" ;
+   chamber        : location "";
    
 }
 
@@ -71,7 +71,7 @@ connections {
      // far_2_tavern, north, outside_tavern, 
      
      inside_tavern, enter, chamber, 
-      ]
+   ]
    
 }
 
@@ -81,27 +81,27 @@ connections {
 
 objects {
    
-   painting : scenery "a haunting painting" ;
-  // stools : scenery "typical bar stools" ;
-   cloak_woman : scenery "a woman in a cloak" at = "inside_tavern" conspicuous = "false"  ; 
-   bartender : scenery "the bartender";
-   ancient_key : object "an ancient key" ;
-   red_drink : object "a red drink" ;
-   blue_drink : object "a blue drink" ;
-   green_drink : object "a green drink" ;
-   yellow_drink : object "a yellow drink" ;
-   purple_drink : object "a purple drink" ;
-   incense : object "a stick of incense" ;
-   candle : scenery "a burning candle" ;
-   table_words : scenery "legible words seared into the table from the flames" ;
-   empty_seat : scenery "empty seat now that the woman has left" conspicuous = "false" ;
-   keyhole_1 : scenery "keyhole on the painting";
-   chaos : scenery "the table of Chaos" at = "chamber" conspicuous = "false"   ;
-   logic : scenery "the table of Logic" at = "chamber" conspicuous = "false"  ;
-   order : scenery "the table of Order" at = "chamber" conspicuous = "false"  ;
-   structure : scenery "the table of Structure" at = "chamber" conspicuous = "false"  ;
-   mystery : scenery "the table of Mystery" at = "chamber" conspicuous = "false"  ;
-   guardian : scenery "a guardian watching over us" at = "chamber" conspicuous = "false"  ;
+   painting       : scenery "a haunting painting" ;
+   // stools         : scenery "typical bar stools" ;
+   cloak_woman    : scenery "a woman in a cloak" at = "inside_tavern" conspicuous = "false"  ; 
+   bartender      : scenery "the bartender";
+   ancient_key    : object "an ancient key" ;
+   red_drink      : object "a red drink" ;
+   blue_drink     : object "a blue drink" ;
+   green_drink    : object "a green drink" ;
+   yellow_drink   : object "a yellow drink" ;
+   purple_drink   : object "a purple drink" ;
+   incense        : object "a stick of incense" ;
+   candle         : scenery "a burning candle" ;
+   table_words    : scenery "legible words seared into the table from the flames" ;
+   empty_seat     : scenery "empty seat now that the woman has left" conspicuous = "false" ;
+   keyhole_1      : scenery "keyhole on the painting";
+   chaos          : scenery "the table of Chaos" at = "chamber" conspicuous = "false"   ;
+   logic          : scenery "the table of Logic" at = "chamber" conspicuous = "false"  ;
+   order          : scenery "the table of Order" at = "chamber" conspicuous = "false"  ;
+   structure      : scenery "the table of Structure" at = "chamber" conspicuous = "false"  ;
+   mystery        : scenery "the table of Mystery" at = "chamber" conspicuous = "false"  ;
+   guardian       : scenery "a guardian watching over us" at = "chamber" conspicuous = "false"  ;
    
    
 }
@@ -112,8 +112,8 @@ objects {
 
 on_describe {
 
-//describe far from tavern
-      : if (is_at "far_1_tavern") {
+   //describe far from tavern
+   : if (is_at "far_1_tavern") {
       : play_music sound="ambient_night"; 
       : print "You open your eyes." ;
       : press_any_key ;
@@ -133,60 +133,60 @@ on_describe {
       : press_any_key ;
       : print "Looks like you have no choice but to walk towards it." ;
       : press_any_key ;
-      }
+   }
       
-//describe far from tavern
-      : if (is_at "far_2_tavern") {
+   //describe far from tavern
+   : if (is_at "far_2_tavern") {
       : print "You are getting closer to the glow. You can make out an outline of a building of some sort." ;
       : press_any_key ;
       : print "You sigh with relief... At least there is civilisation here. Better keep walking." ;
-      }  
+   }  
       
-//describe outside tavern
-      : if (is_at "outside_tavern") {
+   //describe outside tavern
+   : if (is_at "outside_tavern") {
       : print "You are standing in front of a door leading into what looks like an apothecarium... or is it a tavern?" ;
-      }
+   }
    
-//describe inside tavern
-      : if (is_at "inside_tavern") {
-         : if (is_present "cloak_woman") {
+   //describe inside tavern
+   : if (is_at "inside_tavern") {
+      : if (is_present "cloak_woman") {
          : print "You look around and start to wonder what kind of room you are even in. To your left, you notice a PAINTING hanging on the wall. To your right, a bar. A narrow door at the back that probably leads to the BATHROOM.";
          : print "A WOMAN in a cloak is sitting at the bar. She is drinking a shimmery beverage. There is a MAN in a dark robe behind the bar. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
-         }
+      }
 
-         : if (is_chamber_open == true) {
+      : if (is_chamber_open == true) {
          : print "An entire CHAMBER was hidden behind the painting!" ;
          : set_graphic graphic = "opening_chamber"  target = "inside_tavern" ;
          : play_music sound="ambient_chant";
-         }
-         
-         : if (is_present "empty_seat") {
+      }
+      
+      : if (is_present "empty_seat") {
          : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the BATHROOM. There is a MAN in a dark robe behind the bar. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
-            : if (entered_toilet == 0) {
-               : set_graphic graphic = "no_table_no_woman1"  target = "inside_tavern" immediate = "true" ;
-            }
-            : if (entered_toilet > 0) {
-                : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;
-            }
+         : if (entered_toilet == 0) {
+            : set_graphic graphic = "no_table_no_woman1"  target = "inside_tavern" immediate = "true" ;
          }
+         : if (entered_toilet > 0) {
+               : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;
+         }
+      }
 
-         : if (entered_toilet > 0 && has_not_created "table_words" ) {
+      : if (entered_toilet > 0 && has_not_created "table_words" ) {
          : print "...You notice a small TABLE under the painting with something on it. Was that there before?..."; 
-            : if (is_present "empty_seat") {
-               : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;  
-            }
-             : if (!is_present "empty_seat") {
-               : set_graphic graphic = "table_and_woman1"  target = "inside_tavern" immediate = "true" ;  
-            }
+         : if (is_present "empty_seat") {
+            : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;  
+         }
+            : if (!is_present "empty_seat") {
+            : set_graphic graphic = "table_and_woman1"  target = "inside_tavern" immediate = "true" ;  
          }
       }
-   
-//describe inside toilet
-      : if (is_at "toilet") {
-         : print "A regular bathroom. Complete with a sink, toilet bowl and lots of scribbling on the wall";
-      }
+   }
 
-//dweling chamber
+   //describe inside toilet
+   : if (is_at "toilet") {
+      : print "A regular bathroom. Complete with a sink, toilet bowl and lots of scribbling on the wall";
+   }
+
+   //dweling chamber
 	: if (is_at "chamber") {
   	: print "You enter the chamber. The sounds are soothing to your ears and the lingering smoke of burned incense fills your nostrils. Effigies of robed templars sit in the corners of the room." ;
     : pause "1000" ;
@@ -204,20 +204,19 @@ on_describe {
 ######################################
 
 booleans {
-   
-   is_key_exists : boolean;
-   is_intro_done : boolean;
+   is_key_exists        : boolean;
+   is_intro_done        : boolean;
   // is_sitting : boolean;
-   is_incense_there : boolean;
-   is_quest_started : boolean;
-   is_woman_ready : boolean;
-   is_woman_intro_done : boolean;
-   is_heard_something : boolean;
-   is_chamber_open : boolean;
-   is_clean : boolean;
-   is_chamber_quest : boolean;
-   is_asked_work : boolean;
-   is_asked_future : boolean;
+   is_incense_there     : boolean;
+   is_quest_started     : boolean;
+   is_woman_ready       : boolean;
+   is_woman_intro_done  : boolean;
+   is_heard_something   : boolean;
+   is_chamber_open      : boolean;
+   is_clean             : boolean;
+   is_chamber_quest     : boolean;
+   is_asked_work        : boolean;
+   is_asked_future      : boolean;
 }
 
 
@@ -227,15 +226,13 @@ booleans {
 ######################################
 
 integers {
-   
-   question_1 : integer "0";
-   drinking : integer "0";
-   drunkeness : integer "0";
+   question_1     : integer "0";
+   drinking       : integer "0";
+   drunkeness     : integer "0";
    toilet_writing : integer "0";
    entered_toilet : integer "0";
-   quest_counter : integer "0";
-   impostor_try : integer "3";
-   
+   quest_counter  : integer "0";
+   impostor_try   : integer "3";
 }
 
 
@@ -245,12 +242,10 @@ integers {
 ######################################
 
 barriers {
-   
    chamber : block {
       location = chamber
       block_when_not = is_chamber_open
    }
-   
 }
 
 ######################################
@@ -259,21 +254,21 @@ barriers {
 
 subroutines {
 	//game over
- 	end_game : subroutine {
-    : press_any_key ;
-    : clear_screen;
-    : print_graphic "game_over" ;
-    : failure ;
-  	: lose_game;
+   end_game : subroutine {
+      : press_any_key ;
+      : clear_screen;
+      : print_graphic "game_over" ;
+      : failure ;
+      : lose_game;
 	}
 
  	//game over at impostor       
  	end_game2 : subroutine {
-  	: press_any_key ;
-    : clear_screen;
-    : print_graphic "game_over" ;
-  	: failure ;
-    : lose_game;
+      : press_any_key ;
+      : clear_screen;
+      : print_graphic "game_over" ;
+      : failure ;
+      : lose_game;
 	}
 
 	//woman questions
@@ -341,301 +336,296 @@ subroutines {
       : done ;
    }
 
-//first man question
+   //first man question
    man_question1 : subroutine {
-            : add_choice "Where am I?"  {
-            : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
-            : set_integer var = "question_1"  value = "1" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-            : print "<\"That, my friend, is a question you will need to figure out yourself!\"<4>>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now."  {
-               : print "<\"You take care then.\"<4>>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;
-            : press_any_key ;
-            
-            
+      : add_choice "Where am I?"  {
+         : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
+         : set_integer var = "question_1"  value = "1" ;
+      }
+      
+      : add_choice "Why am I here?"  {
+         : print "<\"That, my friend, is a question you will need to figure out yourself!\"<4>>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now."  {
+         : print "<\"You take care then.\"<4>>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;
+      : press_any_key ;
    }      
-//second man question
+   
+   //second man question
    man_question2 : subroutine {
-            : add_choice "Newcomers?"  {
-               : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
-               : set_integer var = "question_1"  value = "2" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-            : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now"  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
+      : add_choice "Newcomers?"  {
+         : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
+         : set_integer var = "question_1"  value = "2" ;
+      }
+      
+      : add_choice "Why am I here?"  {
+      : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now"  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;
    }
-//red drink
+
+   //red drink
    man_red_drink : subroutine {
-            : add_choice "Give me a drink..."  {
-               : print "<'I have just the thing for you...<4>>" ;
-               : print "The burly bartender begins to mix your drink..." ;
-               : pause "800" ;
-               : print "<** Mix **<5>>" ;
-               : pause "100" ;
-               : print "<** Mix **<5>>" ;
-               : pause "100" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<Here you go.<4>>" ;
-               : print "The burly bartender places a red drink in front of you." ;
-               : create "red_drink" ;
-               : set_integer var = "question_1"  value = "3" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now."  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
-            
-         }
+      : add_choice "Give me a drink..."  {
+         : print "<'I have just the thing for you...<4>>" ;
+         : print "The burly bartender begins to mix your drink..." ;
+         : pause "800" ;
+         : print "<** Mix **<5>>" ;
+         : pause "100" ;
+         : print "<** Mix **<5>>" ;
+         : pause "100" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<Here you go.<4>>" ;
+         : print "The burly bartender places a red drink in front of you." ;
+         : create "red_drink" ;
+         : set_integer var = "question_1"  value = "3" ;
+      }
+      
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now."  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;        
+   }
      
-//blue drink
+   //blue drink
     man_blue_drink : subroutine {     
-            : add_choice "I need another drink."  {
-               : print "<'Oho, another one already?<4>>" ;
-               : print "The burly bartender begins to mix your drink..." ;
-               : pause "700" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1500" ;
-               : print "<** Mix **<5>>" ;
-               : pause "300" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<Here you go.<4>>" ;
-               : print "The burly bartender places a blue drink in front of you." ;
-               : create "blue_drink" ;
-               : set_integer var = "question_1"  value = "4" ;
-            }
-             
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now."  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
-            
-         }
+      : add_choice "I need another drink."  {
+         : print "<'Oho, another one already?<4>>" ;
+         : print "The burly bartender begins to mix your drink..." ;
+         : pause "700" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1500" ;
+         : print "<** Mix **<5>>" ;
+         : pause "300" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<Here you go.<4>>" ;
+         : print "The burly bartender places a blue drink in front of you." ;
+         : create "blue_drink" ;
+         : set_integer var = "question_1"  value = "4" ;
+      }
+         
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now."  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;        
+   }
        
 //green drink
    man_green_drink : subroutine {  
-            : add_choice "Another drink, bartender."  {
-               : print "<'Coming right up...<4>>" ;
-               : print "The burly bartender begins to mix your drink..." ;
-               : pause "500" ;
-               : print "<** Mix **<5>>" ;
-               : pause "500" ;
-               : print "<** Mix **<5>>" ;
-               : pause "500" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<Here you go.<4>>" ;
-               : print "The burly bartender places a green drink in front of you." ;
-               : create "green_drink" ;
-               : set_integer var = "question_1"  value = "5" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now"  {
-            : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
-            
+      : add_choice "Another drink, bartender."  {
+         : print "<'Coming right up...<4>>" ;
+         : print "The burly bartender begins to mix your drink..." ;
+         : pause "500" ;
+         : print "<** Mix **<5>>" ;
+         : pause "500" ;
+         : print "<** Mix **<5>>" ;
+         : pause "500" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<Here you go.<4>>" ;
+         : print "The burly bartender places a green drink in front of you." ;
+         : create "green_drink" ;
+         : set_integer var = "question_1"  value = "5" ;
+      }
+      
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now"  {
+      : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;    
    }
        
 //yellow drink
    man_yellow_drink : subroutine {  
-            : add_choice "Barkeep, a drink is needed."  {
-               : print "<'Got a special one for you this time...<4>>" ;
-               : print "The burly bartender begins to mix your drink..." ;
-               : pause "600" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1100" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1300" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<Here you go.<4>>" ;
-               : print "The burly bartender places a yellow drink in front of you." ;
-               : create "yellow_drink" ;
-               : set_integer var = "question_1"  value = "6" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now"  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
-            
-         }
-       
-//purple drink
-      man_purple_drink : subroutine {  
-            : add_choice "I need one more drink..."  {
-               : print "<'This one here is my favourite...<4>>" ;
-               : print "The burly bartender begins to mix your drink..." ;
-               : pause "1000" ;
-               : print "<** Mix **<5>>" ;
-               : pause "500" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<** Mix **<5>>" ;
-               : pause "1000" ;
-               : print "<Here you go.<4>>" ;
-               : print "The burly bartender places a purple drink in front of you." ;
-               : create "purple_drink" ;
-               : set_integer var = "question_1"  value = "7" ;
-           	}
-             
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now"  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
-            
+      : add_choice "Barkeep, a drink is needed."  {
+         : print "<'Got a special one for you this time...<4>>" ;
+         : print "The burly bartender begins to mix your drink..." ;
+         : pause "600" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1100" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1300" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<Here you go.<4>>" ;
+         : print "The burly bartender places a yellow drink in front of you." ;
+         : create "yellow_drink" ;
+         : set_integer var = "question_1"  value = "6" ;
       }
-       
-      //no more drinks
-         man_nomore_drink : subroutine { 
-            : add_choice "I need more drinks..."  {
-               : print "<'I think that's about enough for you today...<4>>" ;
-            }
-            
-            : add_choice "Why am I here?"  {
-               : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
-            }
-            
-            : add_choice "Who is that woman?"  {
-               : print "<\"Ahh... Don't mind her.\"<4>>" ;
-               : pause "600";
-               : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-               : set_boolean var = "is_woman_ready"  value = "true" ;
-            }
-            
-            : add_choice "I have no more questions for now"  {
-               : print "\"You take care then.\"<4>" ;
-               : press_any_key ;
-               : redescribe;
-               : done ;
-            }
-            
-            : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
-            : press_any_key ;
       
-         }
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now"  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;
+   }
+       
+   //purple drink
+   man_purple_drink : subroutine {  
+      : add_choice "I need one more drink..."  {
+         : print "<'This one here is my favourite...<4>>" ;
+         : print "The burly bartender begins to mix your drink..." ;
+         : pause "1000" ;
+         : print "<** Mix **<5>>" ;
+         : pause "500" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<** Mix **<5>>" ;
+         : pause "1000" ;
+         : print "<Here you go.<4>>" ;
+         : print "The burly bartender places a purple drink in front of you." ;
+         : create "purple_drink" ;
+         : set_integer var = "question_1"  value = "7" ;
+      }
+         
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now"  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;
+            
+   }
+       
+   //no more drinks
+   man_nomore_drink : subroutine { 
+      : add_choice "I need more drinks..."  {
+         : print "<'I think that's about enough for you today...<4>>" ;
+      }
+      
+      : add_choice "Why am I here?"  {
+         : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
+      }
+      
+      : add_choice "Who is that woman?"  {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      
+      : add_choice "I have no more questions for now"  {
+         : print "\"You take care then.\"<4>" ;
+         : press_any_key ;
+         : redescribe;
+         : done ;
+      }
+      
+      : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
+      : press_any_key ;
+
+   }
        
 
-//red table
-chaos_s : subroutine {
+   //red table
+   chaos_s : subroutine {
      : print "You approach the red table. There are two templars sitting there, wearing robes with a \"Chaos\" insignia." ;
      : print "They are the loudest templars in the room, scheming loudly about \"trolling fudders\", \"creating more memes\" and... \"eating beans?\". These templars know how to party!";
      : if (is_chamber_quest == true) {
@@ -651,11 +641,11 @@ chaos_s : subroutine {
      }
      : press_any_key ;
      : redescribe;
-}
+   }
 
 
-//blue table
-logic_s : subroutine {
+   //blue table
+   logic_s : subroutine {
      : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
      : print "One of the templars is fidgeting with his hand, cracking knuckles... is he nervous or just deep in thought?";
       : if (is_chamber_quest == true) {
@@ -671,11 +661,11 @@ logic_s : subroutine {
      }
      : press_any_key ;
      : redescribe;
-}
+   }
 
 
-//yellow table
-order_s : subroutine {
+   //yellow table
+   order_s : subroutine {
     : print "As you approach the yellow table you see one Templar writing furiously. He dons a robe with a yellow 'Order' insignia displayed. There are post it notes and plans strewn across the table. You see the word 'Operations' repeated a lot in the documents . ";
     : if (is_chamber_quest == true) {
        : add_choice "What are you working on?"  {
@@ -688,26 +678,26 @@ order_s : subroutine {
      }
      : press_any_key ;
      : redescribe;
-}
+   }
 
-//green table
-structure_s : subroutine {
+   //green table
+   structure_s : subroutine {
    : print "You approach the green table. One templar, muttering, shrouded in a robe. You can barely see his green 'structure' insignia.  There is a model of a temple on the table. Seems that the templars on this table have been building it piece by piece ";
    : if (is_chamber_quest == true) {
       : add_choice "What are you working on?"  {
          : print "<Structure Templar: 'How can you not know?? I created the whole website!'<12>>" ;
-         }
+      }
          : add_choice "What's in the pipeline?"  {
             : print "<Structure Templar: 'Well someone needs to keep making those smart contracts smarter you know'<12>>" ;
-         }
-         : choose "You think for a moment, and decide to ask the table" ;
+      }
+      : choose "You think for a moment, and decide to ask the table" ;
    }
    : press_any_key ;
    : redescribe;
 }
 
-//purple table
-mystery_s : subroutine {
+   //purple table
+   mystery_s : subroutine {
    : print "This table is the source of the chanting. As you approach, you see 3 'Mystery' robed templars chanting in harmony. A few paintings are arranged on the table. One of them looks almost identical to the painting in the apothecarium.";
    : if (is_chamber_quest == true) {
       : add_choice "What are you working on?"  {
@@ -756,11 +746,10 @@ win_game : subroutine {
 ######################################
 
 on_tick {
-
    //outside tavern
    : if (is_at "far_1_tavern") {      
       : if (linger() == 0) {
-      : play_music sound="ambient_night";
+         : play_music sound="ambient_night";
       }
    }
          
@@ -775,7 +764,7 @@ on_tick {
          }
          : if (quest_counter !=3) {
             : if (linger() == 0) {
-            : play_music sound="ambient_apothecarium";
+               : play_music sound="ambient_apothecarium";
             }
          }
       }
@@ -805,12 +794,15 @@ on_tick {
       : if (linger() == 6) {
          : print "It's too dark to do anything else out here...maybe you should go inside" ;
       }
+
       : if (linger() == 8) {
          : print "Maybe you should do something to that DOOR you see before you..." ;
       }
+
       : if (linger() == 9) {
          : print "Stay out here too much longer and you will freeze to death. OPEN the DOOR already" ;
       }
+
       : if (linger() == 10) {
          : print "You linger outside the building. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
          : press_any_key ;
@@ -847,11 +839,10 @@ on_tick {
 ######################################
 
 on_command {
-
    //walk any other direction
    : match " s _;e _;w _; go back"  {
       : if (is_at "far_1_tavern" || is_at "far_2_tavern") {
-      : print "It's too dark to go that way" ;
+         : print "It's too dark to go that way" ;
       }
    }
 
@@ -1257,27 +1248,27 @@ on_command {
          
    //read writings in toilet
    : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
-         : if (is_at "toilet") {
-            : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
-               : print "You look at the scribbles and see that one of the scribbles say" ;
-               : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
-               : print "Further down someone else wrote\n <What's a flush?<2>>" ;
-               : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
-               : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
-               : print "On yet another section of wall it says \n <You can touch...<2>> " ;
-               : print "Further below it says \n <You can play...<2>> " ;
-               : print "Further yet it says \n <If you say...<2>> " ;
-               on_exhausted {
-                  : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
-                  : play_music sound="ambient_barbie";
-                  : pause "5000" ;
-                  : print "you probably shouldn't take anything on this wall seriously..." ;
-                  : press_any_key ;
-                  : play_music sound="ambient_apothecarium";
-                  : redescribe;
-               }      
-            }
+      : if (is_at "toilet") {
+         : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
+            : print "You look at the scribbles and see that one of the scribbles say" ;
+            : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
+            : print "Further down someone else wrote\n <What's a flush?<2>>" ;
+            : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
+            : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
+            : print "On yet another section of wall it says \n <You can touch...<2>> " ;
+            : print "Further below it says \n <You can play...<2>> " ;
+            : print "Further yet it says \n <If you say...<2>> " ;
+            on_exhausted {
+               : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
+               : play_music sound="ambient_barbie";
+               : pause "5000" ;
+               : print "you probably shouldn't take anything on this wall seriously..." ;
+               : press_any_key ;
+               : play_music sound="ambient_apothecarium";
+               : redescribe;
+            }      
          }
+      }
    }
 
    //use sink
@@ -1321,9 +1312,9 @@ on_command {
    //examine incense
    : match "examine incense"  {
       : if (is_present "incense") {
-      : print "a stick of incense" ;
-      : press_any_key ;
-      : redescribe;   
+         : print "a stick of incense" ;
+         : press_any_key ;
+         : redescribe;   
       }
    }
 
@@ -1331,9 +1322,9 @@ on_command {
    //use toilet bowl
    : match "use toilet; examine toilet"  {
       : if (is_at "toilet") {
-      : print "You don't really feel like going right now..." ;
-      : press_any_key ;
-      : redescribe;
+         : print "You don't really feel like going right now..." ;
+         : press_any_key ;
+         : redescribe;
       }
    }
 
@@ -1341,10 +1332,10 @@ on_command {
    : match "examine table; check table; look table; examine candle; check candle"  {
       : if (is_at "inside_tavern") {
          : if (entered_toilet > 0) {
-         : print "upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
-         : create "candle" ;
-         : press_any_key ;
-         : redescribe;
+               : print "upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
+               : create "candle" ;
+               : press_any_key ;
+               : redescribe;
          }
       }
    }
@@ -1353,9 +1344,9 @@ on_command {
    : match "examine candle; check candle; look candle"  {
       : if (is_at "inside_tavern") {
          : if (is_present "candle") {
-         : print "a newly lighted candle burns brightly." ;
-         : press_any_key ;
-         : redescribe;
+            : print "a newly lighted candle burns brightly." ;
+            : press_any_key ;
+            : redescribe;
          }
       }
    }
@@ -1364,15 +1355,15 @@ on_command {
    : match "burn incense; incense candle; light incense; candle incense"  {
       : if (is_at "inside_tavern") {
          : if (is_carried "incense") {
-         : print "You burn the incense. It effuses a sweet smelling aroma" ;
-         : press_any_key ;
-         : print "The stick burns quicker than you expected...The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
-         : press_any_key ;
-         : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
-         : press_any_key ;
-         : create "table_words" ;
-         : destroy "incense" ;
-         : redescribe;
+            : print "You burn the incense. It effuses a sweet smelling aroma" ;
+            : press_any_key ;
+            : print "The stick burns quicker than you expected...The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
+            : press_any_key ;
+            : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
+            : press_any_key ;
+            : create "table_words" ;
+            : destroy "incense" ;
+            : redescribe;
          }
       }
    }
@@ -1390,27 +1381,26 @@ on_command {
    //examine keyhole
    : match "examine keyhole; check keyhole; look keyhole"  {
       : if (is_at "inside_tavern" && is_present "keyhole_1") {
-      : print "This wasn't here before. But this is a real keyhole alright. " ;
+         : print "This wasn't here before. But this is a real keyhole alright. " ;
       }
    }
 
    //use ancient key on keyhole
    : match "use key; unlock keyhole; unlock painting; key keyhole"  {
       : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
-      : print "You cautiously put the ancient key into the keyhole" ;
-      : press_any_key ;
-      : print "it fits";
-      : press_any_key ;
-      : print "you turn the key, and the entire section of the wall slowly swings open! \n you glance behind you, the bartender doesn't even bat an eyelid. " ;
-      : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
-      : press_any_key ;
-      : success ;
-      : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
-      : set_boolean var = "is_chamber_open"  value = "true" ;
-      : destroy "ancient_key" ;
-      : press_any_key ;
-      : redescribe;
-
+         : print "You cautiously put the ancient key into the keyhole" ;
+         : press_any_key ;
+         : print "it fits";
+         : press_any_key ;
+         : print "you turn the key, and the entire section of the wall slowly swings open! \n you glance behind you, the bartender doesn't even bat an eyelid. " ;
+         : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
+         : press_any_key ;
+         : success ;
+         : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
+         : set_boolean var = "is_chamber_open"  value = "true" ;
+         : destroy "ancient_key" ;
+         : press_any_key ;
+         : redescribe;
       }
    }
 
@@ -1433,16 +1423,16 @@ on_command {
             : gosub "logic_s" ;
          }
          : add_choice "Table of Order Yellow"  {
-         : gosub "order_s" ;
+            : gosub "order_s" ;
          }
          : add_choice "Table of Structure Green"  {
-         : gosub "structure_s" ;
+            : gosub "structure_s" ;
          }
          : add_choice "Table of Mystery Purple"  {
-         : gosub "mystery_s" ;
+            : gosub "mystery_s" ;
          }
+
          : choose "Which table?" ;
-         
          : press_any_key ;
          : done ;
          
@@ -1483,6 +1473,7 @@ on_command {
             : press_any_key ;
             : redescribe;
          }
+
          : if (is_chamber_quest == true) {
          : add_choice "Yes"  {
             : add_choice "Chaos Templar 1"  {
@@ -1493,6 +1484,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. I have verified that he works with the codex team.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Chaos Templar 2"  {
                : clear_screen;
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
@@ -1517,8 +1509,8 @@ on_command {
                : press_any_key ;
                : play_music sound="ambient_chant";
                : set_graphic graphic = "chamber"  target = "chamber";
-               
             }
+
             : add_choice "Logic Templar 1 "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1527,6 +1519,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Logic Templar 2 "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1535,6 +1528,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Order Templar"  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1543,6 +1537,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Structure Templar "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1551,6 +1546,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. The entire dAPP and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Mystery Templar 1 "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1559,6 +1555,7 @@ on_command {
                : decrement "impostor_try" ;
                : print "<'No... that is not the impostor. I've personally seen some of this guy's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
             }
+
             : add_choice "Mystery Templar 2 "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1570,14 +1567,17 @@ on_command {
                : success ;
                : print "'Lucky Guess...'" ;
                : press_any_key ;
+                  
                   : if (is_asked_work ==true) {
-                  : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
-                  : press_any_key ;
+                     : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
+                     : press_any_key ;
                   }
+
                   : if (is_asked_future ==true) {
-                  : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
-                  : press_any_key ;
+                     : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
+                     : press_any_key ;
                   }
+
                : print "<'You've done well. And I see your knowledge of all things Temple is returning.'<5>>" ;
                : press_any_key ;
                : print "'Yes...it is...all coming back to me now. I was a templar myself...a devoted one. I did everything required of me...'" ;
@@ -1589,6 +1589,7 @@ on_command {
                : print "<'Yes...there were many others like you. Some never came back. But it is a choice we are all free to make. You however, chose to come back for some reason. Whatever that reason may be, welcome back<5>> {name} <. And this time, we all hope you stay.'<5>>" ;
                : gosub "win_game" ;
             }
+
             : add_choice "Mystery Templar 3 "  {
                : print "The guardian motions for the suspect while you move away to give them some privacy." ;
                : press_any_key ;
@@ -1606,30 +1607,17 @@ on_command {
          : choose "<So, you figured out who the impostor is yet?<5>>" ;
          : press_any_key ;
          : redescribe;
-         
-         
-         
-         
-         }
-         
+         }         
       }
-
-
    }
 
    //examine statues
    : match "examine statue; check statue; look statue; examine effigy; examine effigies; check effigy; check effigies"  {
       : if (is_at "chamber") {
-      : print "intricately carved statues. They look like templars in deep prayer" ;
-         
+      : print "intricately carved statues. They look like templars in deep prayer" ;  
       }
    }
 
-
-
-
-
-         
    //troubeshoot
    : match "colour me"  {
       : print "<'1'<1>>" ;
@@ -1647,31 +1635,34 @@ on_command {
       : print "<'13'<13>>";
       : print "<'14'<14>>";
       : print "<'15'<15>>";
-      }
+   }
 
    : match "get apoth"  {
       : play_music sound="ambient_apothecarium";
    }
+
    : match "get night"  {
       : play_music sound="ambient_night";
    }
+
    : match "get chant"  {
       : play_music sound="ambient_chant";
    }
+
    : match "get barbie"  {
       : play_music sound="ambient_barbie";
-   }  
+   }
+
    : match "get gong"  {
       : play_music sound="ambient_gong";
-   }  
+   }
+
    : match "get rick"  {
       : play_music sound="ambient_rickroll";
    }
 
    : match "get drunk"  {
       : set_integer var = "drunkeness"  value = "5" ;
-      
-      
    }
 }
 
