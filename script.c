@@ -151,8 +151,8 @@ on_describe {
          : if (is_present "cloak_woman") {
          : print "You look around and start to wonder what kind of room you are even in. To your left, you notice a PAINTING hanging on the wall. To your right, a bar. A narrow door at the back probably leads to the BATHROOM.";
          : print "A WOMAN in a cloak is sitting at the bar. She is drinking a shimmery beverage. There is a MAN in a dark robe behind the bar. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
-       
          }
+
          : if (is_chamber_open == true) {
          : print "A whole other chamber was hidden behind the painting" ;
          : set_graphic graphic = "opening_chamber"  target = "inside_tavern" ;
@@ -169,6 +169,7 @@ on_describe {
             }
                
          }
+
          : if (entered_toilet > 0 && has_not_created "table_words" ) {
          : print "...you notice a small TABLE under the painting with something on it. Was that there before?..."; 
             : if (is_present "empty_seat") {
@@ -177,20 +178,20 @@ on_describe {
              : if (!is_present "empty_seat") {
                : set_graphic graphic = "table_and_woman1"  target = "inside_tavern" immediate = "true" ;  
             }
-             
          }
       }
    
 //describe inside toilet
       : if (is_at "toilet") {
-         : print "a regular bathroom stall. Complete with a sink, toilet bowl and lots of scribblings on the wall";
-         
+         : print "A regular bathroom. Complete with a sink, toilet bowl and lots of scribbling on the wall";
       }
 
 //dweling chamber
-      
       : if (is_at "chamber") {
-         : print "You enter the chamber. The sounds are soothing to your ears and the lingering smoke of burned incense fills your nostrils. Effigies of robed templars sit in the corners of the room. \n Your eyes gaze upon five TABLES in the middle of the room, each boldly displaying a unique colour and insignia - CHAOS red, LOGIC blue, ORDER yellow, STRUCTURE green, and MYSTERY purple.\n You spot a another robed Templar at the back of the room keeping watch. Is he a GUARDIAN?" ;
+         : print "You enter the chamber. The sounds are soothing to your ears and the lingering smoke of burned incense fills your nostrils. Effigies of robed templars sit in the corners of the room." ;
+         : pause "1000" ;
+         : print "Your eyes gaze upon five TABLES in the middle of the room, each boldly displaying a unique colour and insignia - CHAOS red, LOGIC blue, ORDER yellow, STRUCTURE green, and MYSTERY purple." ;
+         : print "You spot a another robed Templar at the back of the room keeping watch. Is he a GUARDIAN?" ;
        : play_music sound="ambient_chant";
       }
       
@@ -1205,7 +1206,8 @@ on_command {
 : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
       : if (is_at "toilet") {
          : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
-            : print "One of the writings say \n <Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
+            : print "You look at the scribbles and see that one of the scribbles say" ;
+            : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>> " ; 
             : print "Further down someone else wrote\n <What's a flush?<2>>" ;
             : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
             : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
