@@ -193,10 +193,11 @@ on_describe {
          : pause "1000" ;
       }
       : print "Your eyes gaze upon five TABLES in the middle of the room, each boldly displaying a unique colour and insignia - CHAOS red, LOGIC blue, ORDER yellow, STRUCTURE green, and MYSTERY purple." ;
-      if (!is_chamber_quest) {
+      : if (!is_chamber_quest) {
          : pause "1000" ;
          : print "You spot a another robed Templar at the back of the room keeping watch. Is that a GUARDIAN?" ;
-      } else {
+      } 
+      : else {
          : print "You wonder which table has the impostor.";  
       }
       : play_music sound="ambient_chant";
