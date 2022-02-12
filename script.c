@@ -659,17 +659,17 @@ logic_s : subroutine {
      : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
      : print "One of the templars is fidgeting with his hand, cracking knuckles... is he nervous or just deep in thought?";
       : if (is_chamber_quest == true) {
-        : add_choice "What are you working on?"  {
-           : print "<Logic Templar 1: \"Shhhh! I almost cracked the code on sustainable yield...\"<9>>" ;
-           : print "<Logic Templar 2: \"Faith mechanics is my top priority\"<9>>" ; 
+         : add_choice "What are you working on?"  {
+         : print "<Logic Templar 1: \"Shhhh! I almost cracked the code on sustainable yield...\"<9>>" ;
+         : print "<Logic Templar 2: \"Faith mechanics is my top priority\"<9>>" ; 
         }
-         : add_choice "What's in the pipeline?"  {
+        : add_choice "What's in the pipeline?"  {
            : print "<Logic Templar 1: \"Quit disturbing me! I duno, there are a whole heap of analytics and calculators I need to create<9>>" ;
            : print "<Logic Templar 2: \"It's all about the treasury investment opportunities baby!\"<9>>" ;
         }
         : choose "You think for a moment, and decide to ask the table" ;
      }
-      : press_any_key ;
+     : press_any_key ;
      : redescribe;
 }
 
@@ -677,78 +677,74 @@ logic_s : subroutine {
 //yellow table
 order_s : subroutine {
     : print "As you approach the yellow table you see one Templar writing furiously. He dons a robe with a yellow 'Order' insignia displayed. There are post it notes and plans strewn across the table. You see the word 'Operations' repeated a lot in the documents . ";
-     : if (is_chamber_quest == true) {
-        : add_choice "What are you working on?"  {
-           : print "<Order Templar : 'A better onboarding experience for newcomers is my focus'<6>>" ;
+    : if (is_chamber_quest == true) {
+       : add_choice "What are you working on?"  {
+          : print "<Order Templar : 'A better onboarding experience for newcomers is my focus'<6>>" ;
         }
-         : add_choice "What's in the pipeline?"  {
+        : add_choice "What's in the pipeline?"  {
            : print "<Order Templar : 'Working on reopening enclaves and allowing people to swtich between them really'<6>>";
         }
         : choose "You think for a moment, and decide to ask the table" ;
      }
-      : press_any_key ;
+     : press_any_key ;
      : redescribe;
 }
 
 //green table
 structure_s : subroutine {
-    : print "You approach the green table. One templar, muttering, shrouded in a robe. You can barely see his green 'structure' insignia.  There is a model of a temple on the table. Seems that the templars on this table have been building it piece by piece ";
-    : if (is_chamber_quest == true) {
-        : add_choice "What are you working on?"  {
-           : print "<Structure Templar: 'How can you not know?? I created the whole website!'<12>>" ;
-        }
+   : print "You approach the green table. One templar, muttering, shrouded in a robe. You can barely see his green 'structure' insignia.  There is a model of a temple on the table. Seems that the templars on this table have been building it piece by piece ";
+   : if (is_chamber_quest == true) {
+      : add_choice "What are you working on?"  {
+         : print "<Structure Templar: 'How can you not know?? I created the whole website!'<12>>" ;
+         }
          : add_choice "What's in the pipeline?"  {
-           : print "<Structure Templar: 'Well someone needs to keep making those smart contracts smarter you know'<12>>" ;
-        }
-        : choose "You think for a moment, and decide to ask the table" ;
-     }
-      : press_any_key ;
-     : redescribe;
+            : print "<Structure Templar: 'Well someone needs to keep making those smart contracts smarter you know'<12>>" ;
+         }
+         : choose "You think for a moment, and decide to ask the table" ;
+   }
+   : press_any_key ;
+   : redescribe;
 }
 
 //purple table
 mystery_s : subroutine {
-      : print "This table is the source of the chanting. As you approach, you see 3 'Mystery' robed templars chanting in harmony. A few paintings are arranged on the table. One of them looks almost identical to the painting in the apothecarium.";
-      : if (is_chamber_quest == true) {
-        : add_choice "What are you working on?"  {
-           : print "<Mystery Templar 1: 'I'm creating the concept art for the metaverse'<3>>" ;
-           : print "<Mystery Templar 2: 'I am better managing our ETH investments'<3>>" ;
-           : print "<Mystery Templar 3: 'My passion is in the sounds of the Temple. I create the music'<3>>" ;
-           : set_boolean var = "is_asked_work"  value = "true" ;
-        
+   : print "This table is the source of the chanting. As you approach, you see 3 'Mystery' robed templars chanting in harmony. A few paintings are arranged on the table. One of them looks almost identical to the painting in the apothecarium.";
+   : if (is_chamber_quest == true) {
+      : add_choice "What are you working on?"  {
+         : print "<Mystery Templar 1: 'I'm creating the concept art for the metaverse'<3>>" ;
+         : print "<Mystery Templar 2: 'I am better managing our ETH investments'<3>>" ;
+         : print "<Mystery Templar 3: 'My passion is in the sounds of the Temple. I create the music'<3>>" ;
+         : set_boolean var = "is_asked_work"  value = "true" ;
         }
-         : add_choice "What's in the pipeline?"  {
+        : add_choice "What's in the pipeline?"  {
            : print "<Mystery Templar 1: 'Have you seen some of the ideas we have for the Temple lore?'<3>>" ;
            : print "<Mystery Templar 2: 'I am working with our Mystery leader Lost Boy to make some art'<3>>" ;
            : print "<Mystery Templar 3: 'Music music music and more music'<3>>" ;
            : set_boolean var = "is_asked_future"  value = "true" ;
-           
         }
-        : choose "You think for a moment, and decide to ask the table" ;
-     }
-     
+      : choose "You think for a moment, and decide to ask the table" ;
+   }
 }
 
 //win game
 
 win_game : subroutine {
    : press_any_key ;
-      : clear_screen;
-      : play_music "ambient_outrosilence";
-      : print "So here you stay in the Temple, staking and chilling.";
-      : press_any_key ;
-      : print "You can rest easy now as your adventure has come to an end." ;
-      : press_any_key ;
-      : print "...Or has it?..." ;
-      : press_any_key ;
-      : print "TO BE CONTINUED" ;
-      : press_any_key ;
-      : print_graphic "final_scroll" ;
-      : press_any_key ;
-      : print "Click <here<4>>[https://adventuron.io] to collect your POAP\n\n <Created by: Gman<6>> \n\n <Game Credits<6>> \n <DocPeppercon<6>> \n <Marshmellowzz<6>> \n <asitgoes<6>> \n <psgb<6>> \n   ";
-      : success ;
-      : win_game ;
-      
+   : clear_screen;
+   : play_music "ambient_outrosilence";
+   : print "So here you stay in the Temple, staking and chilling.";
+   : press_any_key ;
+   : print "You can rest easy now as your adventure has come to an end." ;
+   : press_any_key ;
+   : print "...Or has it?..." ;
+   : press_any_key ;
+   : print "TO BE CONTINUED" ;
+   : press_any_key ;
+   : print_graphic "final_scroll" ;
+   : press_any_key ;
+   : print "Click <here<4>>[https://adventuron.io] to collect your POAP\n\n <Created by: Gman<6>> \n\n <Game Credits<6>> \n <DocPeppercon<6>> \n <Marshmellowzz<6>> \n <asitgoes<6>> \n <psgb<6>> \n   ";
+   : success ;
+   : win_game ;
 }
 
 
@@ -761,19 +757,18 @@ win_game : subroutine {
 
 on_tick {
 
-//outside tavern
- : if (is_at "far_1_tavern") {
-      
+   //outside tavern
+   : if (is_at "far_1_tavern") {      
       : if (linger() == 0) {
       : play_music sound="ambient_night";
       }
-  }
+   }
          
 
 
-//apothecarium ambient
-      : if (is_at "inside_tavern") {
-         : if (quest_counter == 3) {
+   //apothecarium ambient
+   : if (is_at "inside_tavern") {
+      : if (quest_counter == 3) {
             : if (linger() == 0) {
             : play_music sound="ambient_chant";
             }
@@ -788,13 +783,13 @@ on_tick {
 //if too long far_tavern
    : if (is_at "far_1_tavern" || is_at "far_2_tavern" ) {
       : if (linger() == 3) {
-      : print "It's too dark to do anything else out here...maybe you should go towards the light" ;
+         : print "It's too dark to do anything else out here...maybe you should go towards the light" ;
       }
       : if (linger() == 5) {
-      : print "Maybe you should use your feet to WALK there..." ;
+         : print "Maybe you should use your feet to WALK there..." ;
       }
       : if (linger() == 6) {
-      : print "Stay out here too much longer and you will freeze to death. WALK NORTH already" ;
+         : print "Stay out here too much longer and you will freeze to death. WALK NORTH already" ;
       }
       : if (linger() == 8) {
       : print "You are lost outside. The night goes cold. Your hands start to shiver. Your mind begins to fade." ;
