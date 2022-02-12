@@ -195,7 +195,7 @@ on_describe {
       : print "Your eyes gaze upon five TABLES in the middle of the room, each boldly displaying a unique colour and insignia - CHAOS red, LOGIC blue, ORDER yellow, STRUCTURE green, and MYSTERY purple." ;
       if (!is_chamber_quest) {
          : pause "1000" ;
-         : print "You spot a another robed Templar at the back of the room keeping watch. Is he a GUARDIAN?" ;
+         : print "You spot a another robed Templar at the back of the room keeping watch. Is that a GUARDIAN?" ;
       } else {
          : print "You wonder which table has the impostor.";  
       }
@@ -1501,7 +1501,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. I have verified that he works with the codex team.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. I have verified that he works with the codex team.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Chaos Templar 2"  {
@@ -1524,7 +1524,7 @@ on_command {
                : press_any_key ;
                : print "The Guardian groans as the templar walks back to their table" ;
                : decrement "impostor_try" ;
-               : print "<'I will give you<5>> {impostor_try} <more try(s)'<5>>'" ;
+               : print "<'I will give you<5>> {impostor_try} <more attempt(s)'<5>>'" ;
                : press_any_key ;
                : play_music sound="ambient_chant";
                : set_graphic graphic = "chamber"  target = "chamber";
@@ -1536,7 +1536,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Logic Templar 2 "  {
@@ -1545,7 +1545,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Order Templar"  {
@@ -1554,7 +1554,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Structure Templar "  {
@@ -1563,7 +1563,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. The entire dAPP and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. The entire dAPP and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Mystery Templar 1 "  {
@@ -1572,7 +1572,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. I've personally seen some of this guy's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. I've personally seen some of this Templar's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
 
             : add_choice "Mystery Templar 2 "  {
@@ -1581,25 +1581,26 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'You've got him! Once I cornered him he confessed to having infiltrated our ranks. How did you know?'<5>>" ;
+               : print "<\"You've got them! Once I cornered the impostor, they confessed to having infiltrated our ranks!\"<5>>" ; 
+               : print "<\"How did you know?\"<5>>" ;
                : press_any_key ;
                : success ;
-               : print "'Lucky Guess...'" ;
                : press_any_key ;
-                  
-                  : if (is_asked_work ==true) {
-                     : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments...especially ETH investments which we don't actually have, I got a little suspicious.\"" ;
-                     : press_any_key ;
-                  }
-
-                  : if (is_asked_future ==true) {
-                     : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
-                     : press_any_key ;
-                  }
-
-               : print "<'You've done well. And I see your knowledge of all things Temple is returning.'<5>>" ;
+               : if (is_asked_work ==true) {
+                  : print "\"I came to realise the mystery table deals with all things creative, so when he said he was managing investments... especially ETH investments, which we don't actually have, I got a little suspicious.\"" ;
+                  : press_any_key ;
+               }
+               : if (is_asked_future ==true) {
+                  : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
+                  : press_any_key ;
+               }
+               : if (!is_asked_work && !is_asked_future) {
+                  : print "\"Lucky Guess...\"" ;
+               }
+               : print "<\"Thank you. You've done well.\"<5>>" ;
+               : print "<\"I see your knowledge of all things Temple is returning, as well.\"<5>>" ;
                : press_any_key ;
-               : print "'Yes...it is...all coming back to me now. I was a templar myself...a devoted one. I did everything required of me...'" ;
+               : print "\"Yes... it's all coming back to me now. I was a Templar myself...a devoted one. I did everything required of me...'" ;
                : press_any_key ;
                : print "But I..." ;
                : press_any_key ;
@@ -1615,15 +1616,15 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<'No... that is not the impostor. His work can be heard everywhere.<5>> \n <I will give you<5>> {impostor_try} <more try(s)'<5>>" ;
+               : print "<'No... that is not the impostor. His work can be heard everywhere.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)'<5>>" ;
             }
-            : choose "<So who is it?<5>>" ;
+            : choose "<Who is the impostor among us?<5>>" ;
             : redescribe;
          }
          : add_choice "No"  {
-            : print "<ok well, you let me know as soon as you do<5>>" ;
+            : print "<Let me know as soon as you do.<5>>" ;
          }
-         : choose "<So, you figured out who the impostor is yet?<5>>" ;
+         : choose "<Who is the impostor among us<5>>" ;
          : press_any_key ;
          : redescribe;
          }         
@@ -1638,7 +1639,7 @@ on_command {
    }
 
    //troubeshoot
-   : match "colour me"  {
+   : match "colour me" {
       : print "<'1'<1>>" ;
       : print "<'2'<2>>" ; 
       : print "<'3'<3>>" ;
