@@ -627,7 +627,7 @@ subroutines {
    //red table
    chaos_s : subroutine {
      : print "You approach the red table. There are two templars sitting there, wearing robes with a \"Chaos\" insignia." ;
-     : print "They are the loudest templars in the room, scheming loudly about \"trolling fudders\", \"creating more memes\" and... \"eating beans?\". These templars know how to party!";
+     : print "They are the loudest templars in the room, scheming loudly about \"trolling fudders\", \"creating more memes\" and... \"eating beans?\".";
      : if (is_chamber_quest == true) {
         : add_choice "What are you working on?"  {
            : print "<Chaos Templar 1: \"Just working on the next article for the Temple Codex. You know, the community newsletter!\"<2>>" ;
@@ -646,8 +646,9 @@ subroutines {
 
    //blue table
    logic_s : subroutine {
-     : print "You approach the blue table. There are two Templars at this table today. Their robe has a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
-     : print "One of the templars is fidgeting with his hand, cracking knuckles... Is he nervous or just deep in thought?";
+     : print "You approach the blue table. There are two Templars at this table today. Their robes have a bright blue \"Logic\" insignia, though this is not the only thing that caught your eye...";
+     : pause "600";
+     : print "One of the templars is fidgeting with their hand, cracking their knuckles... Are they nervous, or they deep in thought?";
       : if (is_chamber_quest == true) {
          : add_choice "What are you working on?"  {
          : print "<Logic Templar 1: \"Shhhh! I almost cracked the code on sustainable yield...\"<9>>" ;
@@ -688,10 +689,14 @@ subroutines {
    : print "There is a model of a temple on the table. It seems that the templars at this table have been building it piece by piece.";
    : if (is_chamber_quest == true) {
       : add_choice "What are you working on?"  {
-         : print "<Structure Templar: 'How can you not know?? I created the whole website!'<12>>" ;
+         : print "The templar turns to you with a startled look."
+         : print "<Structure Templar: \"Huh? What? What am I working on? How can you not know? I created the whole website!\"<12>>" ;
+         : print "The templar looks away and begins muttering to themselves again."
       }
          : add_choice "What's in the pipeline?"  {
-            : print "<Structure Templar: 'Well someone needs to keep making those smart contracts smarter you know'<12>>" ;
+            : print "The templar turns to you with a startled look."
+            : print "<Structure Templar: \"Oh. Well, uh, someone needs to keep making those smart contracts smarter, you know.\"<12>>" ;
+            : print "The templar looks away and begins muttering to themselves again."
       }
       : choose "You think for a moment, and decide to ask the table:" ;
    }
