@@ -1492,6 +1492,8 @@ on_command {
 
    //talk guardian
    : match "talk guardian; speak guardian"  {
+      : clear_screen ;
+      : print_graphic "guardian" ;
       : if (is_at "chamber") {
          : if (is_chamber_quest == false) {
             : print "<'Welcome<5>> {name} <. You have made it to the inner chamber. The Temple labours are performed here. Ordinarily there are more templars in here, but today we are spread thin. Many are called away to fight in the FUD wars, others to defend the AMM and more still sent to call upon our allies the Great House of FRAX to aid us.'<5>>" ;
