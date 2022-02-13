@@ -524,7 +524,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now."  {
-         : print "<\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -563,7 +563,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "<\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -602,7 +602,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "<\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -641,7 +641,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "<\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -669,7 +669,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "<\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
