@@ -1325,7 +1325,7 @@ on_command {
    } 
          
    //read writings in toilet
-   : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
+   : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling; look wall; examine wall"  {
       : if (is_at "toilet") {
          : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
             : print "You look at the scribbles and see that one of the scribbles say" ;
