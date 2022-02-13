@@ -313,7 +313,7 @@ subroutines {
       : else {
          : add_choice "You need to send your feet pictures to the devs."  {
             : print "<\"I have... *sniff*\" <6>>" ;
-            : pause "600" ;
+            : press_any_key ;
             : print "<\"A-and... now... my feet are all over feetfinder.com! Waaaaaah!\" <6>>" ;
             : print "You quickly retreat. Maybe rethink your answer?";
          }
