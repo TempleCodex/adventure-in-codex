@@ -68,7 +68,6 @@ locations {
 ######################################
 
 connections {
-
    from, direction, to = [
      // outside_apothecary, north, road_1,
      // apothecary, north, road_2, 
@@ -77,7 +76,6 @@ connections {
      
      inside_tavern, enter, chamber, 
    ]
-   
 }
 
 ######################################
@@ -88,8 +86,8 @@ objects {
    
    painting       : scenery "a haunting painting" ;
    // stools         : scenery "typical bar stools" ;
-   cloak_woman    : scenery "a woman in a cloak" at = "inside_tavern" conspicuous = "false"  ; 
-   bartender      : scenery "the bartender";
+   cloak_woman    : scenery "a woman in a cloak" at = "inside_tavern" conspicuous = "false" ; 
+   bartender      : scenery "the bartender" ;
    ancient_key    : object "an ancient key" ;
    red_drink      : object "a red drink" ;
    blue_drink     : object "a blue drink" ;
@@ -101,14 +99,12 @@ objects {
    table_words    : scenery "legible words seared into the table from the flames" ;
    empty_seat     : scenery "empty seat now that the woman has left" conspicuous = "false" ;
    keyhole_1      : scenery "keyhole on the painting";
-   chaos          : scenery "the table of Chaos" at = "chamber" conspicuous = "false"   ;
-   logic          : scenery "the table of Logic" at = "chamber" conspicuous = "false"  ;
-   order          : scenery "the table of Order" at = "chamber" conspicuous = "false"  ;
-   structure      : scenery "the table of Structure" at = "chamber" conspicuous = "false"  ;
-   mystery        : scenery "the table of Mystery" at = "chamber" conspicuous = "false"  ;
-   guardian       : scenery "a guardian watching over us" at = "chamber" conspicuous = "false"  ;
-   
-   
+   chaos          : scenery "the table of Chaos" at = "chamber" conspicuous = "false"  ;
+   logic          : scenery "the table of Logic" at = "chamber" conspicuous = "false" ;
+   order          : scenery "the table of Order" at = "chamber" conspicuous = "false" ;
+   structure      : scenery "the table of Structure" at = "chamber" conspicuous = "false" ;
+   mystery        : scenery "the table of Mystery" at = "chamber" conspicuous = "false" ;
+   guardian       : scenery "a guardian watching over us" at = "chamber" conspicuous = "false" ;
 }
 
 ######################################
@@ -170,7 +166,7 @@ on_describe {
          : if (entered_toilet == 0) {
             : set_graphic graphic = "no_table_no_woman1"  target = "inside_tavern" immediate = "true" ;
          }
-         : if (entered_toilet > 0) {
+         : else {
                : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;
          }
       }
