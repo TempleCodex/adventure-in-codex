@@ -358,8 +358,26 @@ subroutines {
       : done ;
    }
 
+   who_is_woman : subroutine {
+      : if (!is_woman_ready) {
+         : print "<\"Ahh... Don't mind her.\"<4>>" ;
+         : pause "2600";
+         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
+         : set_boolean var = "is_woman_ready"  value = "true" ;
+      }
+      : else {
+         : if (is_woman_helped) {
+            : print "<She was a lost soul. Thank you for guiding her.\"<4>>";
+         : else {
+            : print "<A lost soul. Maybe you could talk to her for me?\"<4>>" ;
+         }
+      }
+   }
+
    //first man question
    man_question1 : subroutine {
+      : clear_screen ;
+      : print_graphic ;
       : add_choice "Where am I?"  {
          : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
          : set_integer var = "question_1"  value = "1" ;
@@ -369,16 +387,8 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself!\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... {is_woman_helped ? "Thank you for guiding her." : "Maybe you could talk to her for me?"}\"<4>>" ;
-         }
+      : add_choice "Who is that woman?" {
+         : gosub "who_is_woman";
       }
       
       : add_choice "I have no more questions for now."  {
@@ -393,8 +403,10 @@ subroutines {
    
    //second man question
    man_question2 : subroutine {
+      : clear_screen ;
+      : print_graphic ;
       : add_choice "Newcomers?"  {
-         : print "<\"Why, this here is where all newcomers like yourself start off! It's both a starting point and a halfway house, if you will.\"<4>>" ;
+         : print "<\"New people come in all the time, some to stake and chill, some to throw FUD, other's just to lurk around.<4>>\n<Can't quite tell which camp you fall into...I guess we'll see...<4>>\"" ;
          : set_integer var = "question_1"  value = "2" ;
       }
       
@@ -402,16 +414,8 @@ subroutines {
       : print "\"That my friend is a question you will need to figure out yourself.\"<4>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+      : add_choice "Who is that woman?" {
+         : gosub "who_is_woman"; 
       }
       
       : add_choice "I have no more questions for now"  {
