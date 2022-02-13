@@ -30,7 +30,7 @@ on_startup {
    : play_music "ambient_intro";
    : print "Welcome to Codex Chronicles." ;
    : print "This is a text based adventure game. Type in commands to perform actions, solve puzzles and progress the story.";
-   " print "------ \n TIPS \n ------";
+   : print "------ \n TIPS \n ------";
    : print "- Type 'EXAMINE' followed by an object name to view info on that object.";
    : print "- Type 'INVENTORY' shows you a list of things you are currently carrying.";
    : print "- Type 'SAVE' to save your game.";
@@ -219,6 +219,7 @@ booleans {
    is_quest_started     : boolean;
    is_woman_ready       : boolean;
    is_woman_intro_done  : boolean;
+   is_woman_helped      : boolean;
    is_heard_something   : boolean;
    is_chamber_open      : boolean;
    is_clean             : boolean;
@@ -295,8 +296,9 @@ subroutines {
 
    // make right choice
    woman_correct_choice : subroutine {
-      : print "<\"You sure? Hmm, ok I will try that right away!\"<6>>" ;
-      : print "She thanks you one last time and leaves. \n You wonder if you told her the right thing." ;
+      : print "<\"Wow... it was that simple... I will try that right away!\"<6>>" ;
+      : print "She thanks you one last time and leaves." ;
+      : print "You wonder if you told her the right thing." ;
       : success ;
       : destroy "cloak_woman" ;
    }
@@ -375,7 +377,7 @@ subroutines {
          : set_boolean var = "is_woman_ready"  value = "true" ;
          }
          : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+            : print "<\"A lost soul... {is_woman_helped ? "Thank you for guiding her." : "Maybe you could talk to her for me?"}\"<4>>" ;
          }
       }
       
@@ -1097,31 +1099,24 @@ on_command {
          : done;
       }
       : if (is_at "inside_tavern" && is_woman_ready == true && is_woman_intro_done == false && is_present "cloak_woman") {
-         : print "You say to her 'You know, I too knew someone who didn't make it through the Opening Ceremony...'";
+         : print "You say to her \"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
          : press_any_key ;
-         : print "She finally turns to you";
+         : print "She finally turns to you.";
          : press_any_key ;
          : set_boolean var = "is_woman_intro_done"  value = "true" ;
-         : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
+         : print "<\"You don't understand... I am completely lost. I've been trying to get verified for weeks even before the opening ceremony.\"<6>>";
          : press_any_key ;
          : gosub "woman_questions" ;
          : redescribe;
          : done;
       }
       : if (is_at "inside_tavern" && is_woman_ready == true && is_woman_intro_done == true && is_present "cloak_woman") {
-         : print "<'You don't understand...I am completely lost. I've been trying to get verified for weeks even before the opening ceremony'<6>>";
+         : print "<'You don't understand... I am completely lost. I've been trying to get verified for weeks even before the opening ceremony.'<6>>";
          : press_any_key ;
          : gosub "woman_questions" ;
          : redescribe;
          : done;
       }
- 
-   //      : if (is_at "inside_tavern" && is_sitting == false) {
-   //      : print "You should probably sit down first";
-   //      : press_any_key ;
-   //      : redescribe;
-   //      : done ;
-   //      }
    }   
 
    //inside tavern - man
