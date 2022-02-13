@@ -446,7 +446,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "\"You take care then.\"<4>>" ;
+         : print "<\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -485,7 +485,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now."  {
-         : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -524,7 +524,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now."  {
-         : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -563,7 +563,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-      : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -602,7 +602,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -641,7 +641,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -669,7 +669,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "\"You take care then.\"<4>" ;
+         : print "<\"You take care then.\"<4>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -1303,7 +1303,9 @@ on_command {
    //enter bathroom
    : match "enter bathroom; enter toilet; go bathroom; go toilet"  {
       : if (is_at "inside_tavern") {
-         : print "The front of the door says 'memes room'. You assume it was a typo and meant to say 'men's room'. you proceed to enter" ;
+         : print "The front of the door says \"meme's room\". You assume it was a misspelt and meant to say \"men's room\".";
+         : press_any_key ;
+         : print "You proceed to enter." ;
          : goto "toilet" ;
          : increment "entered_toilet" ;
          : press_any_key ;
@@ -1314,7 +1316,7 @@ on_command {
    //exit bathroom
    : match "exit bathroom; exit _;go outside; enter tavern; enter apothecarium; enter apothecary; open door"  {
       : if (is_at "toilet") {
-         : print "you exit the bathroom with haste, escaping the stench" ;
+         : print "you exit the bathroom with haste, escaping the stench." ;
          : goto "inside_tavern" ;
          : press_any_key ;
          : play_music sound="ambient_apothecarium";
