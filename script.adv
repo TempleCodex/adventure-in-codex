@@ -446,7 +446,7 @@ subroutines {
       }
       
       : add_choice "I have no more questions for now"  {
-         : print "\"You take care then.\"<4>" ;
+         : print "\"You take care then.\"<4>>" ;
          : press_any_key ;
          : redescribe;
          : done ;
@@ -1344,7 +1344,9 @@ on_command {
             on_exhausted {
                : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
                : play_music sound="ambient_barbie";
-               : pause "15000" ;
+               : pause "5000" ;
+               : pause "5000" ;
+               : pause "5000" ;
                : print "You probably shouldn't take anything on this wall seriously." ;
                : press_any_key ;
                : play_music sound="ambient_apothecarium";
