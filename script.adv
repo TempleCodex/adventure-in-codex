@@ -410,8 +410,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself!\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?" {
-         : gosub "who_is_woman";
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -437,8 +439,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?" {
-         : gosub "who_is_woman"; 
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
