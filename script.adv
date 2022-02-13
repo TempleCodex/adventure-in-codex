@@ -1102,9 +1102,9 @@ on_command {
          : clear_screen ;
          : print_graphic ;
          : if (!is_woman_intro_done) {
-            : print "You try to introduce yourself...";
+            : print "You try to introduce yourself to the woman...";
             : press_any_key ;
-            : print "You say to her \"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
+            : print "\"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
             : press_any_key ;
             : print "She finally turns to you. You can see that she's at her breaking point.";
             : press_any_key ;
