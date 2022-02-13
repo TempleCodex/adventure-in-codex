@@ -6,7 +6,7 @@ start_at = far_1_tavern
 
 // debug code
 on_debug {
-   : goto "chamber" ;
+   : goto "inside_tavern" ;
 }
 
 start_theme = my_theme
@@ -355,10 +355,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -383,10 +388,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -423,10 +433,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -463,10 +478,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -503,10 +523,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -543,10 +568,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -583,10 +613,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -612,10 +647,15 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
+         : if (!is_woman_ready) {
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "600";
+         : pause "2600";
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
          : set_boolean var = "is_woman_ready"  value = "true" ;
+         }
+         : else {
+            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
