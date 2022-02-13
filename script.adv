@@ -432,10 +432,12 @@ subroutines {
 
    //red drink
    man_red_drink : subroutine {
+      : clear_screen ;
+      : print_graphic ;
       : add_choice "Give me a drink..."  {
          : print "<'I have just the thing for you...<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
-         : pause "800" ;
+         : pause "1800" ;
          : print "<** Mix **<5>>" ;
          : pause "100" ;
          : print "<** Mix **<5>>" ;
@@ -453,15 +455,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now."  {
@@ -470,7 +464,9 @@ subroutines {
          : redescribe;
          : done ;
       }
-      
+
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;        
    }
@@ -480,7 +476,7 @@ subroutines {
       : add_choice "I need another drink."  {
          : print "<'Oho, another one already?<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
-         : pause "700" ;
+         : pause "1000" ;
          : print "<** Mix **<5>>" ;
          : pause "1500" ;
          : print "<** Mix **<5>>" ;
@@ -498,15 +494,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now."  {
@@ -516,6 +504,8 @@ subroutines {
          : done ;
       }
       
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;        
    }
@@ -525,7 +515,7 @@ subroutines {
       : add_choice "Another drink, bartender."  {
          : print "<'Coming right up...<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
-         : pause "500" ;
+         : pause "1500" ;
          : print "<** Mix **<5>>" ;
          : pause "500" ;
          : print "<** Mix **<5>>" ;
@@ -543,15 +533,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now"  {
@@ -561,6 +543,8 @@ subroutines {
          : done ;
       }
       
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;    
    }
@@ -570,7 +554,7 @@ subroutines {
       : add_choice "Barkeep, a drink is needed."  {
          : print "<'Got a special one for you this time...<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
-         : pause "600" ;
+         : pause "2000" ;
          : print "<** Mix **<5>>" ;
          : pause "1100" ;
          : print "<** Mix **<5>>" ;
@@ -588,15 +572,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now"  {
@@ -606,6 +582,8 @@ subroutines {
          : done ;
       }
       
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;
    }
@@ -633,15 +611,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now"  {
@@ -651,6 +621,8 @@ subroutines {
          : done ;
       }
       
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;
             
@@ -667,15 +639,7 @@ subroutines {
       }
       
       : add_choice "Who is that woman?"  {
-         : if (!is_woman_ready) {
-         : print "<\"Ahh... Don't mind her.\"<4>>" ;
-         : pause "2600";
-         : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.<4>>\n <I've told her the OC is over and that all doors are open to her now, but I can't get through to her.<4>>\n <Sigh... What can you do...\"<4>>" ;
-         : set_boolean var = "is_woman_ready"  value = "true" ;
-         }
-         : else {
-            : print "<\"A lost soul... Maybe you could talk to her for me?\"<4>>";
-         }
+         :gosub "who_is_woman" ;
       }
       
       : add_choice "I have no more questions for now"  {
@@ -685,6 +649,8 @@ subroutines {
          : done ;
       }
       
+      : clear_screen ;
+      : print_graphic ;
       : choose "<\"So, what will it be <4>>{name}<?\"<4>>" ;  
       : press_any_key ;
 
