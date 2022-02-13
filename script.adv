@@ -1329,15 +1329,10 @@ on_command {
       : if (is_at "toilet") {
          : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
             : print "You look at the scribbles and see that one of the scribbles say" ;
-            : press_any_key ;
-            : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>>" ;
-            : press_any_key ; 
+            : print "<Do not paper-mache the toilet. And don't get forget to Flush!<2>>" ; 
             : print "Further down someone else wrote\n <What's a flush?<2>>" ;
-            : press_any_key ;
             : print "Ever further below, someone wrote \n <It's what comes after a Full House<2>>" ;
-            : press_any_key ;
             : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
-            : press_any_key ;
             : print "On yet another section of wall it says \n <You can touch...<2>> " ;
             : pause "2000" ;
             : print "Further below it says \n <You can play...<2>> " ;
