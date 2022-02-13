@@ -368,6 +368,7 @@ subroutines {
       : else {
          : if (is_woman_helped) {
             : print "<She was a lost soul. Thank you for guiding her.\"<4>>";
+         }
          : else {
             : print "<A lost soul. Maybe you could talk to her for me?\"<4>>" ;
          }
