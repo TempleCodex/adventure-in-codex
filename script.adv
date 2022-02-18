@@ -1199,7 +1199,7 @@ on_command {
    //inside tavern - drink blue drink
    : match "drink drink; down drink; gulp drink; take drink; drink blue"  {
       : if (is_exists "blue_drink") {
-         : print "You down the blue drink in one go" ;
+         : print "You down the blue drink in one go." ;
          : press_any_key ;
          : print "It tastes like Blue Curacao. Well, it did look like Blue Curacao, so it's no surprise it tastes like it. That is only logical." ;
          : increment "drink_count" ;
@@ -1209,7 +1209,7 @@ on_command {
    //inside tavern - drink green drink
    : match "drink drink; down drink; gulp drink; take drink; drink green"  {
       : if (is_exists "green_drink") {
-         : print "You down the green drink in one go" ;
+         : print "You down the green drink in one go." ;
          : press_any_key ;
          : print "You marvel at the diversity of its taste. It was as if it was structured layer by layer to form the perfect drink." ;
          : increment "drink_count" ;
@@ -1219,7 +1219,7 @@ on_command {
    //inside tavern - drink yellow drink
    : match "drink drink; down drink; gulp drink; take drink; drink yellow"  {
       : if (is_exists "yellow_drink") {
-         : print "You down the yellow drink in one go" ;
+         : print "You down the yellow drink in one go." ;
          : press_any_key ;
          : print "This was one of the most well ordered drink you've seen. 5 mini cubes of ice, beneath 5 slices of fruit, each symmetrically cut and placed on the rim, precisely spaced out." ;
          : increment "drink_count" ;
@@ -1229,7 +1229,7 @@ on_command {
    //inside tavern - drink purple drink
    : match "drink drink; down drink; gulp drink; take drink; drink purple"  {
       : if (is_exists "purple_drink") {
-         : print "You down the purple drink in one go" ;
+         : print "You down the purple drink in one go." ;
          : press_any_key ;
          : print "You are unable to pinpoint what it tastes like... It is a complete mystery to you." ;
          : increment "drink_count" ;
