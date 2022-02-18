@@ -4,11 +4,6 @@
 
 start_at = far_1_tavern
 
- //debug code
-// on_debug {
-  // : goto "inside_tavern" ;
- //}
-
 start_theme = my_theme
 themes {
    my_theme : theme {
@@ -17,14 +12,12 @@ themes {
          success_jingle  = on
          wingame_jingle  = on
          failure_jingle  = off
-         font                           = daad
-      keyboard_click                 = on
+         font            = daad
+         keyboard_click  = on
       }
-
-
- 
    }
 }
+
 ######################################
 #  On Startup                        #
 ######################################d
@@ -49,10 +42,9 @@ on_startup {
 ######################################
 
 strings {
-   
-   name : string "" ;
-   
+   name : string "" ;   
 }
+
 ######################################
 #  Locations                         #
 ######################################
@@ -90,7 +82,7 @@ connections {
 objects {
    
    painting       : scenery "a haunting painting" ;
-   // stools         : scenery "typical bar stools" ;
+   // stools      : scenery "typical bar stools" ;
    cloak_woman    : scenery "a woman in a cloak" at = "inside_tavern" conspicuous = "false" ; 
    bartender      : scenery "the bartender" ;
    ancient_key    : object "an ancient key" ;
@@ -156,7 +148,7 @@ on_describe {
    }
    
    //describe inside tavern
-   : if (is_at "inside_tavern") {
+  : if (is_at "inside_tavern") {
       : if (is_present "cloak_woman") {
          : print "You look around and start to wonder what kind of room you are even in. To your left, you notice a PAINTING hanging on the wall. To your right, a bar. A narrow door at the back that probably leads to the BATHROOM.";
          : print "A WOMAN in a cloak is sitting at the bar. She is drinking a shimmery beverage. There is a MAN in a dark robe behind the bar. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
@@ -170,13 +162,19 @@ on_describe {
          : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the BATHROOM. There is a MAN in a dark robe behind the bar. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
          
       }
+      : if (is_chamber_open == false) {
+         : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the BATHROOM. There is a MAN in a dark robe behind the bar. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+         
+      }
+      
          : if (entered_toilet == 0) {
             : if (is_chamber_open == false) {
             : set_graphic graphic = "no_table_no_woman1"  target = "inside_tavern" immediate = "true" ;
             }
-         }   
-         : else {
+            
+            : else {
             : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;
+            }
          }
       }
 
@@ -193,7 +191,18 @@ on_describe {
 
    //describe inside toilet
    : if (is_at "toilet") {
-      : print "A regular bathroom. Complete with a sink, toilet bowl, some junk on the shelf and lots of scribbling on the wall";
+      : if (is_exists "incense" || is_exists "candle") {
+      : print "A regular bathroom. Complete with a sink, toilet bowl, and lots of scribbling on the wall.";
+         : if (is_stand_toilet == true) {
+         : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+         }
+      }
+      : else {
+      : print "A regular bathroom. Complete with a sink, toilet bowl, some junk on the shelf and lots of scribbling on the wall.";
+         : if (is_stand_toilet == true) {
+         : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+         }
+      }
    }
 
    //dweling chamber
@@ -210,8 +219,6 @@ on_describe {
       }
       : play_music sound="ambient_chant";
 	}
-      
-
 }
 
 ######################################
@@ -234,7 +241,6 @@ booleans {
    is_asked_work        : boolean;
    is_asked_future      : boolean;
    is_stand_toilet      : boolean;
-   
 }
 
 
@@ -272,16 +278,16 @@ barriers {
 
 subroutines {
    //pre game over text
-   pre_end_game : subroutine {
+ pre_end_game : subroutine {
       : clear_screen ;
       : print "You are lost outside.";
-      : pause "2000" ;
+      : press_any_key ;
       : print "The night goes cold." ;
-      : pause "2000" ;
+      : press_any_key ;
       : print "Your hands start to shiver." ;
-      : pause "2000" ;
+      : press_any_key ;
       : print "Your mind begins to fade." ;
-      : pause "2000" ;
+      : press_any_key ;
    }
 
 
@@ -382,6 +388,9 @@ subroutines {
 
    who_is_woman : subroutine {
       : if (!is_woman_ready) {
+         : clear_screen ;
+         : print_graphic ;
+         : print "You ask the bartender, \"Who is that woman?\"";
          : print "<\"Ahh... Don't mind her.\"<4>>" ;
          : press_any_key ;
          : print "<\"She's still stuck on the Opening Ceremony. Unlike most Templars, she never made it through.\"<4>>";
@@ -467,6 +476,7 @@ subroutines {
       : add_choice "I need a drink..."  {
          : print "<\"I have just the thing for you...\"<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
+         // : press_any_key ;
          : print "<** Mix **<5>>" ;
          : pause "100" ;
          : print "<** Mix **<5>>" ;
@@ -505,6 +515,7 @@ subroutines {
       : add_choice "I need a drink..."  {
          : print "<\"Oho, another one already?\"<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
+         // : press_any_key ;
          : print "<** Mix **<5>>" ;
          : pause "1500" ;
          : print "<** Mix **<5>>" ;
@@ -543,7 +554,7 @@ subroutines {
       : add_choice "I need a drink..."  {
          : print "<\"Coming right up.\"<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
-         : pause "500" ;
+         // : press_any_key ;
          : print "<** Mix **<5>>" ;
          : pause "500" ;
          : print "<** Mix **<5>>" ;
@@ -582,6 +593,7 @@ subroutines {
       : add_choice "I need a drink..."  {
          : print "<\"Got a special one for you this time.\"<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
+         // : press_any_key ;
          : print "<** Mix **<5>>" ;
          : pause "1100" ;
          : print "<** Mix **<5>>" ;
@@ -620,6 +632,7 @@ subroutines {
       : add_choice "I need a drink..."  {
          : print "<\"This one here is my favourite.\"<4>>" ;
          : print "The burly bartender begins to mix your drink..." ;
+         // : press_any_key ;
          : print "<** Mix **<5>>" ;
          : pause "500" ;
          : print "<** Mix **<5>>" ;
@@ -701,6 +714,7 @@ subroutines {
          }
          : choose "You think for a moment, and decide to ask the table:" ;
       }
+      // : press_any_key ;
       : redescribe;
    }
 
@@ -806,7 +820,13 @@ win_game : subroutine {
    : print "You can rest easy now as your adventure has come to an end." ;
    : press_any_key ;
    : print "Or has it?..." ;
-   : pause "3500" ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
    : clear_screen ;
    : print "TO BE CONTINUED." ;
    : press_any_key ;
@@ -853,7 +873,7 @@ on_tick {
    //if too long far_tavern
    : if (is_at "far_1_tavern" || is_at "far_2_tavern" ) {
       : if (linger() == 3) {
-         : print "It's too dark to do anything else out here... Maybe you should go towards the light" ;
+         : print "It's too dark to do anything else out here... Maybe you should go towards the light." ;
       }
       : if (linger() == 5) {
          : print "Maybe you should use your feet to WALK there..." ;
@@ -870,15 +890,15 @@ on_tick {
 
    //if too long outside_tavern
    : if (is_at "outside_tavern") {
-      : if (linger() == 6) {
-         : print "It's too dark to do anything else out here...maybe you should go inside" ;
+      : if (linger() == 3) {
+         : print "It's too dark to do anything else out here... Maybe you should go inside." ;
       }
 
-      : if (linger() == 8) {
+      : if (linger() == 5) {
          : print "Maybe you should do something to that DOOR you see before you..." ;
       }
 
-      : if (linger() == 9) {
+      : if (linger() == 8) {
          : print "Stay out here too much longer and you will freeze to death. OPEN the DOOR already." ;
       }
 
@@ -901,12 +921,13 @@ on_tick {
       : print "Three gongs..." ;
       : play_music sound="ambient_chant";
       : press_any_key ;
-      : print "And.. Chanting? Sounds like it's coming from near the painting." ;
+      : print "And... Chanting? Sounds like it's coming from near the painting." ;
       : set_boolean var = "is_heard_something"  value = "true" ;
    }
       
    //impostor fail
    : if (impostor_try == 0) {
+      : clear_screen;
       : print "<'I am sorry<5>> {name} <. We have drawn too much suspicion to ourselves. The impostor would have their guard up by now. Thank you for trying anyway <5>>." ;
       : gosub "end_game2" ;
    }
@@ -1001,6 +1022,7 @@ on_command {
    //inside tavern - painting
    : match "examine painting; check painting; look painting "  {
       : if (is_at "inside_tavern") {
+         : clear_screen ;
          : if (is_carried "ancient_key" && quest_counter != 3) {
             : print_graphic "painting1_empty" ;
             : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding burning incense." ;
@@ -1008,7 +1030,7 @@ on_command {
             : redescribe;
          }
          : if (quest_counter == 3) {
-            : print "It sounds like the chanting is coming from...behind the painting." ;
+            : print "It sounds like the chanting is coming from behind the painting." ;
             : create "keyhole_1" ;
             : print_graphic "painting_keyhole" ;
             : print "And what's this? The place where the key was supposed to be has now turned into a keyhole!" ;
@@ -1195,7 +1217,7 @@ on_command {
       : if (is_exists "red_drink") {
          : print "You down the red drink in one go." ;
          : press_any_key ;
-         : print "The taste was all over the place. Sweet, bitter, floral, earthy and a bit like cardboard. It can only be described as...chaotic" ;
+         : print "The taste was all over the place. Sweet, bitter, floral, earthy and a bit like cardboard. It can only be described as chaotic" ;
          : increment "drink_count" ;
          : destroy "red_drink" ;
       }
@@ -1203,7 +1225,7 @@ on_command {
    //inside tavern - drink blue drink
    : match "drink drink; down drink; gulp drink; take drink; drink blue"  {
       : if (is_exists "blue_drink") {
-         : print "You down the blue drink in one go" ;
+         : print "You down the blue drink in one go." ;
          : press_any_key ;
          : print "It tastes like Blue Curacao. Well, it did look like Blue Curacao, so it's no surprise it tastes like it. That is only logical." ;
          : increment "drink_count" ;
@@ -1213,7 +1235,7 @@ on_command {
    //inside tavern - drink green drink
    : match "drink drink; down drink; gulp drink; take drink; drink green"  {
       : if (is_exists "green_drink") {
-         : print "You down the green drink in one go" ;
+         : print "You down the green drink in one go." ;
          : press_any_key ;
          : print "You marvel at the diversity of its taste. It was as if it was structured layer by layer to form the perfect drink." ;
          : increment "drink_count" ;
@@ -1223,7 +1245,7 @@ on_command {
    //inside tavern - drink yellow drink
    : match "drink drink; down drink; gulp drink; take drink; drink yellow"  {
       : if (is_exists "yellow_drink") {
-         : print "You down the yellow drink in one go" ;
+         : print "You down the yellow drink in one go." ;
          : press_any_key ;
          : print "This was one of the most well ordered drink you've seen. 5 mini cubes of ice, beneath 5 slices of fruit, each symmetrically cut and placed on the rim, precisely spaced out." ;
          : increment "drink_count" ;
@@ -1233,9 +1255,9 @@ on_command {
    //inside tavern - drink purple drink
    : match "drink drink; down drink; gulp drink; take drink; drink purple"  {
       : if (is_exists "purple_drink") {
-         : print "You down the purple drink in one go" ;
+         : print "You down the purple drink in one go." ;
          : press_any_key ;
-         : print "You are unable to pinpoint what it tastes like...It is a complete mystery to you." ;
+         : print "You are unable to pinpoint what it tastes like... It is a complete mystery to you." ;
          : increment "drink_count" ;
          : destroy "purple_drink" ;
       }
@@ -1286,7 +1308,7 @@ on_command {
    : match "take key; pick key; touch key; touch painting"  {
       : if (is_at "inside_tavern") {
          : if (is_key_exists == true && drink_count == 5) {
-            : print "You reach out to touch the key and...you manage to grab the key. You are a little shocked. This should be impossible! Was it the drinks? No one else seemed to notice, so you quickly pocket the key" ;
+            : print "You reach out to touch the key and... you manage to grab the key. You are a little shocked. This should be impossible! Was it the drinks? No one else seemed to notice, so you quickly pocket the key" ;
             : success ;
             : set_boolean var = "is_key_exists"  value = "false" ;
             : pocket "ancient_key" ;
@@ -1294,7 +1316,7 @@ on_command {
             : press_any_key ;
          }
          : if (is_key_exists == true && drink_count != 5) {
-            : print "You reach out to touch the key and...nothing happens. You are not sure why you did that..maybe you need a drink..." ;
+            : print "You reach out to touch the key and... nothing happens. You are not sure why you did that... Maybe you need a drink." ;
          }
       }
    }
@@ -1316,48 +1338,47 @@ on_command {
    : match "exit bathroom; exit _;go outside; enter tavern; enter apothecarium; enter apothecary; open door"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "you exit the bathroom with haste, escaping the stench." ;
-         : goto "inside_tavern" ;
-         : press_any_key ;
-         : play_music sound="ambient_apothecarium";
-         : redescribe;   
+            : print "You quickly exit the bathroom, escaping the stench." ;
+            : goto "inside_tavern" ;
+            : press_any_key ;
+            : play_music sound="ambient_apothecarium";
+            : redescribe;
          }
          : if (is_stand_toilet == true) {
-         : print "you can't do that from here" ;
-         
+            : print "You can't do that from here." ;
          }
       }
    } 
          
-//read writings in toilet
-: match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling"  {
+   //read writings in toilet
+   : match "read writing; examine writing; look writing; read scribbles; examine scribbles; look scribbles; read scribbling; examine scribbling; look scribbling; look wall; examine wall"  {
       : if (is_at "toilet") {
          : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
-            : print "You look at the scribbles and one of them says \n <Do not paper-mache the toilet. And don't forget to Flush!<2>> " ; 
-            : print "Further down someone else wrote\n <What's a flush?<2>>" ;
-            : print "Further down someone else wrote \n <It's what comes after a Full House<2>>" ;   
-            : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
-            : print "On yet another section of wall it says \n <You can touch...<2>> " ;
-            : print "Further below it says \n <You can play...<2>> " ;
-            : print "Further yet it says \n <If you say...<2>> " ;
+            : print "You look at the scribbles and one of them says \n <Do not paper-mache the toilet. And don't forget to Flush!<2>>" ; 
+            : print "Further down someone else wrote:\n <What's a flush?<2>>" ;
+            : print "Further below, you see: \n <It's what comes after a Full House<2>>" ;
+            : print "On another section of wall it says: \n <Please send pictures of your feet to xxxxxx<2>> \n The number seems to be scratched out. " ;
+            : print "On yet another section of wall it says: \n <You can touch...<2>> " ;
+            : print "Further below it says: \n <You can play...<2>> " ;
+            : print "Further yet it says: \n <If you say...<2>> " ;
             on_exhausted {
-               : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
+               : print "At the very bottom it says: \n <I'm always yours...<2>> \n For some reason you hear a haunting tune playing in your head." ;
                : play_music sound="ambient_barbie";
                : pause "5000" ;
                : press_any_key ;
-               : play_music sound="ambient_apothecarium";
-               : print "you probably shouldn't take anything on this wall seriously..." ;
+               : print "You probably shouldn't take anything on this wall seriously." ;
                : press_any_key ;
+               : play_music sound="ambient_apothecarium";
                : redescribe;
-            }      
+            }
          }
       }
-}
+   }
 
    //use sink
    : match "use sink; use tap; turn tap; examine tap; examine sink; wash hands; wash face; wash self; check sink"  {
       : if (is_at "toilet") {
-        : if (is_stand_toilet ==false) {
+        : if (is_stand_toilet == false) {
          : if (is_quest_started == false) {
             : print "You turn the taps on" ;
             : pause "2000" ;
@@ -1384,8 +1405,7 @@ on_command {
          }
         }
         : if (is_stand_toilet == true) {
-           : print "you can't do that from here" ;
-           
+           : print "You can't do that from here." ;
         }
         
       }
@@ -1412,35 +1432,35 @@ on_command {
    }
    
    //stand toilet bowl
-   : match "stand toilet; climb toilet; climb up; stand up; step up"  {
+   : match "stand toilet; climb toilet; climb up; stand up; step up; on toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You carefully stand on top of the toilet seat" ;
-         : set_boolean var = "is_stand_toilet"  value = "true" ;
-         : press_any_key ;
-         : redescribe;
+            : print "You carefully stand on top of the toilet seat." ;
+            : set_boolean var = "is_stand_toilet"  value = "true" ;
+            : press_any_key ;
+            : redescribe;
          }
          : if (is_stand_toilet == true) {
-         : print "You are already standing on top of the toilet seat" ;
-         : press_any_key ;
-         : redescribe;
+            : print "You are already standing on top of the toilet seat." ;
+            : press_any_key ;
+            : redescribe;
          }
       
       }
    }
    
    //Come down toilet bowl
-   : match "down toilet; climb down; go down; come down; stand down;step down"  {
+   : match "down toilet; climb down; go down; come down; stand down; step down; off toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You can't do that" ;
+            : print "You can't do that." ;
          }
          : if (is_stand_toilet == true) {
-         : print "You come down from the toilet seat" ;
-         : set_boolean var = "is_stand_toilet"  value = "false" ;
+            : print "You come down from the toilet seat." ;
+            : set_boolean var = "is_stand_toilet"  value = "false" ;
          }
         : press_any_key ;
-         : redescribe;
+        : redescribe;
       }
    }
    
@@ -1448,15 +1468,17 @@ on_command {
     : match "examine junk; take junk; check junk; look junk; throw junk; examine shelf; look shelf; check shelf "  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You can't do that from here" ;
-         : press_any_key ;
-         : redescribe;
+            : print "You can't do that from here." ;
+            : press_any_key ;
+            : redescribe;
          }
          : if (is_stand_toilet == true) {
             : if (is_incense_there == false) {
-                : print "It looks like pieces of used toilet paper...but wait, what's that behind the junk?" ;
+                : print "It looks like pieces of used toilet paper.";
                 : press_any_key ;
-                : print "looks like....incense?" ;
+                : print "But wait, what's that behind the junk?" ;
+                : press_any_key ;
+                : print "Looks like... incense?" ;
                 : create "incense" ;
                 : set_graphic graphic = "toilet_incense"  target = "toilet" ;
                 : set_boolean var = "is_incense_there"  value = "true" ;
@@ -1464,11 +1486,10 @@ on_command {
                 : redescribe;
             }
             : if (is_incense_there == true) {
-                : print "you notice nothing special" ;
+                : print "You notice nothing special." ;
                 : press_any_key ;
                 : redescribe;
             }
-        
          }
       }
    }
@@ -1477,12 +1498,12 @@ on_command {
    
    : match "take incense; get incense; pick incense"  {
       : if (is_at "toilet") {
-         : if (is_stand_toilet == false) {
-         : print "You can't do that from here" ;
+            : if (is_stand_toilet == false) {
+            : print "You can't do that from here." ;
          }
          : if (is_stand_toilet == true && is_present "incense") {
             : if (is_incense_there == true) {
-               : print "You take the incense" ;
+               : print "You take the incense." ;
                : press_any_key ;
                : success ;
                : pocket "incense" ;
@@ -1491,26 +1512,22 @@ on_command {
                : redescribe;
             }
             : if (is_incense_there == false) {
-               : print "You can't do that" ;
+               : print "You can't do that." ;
                : press_any_key ;
                : redescribe;
             }
-         
          }
-         
       }
    }
    
-   
-
    //examine table
    : match "examine table; check table; look table; examine candle; check candle"  {
       : if (is_at "inside_tavern") {
          : if (entered_toilet > 0) {
-               : print "Upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
-               : create "candle" ;
-               : press_any_key ;
-               : redescribe;
+            : print "Upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
+            : create "candle" ;
+            : press_any_key ;
+            : redescribe;
          }
       }
    }
@@ -1521,7 +1538,7 @@ on_command {
          : if (is_present "candle") {
             : print "A newly lighted candle burns brightly." ;
             : press_any_key ;
-            : redescribe;
+            : redescribe ;
          }
       }
    }
@@ -1530,9 +1547,9 @@ on_command {
    : match "burn incense; incense candle; light incense; candle incense"  {
       : if (is_at "inside_tavern") {
          : if (is_carried "incense") {
-            : print "You burn the incense. It effuses a sweet smelling aroma" ;
+            : print "You burn the incense. It effuses a sweet smelling aroma." ;
             : press_any_key ;
-            : print "The stick burns quicker than you expected...The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
+            : print "The stick burns quicker than you expected... The flame is almost licking your fingers. \n You drop the incense abruptly onto the table." ;
             : press_any_key ;
             : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
             : press_any_key ;
@@ -1547,12 +1564,11 @@ on_command {
    : match "read words; read message; examine words; examine message; read writing; examine writing"  {
       : if (is_at "inside_tavern" && is_exists "table_words") {
          : print "The message reads:";
-         : print "<Abandon thine inhibitions and collect the key<1>> \n <Give thine aid to a lost devotee<1>> \n <Then cleanse thy skin of all impurity<1>> \n <Only then<1>> {name} <, will thy prove thyself worthy<1>>" ;
-         : print "And right at the bottom it says 'Tasks Completed = {quest_counter}'" ;
+         : print "<Abandon thine inhibitions and collect the key<8>> \n <Give thine aid to a lost devotee<8>> \n <Then cleanse thy skin of all impurity<8>> \n <Only then<8>> {name} <, will thy prove thyself worthy<8>>" ;
+         : print "And right at the bottom it says \"Tasks Completed = {quest_counter}\"" ;
          : set_boolean var = "is_quest_started"  value = "true" ;
       }
    }
-
 
    //examine keyhole
    : match "examine keyhole; check keyhole; look keyhole"  {
@@ -1562,7 +1578,7 @@ on_command {
    }
 
    //use ancient key on keyhole
-   : match "use key; unlock keyhole; unlock painting; key keyhole"  {
+   : match "use key; insert key; unlock keyhole; unlock painting; key keyhole; key painting"  {
       : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
          : print "You cautiously put the ancient key into the keyhole." ;
          : press_any_key ;
@@ -1574,7 +1590,7 @@ on_command {
          : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
          : press_any_key ;
          : success ;
-         : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
+         : print "It is a whole other room in there. It looks like an ancient CHAMBER." ;
          : set_boolean var = "is_chamber_open"  value = "true" ;
          : destroy "ancient_key" ;
          : press_any_key ;
@@ -1671,7 +1687,7 @@ on_command {
                : press_any_key ;
                : print "But the templar suspect calls you back." ;
                : press_any_key ;
-               : print "<\"Ok you got me...But before you banish me I have one thing to say to you...\"<2>>";
+               : print "<\"Ok you got me... But before you banish me I have one thing to say to you...\"<2>>";
                : press_any_key ;
                : print "<\"You...\"<2>>";
                : press_any_key ;
@@ -1686,7 +1702,6 @@ on_command {
                : print "The Guardian groans as the templar walks back to their table." ;
                : decrement "impostor_try" ;
                : print "<\"I will give you<5>> {impostor_try} <more attempt(s)<5>>.\"" ;
-               : press_any_key ;
                : play_music sound="ambient_chant";
                : set_graphic graphic = "chamber"  target = "chamber";
             }
@@ -1761,13 +1776,13 @@ on_command {
                : print "<\"Thank you. You've done well.\"<5>>" ;
                : print "<\"I see your knowledge of all things Temple is returning, as well.\"<5>>" ;
                : press_any_key ;
-               : print "\"Yes... it's all coming back to me now. I was a Templar myself...a devoted one. I did everything required of me...'" ;
+               : print "\"Yes... it's all coming back to me now. I was a Templar myself... a devoted one. I did everything required of me...\"" ;
                : press_any_key ;
-               : print "But I..." ;
+               : print "\"But I lost faith in the protocol...\"" ;
                : press_any_key ;
-               : print "'...lost faith in the protocol. The market turned. I lost a lot of money...I remember I was one of the loudest fudders in the building.\n I was stripped of my roles, my memories...'" ;
+               : print "\"The market turned. I lost a lot of money... I remember I was one of the loudest fudders in the building.\n I was stripped of my roles, my memories...\"" ;
                : press_any_key ;
-               : print "<\"Yes...there were many others like you. Some never came back. But it is a choice we are all free to make. You however, chose to come back for some reason. Whatever that reason may be, welcome back<5>> {name} <. And this time, we all hope you stay.\"<5>>" ;
+               : print "<\"Yes. There were many others like you. Some never came back. But it is a choice we are all free to make. You however, chose to come back for some reason. Whatever that reason may be, welcome back<5>> {name} <. And this time, we all hope you stay.\"<5>>" ;
                : gosub "win_game" ;
             }
 
@@ -1909,15 +1924,14 @@ assets {
       //         web editor)
      
      ambient_apothecarium : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexAPOTHroom1EXT.mp3" ;
-     ambient_barbie : sound_sample "https://www.hamienet.com/44277_Barbie-girl-piano.mp3" ;
+     ambient_barbie : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/barbie.mp3" ;
      ambient_chant : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexDWCHchanting1.mp3" ;
      ambient_gong : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/76887__airtaxi__medium-bowl.mp3" ;
-     ambient_rickroll : sound_sample "http://www.hamienet.com/35298_Never-Gonna-Give-You-Up.mp3" ;
+     ambient_rickroll : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/rickr.mp3" ;
      ambient_night : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/nightsound.mp3" ;
      ambient_outro : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;
      ambient_intro : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexINTRO001.mp3" ;
-     ambient_outrosilence : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;
-      
+     ambient_outrosilence : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;  
    }
 }
 
