@@ -1548,7 +1548,7 @@ on_command {
    : match "read words; read message; examine words; examine message; read writing; examine writing"  {
       : if (is_at "inside_tavern" && is_exists "table_words") {
          : print "The message reads:";
-         : print "<Abandon thine inhibitions and collect the key<1>> \n <Give thine aid to a lost devotee<1>> \n <Then cleanse thy skin of all impurity<1>> \n <Only then<1>> {name} <, will thy prove thyself worthy<1>>" ;
+         : print "<Abandon thine inhibitions and collect the key<1>> \n <Give thine aid to a lost devotee<8>> \n <Then cleanse thy skin of all impurity<8>> \n <Only then<8>> {name} <, will thy prove thyself worthy<8>>" ;
          : print "And right at the bottom it says \"Tasks Completed = {quest_counter}\"" ;
          : set_boolean var = "is_quest_started"  value = "true" ;
       }
