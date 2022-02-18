@@ -4,11 +4,6 @@
 
 start_at = far_1_tavern
 
- //debug code
-// on_debug {
-  // : goto "inside_tavern" ;
-//}
-
 start_theme = my_theme
 themes {
    my_theme : theme {
@@ -18,13 +13,10 @@ themes {
          wingame_jingle  = on
          failure_jingle  = off
          font            = daad
-         keyboard_click  = on
       }
-
-
- 
    }
 }
+
 ######################################
 #  On Startup                        #
 ######################################d
@@ -49,10 +41,9 @@ on_startup {
 ######################################
 
 strings {
-   
-   name : string "" ;
-   
+   name : string "" ;   
 }
+
 ######################################
 #  Locations                         #
 ######################################
@@ -184,7 +175,7 @@ on_describe {
          : if (is_present "empty_seat") {
             : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;  
          }
-         : if (!is_present "empty_seat) {
+         : if (!is_present "empty_seat") {
             : set_graphic graphic = "table_and_woman1"  target = "inside_tavern" immediate = "true" ;  
          }
       }
@@ -209,8 +200,6 @@ on_describe {
       }
       : play_music sound="ambient_chant";
 	}
-      
-
 }
 
 ######################################
@@ -1416,7 +1405,7 @@ on_command {
    }
    
    //stand toilet bowl
-   : match "stand toilet; climb toilet; climb up; stand up; step up; get on toilet"  {
+   : match "stand toilet; climb toilet; climb up; stand up; step up; on toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
          : print "You carefully stand on top of the toilet seat." ;
@@ -1434,7 +1423,7 @@ on_command {
    }
    
    //Come down toilet bowl
-   : match "down toilet; climb down; go down; come down; stand down; step down; get off toilet"  {
+   : match "down toilet; climb down; go down; come down; stand down; step down; off toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
          : print "You can't do that." ;
@@ -1553,7 +1542,6 @@ on_command {
          : set_boolean var = "is_quest_started"  value = "true" ;
       }
    }
-
 
    //examine keyhole
    : match "examine keyhole; check keyhole; look keyhole"  {
