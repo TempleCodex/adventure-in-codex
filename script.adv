@@ -896,7 +896,7 @@ on_tick {
       : print "Three gongs..." ;
       : play_music sound="ambient_chant";
       : press_any_key ;
-      : print "And.. Chanting? Sounds like it's coming from near the painting." ;
+      : print "And... Chanting? Sounds like it's coming from near the painting." ;
       : set_boolean var = "is_heard_something"  value = "true" ;
    }
       
@@ -1451,7 +1451,7 @@ on_command {
                 : press_any_key ;
                 : print "But wait, what's that behind the junk?" ;
                 : press_any_key ;
-                : print "Looks like.. incense?" ;
+                : print "Looks like... incense?" ;
                 : create "incense" ;
                 : set_graphic graphic = "toilet_incense"  target = "toilet" ;
                 : set_boolean var = "is_incense_there"  value = "true" ;
@@ -1522,7 +1522,7 @@ on_command {
          : if (is_carried "incense") {
             : print "You burn the incense. It effuses a sweet smelling aroma" ;
             : press_any_key ;
-            : print "The stick burns quicker than you expected... The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
+            : print "The stick burns quicker than you expected.... The flame is almost licking your fingers \n You drop the incense abruptly onto the table" ;
             : press_any_key ;
             : print "Curiously, the flames seem to take on a life of it's own, leaping off the stick and dancing on the surface, tracing a message into the table!";
             : press_any_key ;
@@ -1651,7 +1651,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<\"No... that is not the impostor. I have verified that he works with the Codex team.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)<5>>.\"" ;
+               : print "<\"No.... that is not the impostor. I have verified that he works with the Codex team.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s)<5>>.\"" ;
             }
 
             : add_choice "Chaos Templar 2"  {
