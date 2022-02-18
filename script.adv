@@ -996,6 +996,7 @@ on_command {
    //inside tavern - painting
    : match "examine painting; check painting; look painting "  {
       : if (is_at "inside_tavern") {
+         : clear_screen ;
          : if (is_carried "ancient_key" && quest_counter != 3) {
             : print_graphic "painting1_empty" ;
             : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding burning incense." ;
@@ -1328,14 +1329,14 @@ on_command {
       : if (is_at "toilet") {
          : cycle predictable_order = "true"  key = "toilet_event" skip_interval = "0" max_loops = "1" {
             : print "You look at the scribbles and one of them says \n <Do not paper-mache the toilet. And don't forget to Flush!<2>>" ; 
-            : print "Further down someone else wrote\n <What's a flush?<2>>" ;
-            : print "Further below, someone wrote \n <It's what comes after a Full House<2>>" ;
-            : print "On another section of wall it says \n <Please send pictures of your feet to xxxxxx<2>> \n the number seems to be scratched out " ;
-            : print "On yet another section of wall it says \n <You can touch...<2>> " ;
-            : print "Further below it says \n <You can play...<2>> " ;
-            : print "Further yet it says \n <If you say...<2>> " ;
+            : print "Further down someone else wrote:\n <What's a flush?<2>>" ;
+            : print "Further below, you see: \n <It's what comes after a Full House<2>>" ;
+            : print "On another section of wall it says: \n <Please send pictures of your feet to xxxxxx<2>> \n The number seems to be scratched out. " ;
+            : print "On yet another section of wall it says: \n <You can touch...<2>> " ;
+            : print "Further below it says: \n <You can play...<2>> " ;
+            : print "Further yet it says: \n <If you say...<2>> " ;
             on_exhausted {
-               : print "At the very bottom it says \n <I'm always yours...<2>> \n for some reason you hear a haunting tune playing in your head " ;
+               : print "At the very bottom it says: \n <I'm always yours...<2>> \n For some reason you hear a haunting tune playing in your head." ;
                : play_music sound="ambient_barbie";
                : pause "5000" ;
                : press_any_key ;
