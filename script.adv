@@ -1409,15 +1409,15 @@ on_command {
    : match "stand toilet; climb toilet; climb up; stand up; step up; on toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You carefully stand on top of the toilet seat." ;
-         : set_boolean var = "is_stand_toilet"  value = "true" ;
-         : press_any_key ;
-         : redescribe;
+            : print "You carefully stand on top of the toilet seat." ;
+            : set_boolean var = "is_stand_toilet"  value = "true" ;
+            : press_any_key ;
+            : redescribe;
          }
          : if (is_stand_toilet == true) {
-         : print "You are already standing on top of the toilet seat." ;
-         : press_any_key ;
-         : redescribe;
+            : print "You are already standing on top of the toilet seat." ;
+            : press_any_key ;
+            : redescribe;
          }
       
       }
@@ -1427,14 +1427,14 @@ on_command {
    : match "down toilet; climb down; go down; come down; stand down; step down; off toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You can't do that." ;
+            : print "You can't do that." ;
          }
          : if (is_stand_toilet == true) {
-         : print "You come down from the toilet seat." ;
-         : set_boolean var = "is_stand_toilet"  value = "false" ;
+            : print "You come down from the toilet seat." ;
+            : set_boolean var = "is_stand_toilet"  value = "false" ;
          }
         : press_any_key ;
-         : redescribe;
+        : redescribe;
       }
    }
    
@@ -1442,9 +1442,9 @@ on_command {
     : match "examine junk; take junk; check junk; look junk; throw junk; examine shelf; look shelf; check shelf "  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You can't do that from here." ;
-         : press_any_key ;
-         : redescribe;
+            : print "You can't do that from here." ;
+            : press_any_key ;
+            : redescribe;
          }
          : if (is_stand_toilet == true) {
             : if (is_incense_there == false) {
@@ -1472,8 +1472,8 @@ on_command {
    
    : match "take incense; get incense; pick incense"  {
       : if (is_at "toilet") {
-         : if (is_stand_toilet == false) {
-         : print "You can't do that from here." ;
+            : if (is_stand_toilet == false) {
+            : print "You can't do that from here." ;
          }
          : if (is_stand_toilet == true && is_present "incense") {
             : if (is_incense_there == true) {
@@ -1498,10 +1498,10 @@ on_command {
    : match "examine table; check table; look table; examine candle; check candle"  {
       : if (is_at "inside_tavern") {
          : if (entered_toilet > 0) {
-               : print "Upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
-               : create "candle" ;
-               : press_any_key ;
-               : redescribe;
+            : print "Upon closer inspection, the table looks a bit like an altar. There's a burning candle on it" ;
+            : create "candle" ;
+            : press_any_key ;
+            : redescribe;
          }
       }
    }
@@ -1512,7 +1512,7 @@ on_command {
          : if (is_present "candle") {
             : print "A newly lighted candle burns brightly." ;
             : press_any_key ;
-            : redescribe;
+            : redescribe ;
          }
       }
    }
