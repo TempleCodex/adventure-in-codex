@@ -1472,11 +1472,11 @@ on_command {
    : match "take incense; get incense; pick incense"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
-         : print "You can't do that from here" ;
+         : print "You can't do that from here." ;
          }
          : if (is_stand_toilet == true && is_present "incense") {
             : if (is_incense_there == true) {
-               : print "You take the incense" ;
+               : print "You take the incense." ;
                : press_any_key ;
                : success ;
                : pocket "incense" ;
@@ -1485,7 +1485,7 @@ on_command {
                : redescribe;
             }
             : if (is_incense_there == false) {
-               : print "You can't do that" ;
+               : print "You can't do that." ;
                : press_any_key ;
                : redescribe;
             }
