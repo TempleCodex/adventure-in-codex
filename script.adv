@@ -1552,7 +1552,7 @@ on_command {
    }
 
    //use ancient key on keyhole
-   : match "use key; unlock keyhole; unlock painting; key keyhole; insert key"  {
+   : match "use key; unlock keyhole; unlock painting; key keyhole; key painting"  {
       : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
          : print "You cautiously put the ancient key into the keyhole." ;
          : press_any_key ;
@@ -1564,7 +1564,7 @@ on_command {
          : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
          : press_any_key ;
          : success ;
-         : print "It is a whole other room in there. It looks like an ancient CHAMBER" ;
+         : print "It is a whole other room in there. It looks like an ancient CHAMBER." ;
          : set_boolean var = "is_chamber_open"  value = "true" ;
          : destroy "ancient_key" ;
          : press_any_key ;
