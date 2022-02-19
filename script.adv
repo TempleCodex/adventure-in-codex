@@ -817,7 +817,13 @@ win_game : subroutine {
    : print "You can rest easy now as your adventure has come to an end." ;
    : press_any_key ;
    : print "Or has it?..." ;
-   : pause "3500" ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
+   : print "." ;
+   : press_any_key ;
    : clear_screen ;
    : print "TO BE CONTINUED." ;
    : press_any_key ;
