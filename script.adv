@@ -887,15 +887,15 @@ on_tick {
 
    //if too long outside_tavern
    : if (is_at "outside_tavern") {
-      : if (linger() == 6) {
+      : if (linger() == 3) {
          : print "It's too dark to do anything else out here... Maybe you should go inside." ;
       }
 
-      : if (linger() == 8) {
+      : if (linger() == 5) {
          : print "Maybe you should do something to that DOOR you see before you..." ;
       }
 
-      : if (linger() == 9) {
+      : if (linger() == 8) {
          : print "Stay out here too much longer and you will freeze to death. OPEN the DOOR already." ;
       }
 
