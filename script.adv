@@ -13,6 +13,7 @@ themes {
          wingame_jingle  = on
          failure_jingle  = off
          font            = daad
+         keyboard_click  = on
       }
    }
 }
