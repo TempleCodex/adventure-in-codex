@@ -924,6 +924,7 @@ on_tick {
       
    //impostor fail
    : if (impostor_try == 0) {
+      : clear_screen ;
       : print "<'I am sorry<5>> {name} <. We have drawn too much suspicion to ourselves. The impostor would have their guard up by now. Thank you for trying anyway <5>>." ;
       : gosub "end_game2" ;
    }
