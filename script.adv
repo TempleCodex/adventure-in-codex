@@ -1922,15 +1922,14 @@ assets {
       //         web editor)
      
      ambient_apothecarium : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexAPOTHroom1EXT.mp3" ;
-     ambient_barbie : sound_sample "https://www.hamienet.com/44277_Barbie-girl-piano.mp3" ;
+     ambient_barbie : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/barbie.mp3" ;
      ambient_chant : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexDWCHchanting1.mp3" ;
      ambient_gong : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/76887__airtaxi__medium-bowl.mp3" ;
-     ambient_rickroll : sound_sample "http://www.hamienet.com/35298_Never-Gonna-Give-You-Up.mp3" ;
+     ambient_rickroll : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/rickr.mp3" ;
      ambient_night : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/nightsound.mp3" ;
      ambient_outro : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;
      ambient_intro : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexINTRO001.mp3" ;
-     ambient_outrosilence : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;
-      
+     ambient_outrosilence : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;  
    }
 }
 
