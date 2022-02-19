@@ -188,7 +188,18 @@ on_describe {
 
    //describe inside toilet
    : if (is_at "toilet") {
-      : print "A regular bathroom. Complete with a sink, toilet bowl, some junk on the shelf and lots of scribbling on the wall.";
+      : if (is_exists "incense" || is_exists "candle") {
+         : print "A regular bathroom. Complete with a sink, toilet bowl, and lots of scribbling on the wall.";
+         : if (is_stand_toilet == true) {
+            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+         }
+      }
+      : else {
+         : print "A regular bathroom. Complete with a sink, toilet bowl, some junk on the shelf and lots of scribbling on the wall.";
+         : if (is_stand_toilet == true) {
+            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+         }
+      }
    }
 
    //dweling chamber
