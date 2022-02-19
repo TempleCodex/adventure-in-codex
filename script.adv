@@ -161,6 +161,9 @@ on_describe {
             : play_music sound="ambient_chant";
             : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the BATHROOM. There is a MAN in a dark robe behind the bar. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
          }
+         : if (is_chamber_open == false) {
+            : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the BATHROOM. There is a MAN in a dark robe behind the bar. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+         }
          : if (entered_toilet == 0) {
             : if (is_chamber_open == false) {
                : set_graphic graphic = "no_table_no_woman1"  target = "inside_tavern" immediate = "true" ;
@@ -176,7 +179,8 @@ on_describe {
          : if (is_present "empty_seat") {
             : set_graphic graphic = "table_no_woman1"  target = "inside_tavern" immediate = "true" ;  
          }
-         : if (!is_present "empty_seat") {
+         // : if (!is_present "empty_seat") {
+         : else {
             : set_graphic graphic = "table_and_woman1"  target = "inside_tavern" immediate = "true" ;  
          }
       }
