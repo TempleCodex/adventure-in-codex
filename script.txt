@@ -1136,41 +1136,43 @@ on_command {
       }
    }   
    : match "talk woman; speak woman "  {
-      : print "You approach the woman.";
-      : press_any_key ;
-      : if (is_at "inside_tavern" && is_woman_ready == false && is_present "cloak_woman") {
-         : clear_screen ;
-         : print_graphic ;
-         : print "You try to introduce yourself...";
+      : if (is_present "cloak_woman") {
+         : print "You approach the woman.";
          : press_any_key ;
-         : print "...but she is oblivious to you.";
-         : press_any_key ;
-         : print "You hear her murmuring to herself, under her breath.";
-         : press_any_key ; 
-         : print "<Verify or... NGMI... Sacrifice to stake and chill... How... verify? Am I NGMI...? Verify... Verify...<6>>";
-         : press_any_key ;
-         : redescribe;
-         : done;
-      }
-      : if (is_at "inside_tavern" && is_woman_ready == true && is_present "cloak_woman") {
-         : clear_screen ;
-         : print_graphic ;
-         : if (!is_woman_intro_done) {
-            : print "You try to introduce yourself to the woman...";
-            : press_any_key ;
-            : print "\"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
-            : press_any_key ;
-            : print "She finally turns to you. You can see that she's at her breaking point.";
-            : press_any_key ;
-            : set_boolean var = "is_woman_intro_done"  value = "true" ;
-            : print "<\"You don't understand... I am completely lost. I've been trying to get verified for weeks. I even started before the opening ceremony!\"<6>>";
-            : press_any_key ;
+         : if (is_at "inside_tavern" && is_woman_ready == false) {
             : clear_screen ;
             : print_graphic ;
+            : print "You try to introduce yourself...";
+            : press_any_key ;
+            : print "...but she is oblivious to you.";
+            : press_any_key ;
+            : print "You hear her murmuring to herself, under her breath.";
+            : press_any_key ; 
+            : print "<Verify or... NGMI... Sacrifice to stake and chill... How... verify? Am I NGMI...? Verify... Verify...<6>>";
+            : press_any_key ;
+            : redescribe;
+            : done;
          }
-         : gosub "woman_questions" ;
-         : redescribe;
-         : done;
+         : if (is_at "inside_tavern" && is_woman_ready == true) {
+            : clear_screen ;
+            : print_graphic ;
+            : if (!is_woman_intro_done) {
+               : print "You try to introduce yourself to the woman...";
+               : press_any_key ;
+               : print "\"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
+               : press_any_key ;
+               : print "She finally turns to you. You can see that she's at her breaking point.";
+               : press_any_key ;
+               : set_boolean var = "is_woman_intro_done"  value = "true" ;
+               : print "<\"You don't understand... I am completely lost. I've been trying to get verified for weeks. I even started before the opening ceremony!\"<6>>";
+               : press_any_key ;
+               : clear_screen ;
+               : print_graphic ;
+            }
+            : gosub "woman_questions" ;
+            : redescribe;
+            : done;
+         }
       }
    }   
 
