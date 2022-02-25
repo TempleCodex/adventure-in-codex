@@ -209,13 +209,13 @@ on_describe {
       : if (is_exists "incense" || is_exists "candle") {
          : print "A regular bathroom. Complete with a sink, toilet bowl, and lots of scribbling on the wall.";
          : if (is_stand_toilet == true) {
-            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+            : print "You are standing on the toilet seat, hoping it doesn't collapse." ;
          }
       }
       : else {
          : print "A regular bathroom. Complete with a sink, toilet bowl, some junk on the shelf and lots of scribbling on the wall.";
          : if (is_stand_toilet == true) {
-            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+            : print "You are standing on the toilet seat, hoping it doesn't collapse." ;
          }
       }
    }
@@ -1022,7 +1022,7 @@ on_command {
       : if (is_at "outside_tavern") {
          : clear_screen ;
          : print_graphic ;
-         : print "The building looks old, but sturdy. It has a logo of the sun above the door" ;
+         : print "The building looks old, but sturdy. It has a logo of the sun above the door." ;
          : press_any_key ;
          : redescribe;
       }
@@ -1458,7 +1458,7 @@ on_command {
    //use toilet bowl
    : match "use toilet; examine toilet"  {
       : if (is_at "toilet") {
-         : print "You don't really feel like going right now...but you do notice footprints on the toilet seat as if someone has been standing on it" ;
+         : print "You don't really feel like going right now... but you do notice footprints on the toilet seat, as if someone has been standing on it." ;
          : press_any_key ;
          : redescribe;
       }
