@@ -159,9 +159,9 @@ on_describe {
        : press_any_key ;
        : print "To your right, a counter. A narrow door at the back that probably leads to the LAVATORY.";
        : press_any_key ;
-       : print "A WOMAN in a cloak is sitting at the counter. She is drinking a shimmery elixer."; 
+       : print "A WOMAN in a cloak is sitting at the counter. She is drinking a shimmering elixer."; 
        : press_any_key ;
-       : print "There is a MAN in a dark robe behind the counter. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";  
+       : print "There is a MAN in a dark robe behind the counter. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";  
        : set_boolean var = "is_first_enter_taver"  value = "true" ;
        : done ;
 
@@ -169,7 +169,7 @@ on_describe {
    }
       : if (is_present "cloak_woman") {
          : print "You look around and start to wonder what kind of room you are even in. To your left, you notice a PAINTING hanging on the wall. To your right, a counter. A narrow door at the back that probably leads to the LAVATORY.";
-         : print "A WOMAN in a cloak is sitting at the counter. She is drinking a shimmery elixer. There is a MAN in a dark robe behind the counter. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+         : print "A WOMAN in a cloak is sitting at the counter. She is drinking a shimmering elixer. There is a MAN in a dark robe behind the counter. The whole place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
       }
 
       : if (is_present "empty_seat") {
@@ -177,13 +177,13 @@ on_describe {
             : print "An entire CHAMBER was hidden behind the painting!" ;
             : set_graphic graphic = "opening_chamber"  target = "inside_tavern" ;
             : play_music sound="ambient_chant";
-            : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+            : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
          }
          : if (is_chamber_open == false) {
-            : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+            : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
          }
          : if (is_chamber_open == false && is_heard_something == true) {
-            : print "There is chanting coming from the PAINTING?.\n A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and a lot of things you don’t have a word for.";
+            : print "There is chanting coming from the PAINTING?.\n A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
          }
          : if (entered_toilet == 0) {
             : if (is_chamber_open == false) {
@@ -1124,7 +1124,7 @@ on_command {
    //inside tavern - woman
    : match "examine woman "  {
       : if (is_at "inside_tavern" && is_present "cloak_woman") {
-         : print "The woman dons a tattered cloak. They look somewhat familiar. She is drinking a shimmery elixer" ;
+         : print "The woman dons a tattered cloak. They look somewhat familiar. She is drinking a shimmering elixer." ;
          : press_any_key ;
          : redescribe;
       }
