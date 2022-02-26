@@ -1833,7 +1833,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<\"No... that is not the impostor. His work can be heard everywhere.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : print "<\"No... that is not the impostor. His work is renowned around these parts.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
             }
             : choose "<Have you figured out who the impostor is?<5>>" ;
             : redescribe;
