@@ -72,8 +72,7 @@ connections {
      // apothecary, north, road_2, 
      // far_1_tavern, north, far_2_tavern, 
      // far_2_tavern, north, outside_tavern, 
-     
-     inside_tavern, enter, chamber, 
+     // inside_tavern, enter, chamber, 
    ]
 }
 
@@ -178,8 +177,9 @@ on_describe {
             : set_graphic graphic = "opening_chamber"  target = "inside_tavern" ;
             : play_music sound="ambient_chant";
             : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
+         : done ;
          }
-         : if (is_chamber_open == false) {
+         : if (is_chamber_open == false && is_heard_something == false) {
             : print "There is a PAINTING hanging on the wall. A narrow door at the back probably leads to the LAVATORY. There is a MAN in a dark robe behind the counter. The place is strewn with vials, tinctures, bottles, artifacts, scrolls, books, and mysterious things you cannot name.";
          }
          : if (is_chamber_open == false && is_heard_something == true) {
@@ -345,7 +345,7 @@ subroutines {
       }
       : else {
          : add_choice "You need to send your feet pictures to the devs."  {
-            : print "<\"I have... I sent them to someone named "LUCIFER"... *sniff*\" <6>>" ;
+            : print "<\"I have... I sent them to someone named \"LUCIFER\"... *sniff*\"<6>>" ;
             : press_any_key ;
             : print "<\"A-and... now... my feet are all over feetfinder.com! Waaaaaah!\" <6>>" ;
             : print "You quickly retreat. Maybe rethink your answer?";
@@ -353,7 +353,7 @@ subroutines {
          
          : add_choice "You need to verify yourself in voice chat."  {
             : print "The woman scowled." ;
-            : print "<\"Are you kidding me? I was in there for ages. I sang the "Barbie Doll" in 2 languages. I chanted their shit posts. Even after all that, they told me this is not the way to get verified!\"<6>>" ;
+            : print "<\"Are you kidding me? I was in there for ages. I sang \"Barbie Girl\" in 2 languages. I chanted their shit posts. Even after all that, they told me this is not the way to get verified!\"<6>>" ;
             : print "You quickly retreat. Maybe rethink your answer?";
          }
          
@@ -865,8 +865,13 @@ win_game : subroutine {
    : clear_screen ;
    : print_graphic "final_scroll2" ;
    : press_any_key ;
-   : print "Click <here<4>>[https://adventuron.io] to collect your POAP\n\n <Created by: Gman<6>> <Game Credits:<6>> <DocPeppercon, <6>><Marshmellowzz, <6>> <asitgoes, <6>> <psgb<6>>   ";
+   : print "Click <here<4>>[https://adventuron.io] to collect your POAP\n\n <Created by: Gman...<6>> <Game Credits:<6>> <DocPeppercon, <6>><Marshmellowzz, <6>> <asitgoes, <6>> <psgb<6>>   ";
    : success ;
+   : press_any_key ;
+   : print "Make sure you've clicked the link before pressing any other button" ;
+   : press_any_key ;
+   : print "The next button press will clear the screen and restart the game." ;
+   : press_any_key ;
    : win_game ;
 }  
 
@@ -946,9 +951,7 @@ on_tick {
       : play_music sound="ambient_gong";
       : print "You hear something..." ;
       : pause "5000" ;
-      : pause "5000" ;
-      : pause "5000" ;
-      : pause "2000" ;
+      : pause "4000" ;
       : print "Three gongs..." ;
       : play_music sound="ambient_chant";
       : press_any_key ;
@@ -1103,7 +1106,7 @@ on_command {
                : if (drink_count == 5) {
                   : print_graphic "painting_purple" ;  
                }
-            : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. {drink_count} of the 5 emblems of the key is glowing!" ;   
+            : print "The painting shows 5 people in robes with a brownish/gold aura around them. They are holding an ancient key and burning incense. {drink_count} of the 5 emblems of the key are glowing!" ;   
             : press_any_key ;
             : redescribe;
          }
@@ -1472,7 +1475,7 @@ on_command {
    }
    
    //stand toilet bowl
-   : match "stand toilet; stand seat; climb toilet; climb up; stand up; step up; on toilet; go up; get top"  {
+   : match "stand toilet; stand seat; climb toilet; climb up; stand up; step up; on toilet; go up; get top; get toilet"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
             : print "You carefully stand on top of the toilet seat." ;
@@ -1490,7 +1493,7 @@ on_command {
    }
    
    //Come down toilet bowl
-   : match "down toilet; climb down; go down; come down; stand down; step down; off toilet"  {
+   : match "down toilet; climb down; go down; come down; stand down; step down; off toilet; get down; go down"  {
       : if (is_at "toilet") {
          : if (is_stand_toilet == false) {
             : print "You can't do that." ;
@@ -1584,7 +1587,7 @@ on_command {
    }
 
    //burn incense
-   : match "burn incense; incense candle; light incense; candle incense"  {
+   : match "burn incense; incense candle; light incense; candle incense; use incense"  {
       : if (is_at "inside_tavern") {
          : if (is_carried "incense") {
             : print "You burn the incense. It effuses a sweet smelling aroma." ;
@@ -1618,7 +1621,7 @@ on_command {
    }
 
    //use ancient key on keyhole
-   : match "use key; unlock keyhole; unlock painting; key keyhole; key painting"  {
+   : match "use key; unlock keyhole; unlock painting; key keyhole; key painting; insert key; put key"  {
       : if (is_at "inside_tavern" && is_present "keyhole_1" && is_carried "ancient_key") {
          : print "You cautiously put the ancient key into the keyhole." ;
          : press_any_key ;
@@ -1627,13 +1630,13 @@ on_command {
          : print "You turn the key, and the entire section of the wall slowly swings open!";
          : press_any_key ;
          : print "You glance behind you, the ancient doesn't even bat an eyelid." ;
-         : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
          : press_any_key ;
          : success ;
          : print "It is a whole other room in there. It looks like an ancient CHAMBER." ;
          : set_boolean var = "is_chamber_open"  value = "true" ;
          : destroy "ancient_key" ;
          : press_any_key ;
+         : set_graphic graphic = "opening_chamber"  target = "inside_tavern" immediate = "true" ;
          : redescribe;
       }
    }
@@ -1645,7 +1648,25 @@ on_command {
       }
    }
 
+//enter chamber
+   : match "enter chamber; go chamber; walk chamber"  {
+      : if (is_at "inside_tavern" && is_chamber_open == true) {
+         : print "You cautiously enter the hidden chamber... " ;
+         : goto "chamber";
+         : press_any_key ;
+         : redescribe;
+         
+      }
+   }
 
+//exit chamber
+   : match "exit chamber; go apothecarium; enter apothecarium "  {
+      : if (is_at "chamber") {
+         : goto "inside_tavern";
+         : press_any_key ;
+         : redescribe;
+      }
+   }
 
    //examine tables
    : match "examine table; check table; look table"  {
@@ -1719,6 +1740,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. I have verified that he works with the Codex team.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Chaos Templar 2"  {
@@ -1754,6 +1777,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. He is just absorbed in his quest for sustainable yield.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Logic Templar 2 "  {
@@ -1763,6 +1788,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. Without him, we would not be able to invest our Treasury wisely.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Order Templar"  {
@@ -1772,6 +1799,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. I can vouch that he maintains the day to day Temple operations.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Structure Templar "  {
@@ -1781,6 +1810,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. The entire dApp and smart contract success rests on his shoulders.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Mystery Templar 1 "  {
@@ -1790,6 +1821,8 @@ on_command {
                : press_any_key ;
                : decrement "impostor_try" ;
                : print "<\"No... that is not the impostor. I've personally seen some of this Templar's art. Real inspiring stuff.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
 
             : add_choice "Mystery Templar 2 "  {
@@ -1817,7 +1850,11 @@ on_command {
                : print "<\"Thank you. You've done well.\"<5>>" ;
                : print "<\"I see your knowledge of all things Temple is returning, as well.\"<5>>" ;
                : press_any_key ;
-               : print "\"Yes... it's all coming back to me now. I was a Templar myself... a devoted one. I did everything required of me...\"" ;
+               : print "\"Yes..."; 
+               : press_any_key ;
+               : print "\"it's all coming back to me now.";
+               : press_any_key ;
+               : print "\"I was a Templar myself... a devoted one. I did everything required of me...\"" ;
                : press_any_key ;
                : print "\"But I lost faith in the protocol...\"" ;
                : press_any_key ;
@@ -1833,7 +1870,9 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<\"No... that is not the impostor. His work is renowned around these parts.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : print "<\"No... that is not the impostor. His music is renowned around these parts.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : press_any_key ;
+               : redescribe;
             }
             : choose "<Have you figured out who the impostor is?<5>>" ;
             : redescribe;
@@ -1968,7 +2007,7 @@ assets {
      ambient_apothecarium : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexAPOTHroom1EXT.mp3" ;
      ambient_barbie : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/barbie.mp3" ;
      ambient_chant : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexDWCHchanting1.mp3" ;
-     ambient_gong : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/76887__airtaxi__medium-bowl.mp3" ;
+     ambient_gong : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/gong.mp3" ;
      ambient_rickroll : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/rickr.mp3" ;
      ambient_night : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/nightsound.mp3" ;
      ambient_outro : sound_sample "https://raw.githack.com/TempleCodex/adventure-in-codex/main/sound/TMPLcodexOUTRO_2_EXTwSILENCEtail.mp3" ;
