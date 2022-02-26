@@ -1762,7 +1762,7 @@ on_command {
                : print "After a long conversation the guardian calls you back and says..." ;
                : press_any_key ;
                : decrement "impostor_try" ;
-               : print "<\"No... that is not the impostor. WIthout him, we would not be able to figure out the Faith mechanics.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
+               : print "<\"No... that is not the impostor. Without him, we would not be able to invest our Treasury wisely.<5>> \n <I will give you<5>> {impostor_try} <more attempt(s).<5>>\"" ;
             }
 
             : add_choice "Order Templar"  {
