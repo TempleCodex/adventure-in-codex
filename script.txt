@@ -1807,7 +1807,7 @@ on_command {
                   : press_any_key ;
                }
                : if (is_asked_future ==true) {
-                  : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young crypto star in the 'Order' enclave!\"" ;
+                  : print "\"He spoke of Lost Boy as a \"Mystery\" leader. I know for a fact that Lost Boy is a young prepubescent boy wise beyond his years in the Order enclave!\"" ;
                   : press_any_key ;
                }
                : if (!is_asked_work && !is_asked_future) {
