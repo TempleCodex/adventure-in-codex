@@ -212,13 +212,13 @@ on_describe {
       : if (is_exists "incense" || is_exists "candle") {
          : print "A regular lavatory. Complete with a washbasin, toilet bowl, and lots of scribbling on the wall.";
          : if (is_stand_toilet == true) {
-            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+            : print "You are standing on the toilet seat, hoping it doesn't collapse." ;
          }
       }
       : else {
          : print "A regular lavatory. Complete with a washbasin, toilet bowl, some junk on the shelf and lots of scribbling on the wall.";
          : if (is_stand_toilet == true) {
-            : print "You are standing on the toilet seat, hoping it doesn't collapse" ;
+            : print "You are standing on the toilet seat, hoping it doesn't collapse." ;
          }
       }
    }
@@ -513,8 +513,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -552,8 +554,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now."  {
@@ -591,8 +595,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -630,8 +636,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -669,8 +677,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -697,8 +707,10 @@ subroutines {
          : print "<\"That, my friend, is a question you will need to figure out yourself.\"<4>>" ;
       }
       
-      : add_choice "Who is that woman?"  {
-         :gosub "who_is_woman" ;
+      : if (is_present "cloak_woman") {
+         : add_choice "Who is that woman?" {
+            : gosub "who_is_woman";
+         }
       }
       
       : add_choice "I have no more questions for now"  {
@@ -997,7 +1009,7 @@ on_command {
    }
 
    //enter tavern
-   : match "open door; enter _ "  {
+   : match "open door; go _; enter _"  {
       : if (is_at "outside_tavern") {
          // : clear_screen ;
          // : print_graphic ;
@@ -1013,7 +1025,7 @@ on_command {
       : if (is_at "outside_tavern") {
          : clear_screen ;
          : print_graphic ;
-         : print "The building looks old, but sturdy. It has a symbol of the sun above the door" ;
+         : print "The building looks old, but sturdy. It has a symbol of the sun above the door." ;
          : press_any_key ;
          : redescribe;
       }
@@ -1127,41 +1139,43 @@ on_command {
       }
    }   
    : match "talk woman; speak woman "  {
-      : print "You approach the woman.";
-      : press_any_key ;
-      : if (is_at "inside_tavern" && is_woman_ready == false && is_present "cloak_woman") {
-         : clear_screen ;
-         : print_graphic ;
-         : print "You try to introduce yourself...";
+      : if (is_present "cloak_woman") {
+         : print "You approach the woman.";
          : press_any_key ;
-         : print "...but she is oblivious to you.";
-         : press_any_key ;
-         : print "You hear her murmuring to herself, under her breath.";
-         : press_any_key ; 
-         : print "<Verify or... NGMI... Sacrifice to stake and chill... How... verify? Am I NGMI...? Verify... Verify...<6>>";
-         : press_any_key ;
-         : redescribe;
-         : done;
-      }
-      : if (is_at "inside_tavern" && is_woman_ready == true && is_present "cloak_woman") {
-         : clear_screen ;
-         : print_graphic ;
-         : if (!is_woman_intro_done) {
-            : print "You try to introduce yourself to the woman...";
-            : press_any_key ;
-            : print "\"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
-            : press_any_key ;
-            : print "She finally turns to you. You can see that she's at her breaking point.";
-            : press_any_key ;
-            : set_boolean var = "is_woman_intro_done"  value = "true" ;
-            : print "<\"You don't understand... I am completely lost. I've been trying to get verified for weeks. I even started before the opening ceremony!\"<6>>";
-            : press_any_key ;
+         : if (is_at "inside_tavern" && is_woman_ready == false) {
             : clear_screen ;
             : print_graphic ;
+            : print "You try to introduce yourself...";
+            : press_any_key ;
+            : print "...but she is oblivious to you.";
+            : press_any_key ;
+            : print "You hear her murmuring to herself, under her breath.";
+            : press_any_key ; 
+            : print "<Verify or... NGMI... Sacrifice to stake and chill... How... verify? Am I NGMI...? Verify... Verify...<6>>";
+            : press_any_key ;
+            : redescribe;
+            : done;
          }
+         : if (is_at "inside_tavern" && is_woman_ready == true) {
+            : clear_screen ;
+            : print_graphic ;
+            : if (!is_woman_intro_done) {
+               : print "You try to introduce yourself to the woman...";
+               : press_any_key ;
+               : print "\"You know, I too knew someone who didn't make it through the Opening Ceremony...\"";
+               : press_any_key ;
+               : print "She finally turns to you. You can see that she's at her breaking point.";
+               : press_any_key ;
+               : set_boolean var = "is_woman_intro_done"  value = "true" ;
+               : print "<\"You don't understand... I am completely lost. I've been trying to get verified for weeks. I even started before the opening ceremony!\"<6>>";
+               : press_any_key ;
+               : clear_screen ;
+               : print_graphic ;
+            }
          : gosub "woman_questions" ;
          : redescribe;
          : done;
+         }
       }
    }   
 
@@ -1451,7 +1465,7 @@ on_command {
    //use toilet bowl
    : match "use toilet; examine toilet"  {
       : if (is_at "toilet") {
-         : print "You don't really feel like going right now...but you do notice footprints on the toilet seat as if someone has been standing on it" ;
+         : print "You don't really feel like going right now... but you do notice footprints on the toilet seat, as if someone has been standing on it." ;
          : press_any_key ;
          : redescribe;
       }
