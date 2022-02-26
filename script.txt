@@ -345,7 +345,7 @@ subroutines {
       }
       : else {
          : add_choice "You need to send your feet pictures to the devs."  {
-            : print "<\"I have... *sniff*\" <6>>" ;
+            : print "<\"I have... I sent them to someone named "LUCIFER"... *sniff*\" <6>>" ;
             : press_any_key ;
             : print "<\"A-and... now... my feet are all over feetfinder.com! Waaaaaah!\" <6>>" ;
             : print "You quickly retreat. Maybe rethink your answer?";
@@ -353,7 +353,7 @@ subroutines {
          
          : add_choice "You need to verify yourself in voice chat."  {
             : print "The woman scowled." ;
-            : print "<\"Are you kidding me? I was in there for ages. I sang the entire Pokémon theme song. I chanted their shit posts. Even after all that, they told me this is not the way to get verified!\"<6>>" ;
+            : print "<\"Are you kidding me? I was in there for ages. I sang the "Barbie Doll" in 2 languages. I chanted their shit posts. Even after all that, they told me this is not the way to get verified!\"<6>>" ;
             : print "You quickly retreat. Maybe rethink your answer?";
          }
          
